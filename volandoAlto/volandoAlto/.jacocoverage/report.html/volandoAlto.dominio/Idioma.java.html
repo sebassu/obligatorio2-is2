@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Idioma.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;volandoAlto&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">volandoAlto.dominio</a> &gt; <span class="el_source">Idioma.java</span></div><h1>Idioma.java</h1><pre class="source lang-java linenums">package volandoAlto.dominio;
+
+/**
+ *
+ * @author Br1
+ */
+public class Idioma {
+    String[] palabras;
+    int idiomaActual;
+
+    /**
+     *
+     */
+<span class="fc" id="L14">    public Idioma() {</span>
+<span class="fc" id="L15">        this.idiomaActual = 0;</span>
+<span class="fc" id="L16">        this.palabras = new String[] {&quot;Welcome.&quot;,&quot;Continue&quot;,</span>
+                    &quot;Flight Information&quot;,&quot;Captain&quot;, &quot;Flight&quot;, &quot;Departure&quot;,
+                    &quot;Departure&quot;, &quot;Estimated arrival time&quot;, &quot;Destination&quot;, 
+                    &quot;Time information&quot;, &quot;and weather on arrival&quot;,
+                    &quot;Welcome aboard.&quot;, &quot;Flight attendant&quot;,&quot;Delayed&quot;,&quot;Select genre&quot;,
+                    &quot;classical&quot;,&quot;Pop&quot;,&quot;Rock&quot;,&quot;Electronics&quot;,&quot;Reggae&quot;,&quot;Alternative&quot;,
+                    &quot;Stopped&quot;,&quot;Playing&quot;};
+<span class="fc" id="L23">    }</span>
+
+    /**
+     *
+     * @return
+     */
+    public String[] getPalabras() {
+<span class="fc" id="L30">        return palabras;</span>
+    }
+
+    /**
+     *
+     * @param palabras
+     */
+    public void setPalabras(String[] palabras) {
+<span class="nc" id="L38">        this.palabras = palabras;</span>
+<span class="nc" id="L39">    }</span>
+
+    /**
+     *
+     * @return
+     */
+    public int getIdiomaActual() {
+<span class="fc" id="L46">        return idiomaActual;</span>
+    }
+
+    /**
+     *
+     * @param idiomaActual
+     */
+    public void setIdiomaActual(int idiomaActual) {
+<span class="fc" id="L54">        this.idiomaActual = idiomaActual;</span>
+<span class="fc" id="L55">        cargarPalabras();</span>
+<span class="fc" id="L56">    }</span>
+    
+    /**
+     *
+     */
+    public void cargarPalabras() {
+<span class="pc bpc" id="L62" title="1 of 11 branches missed.">        switch (this.idiomaActual) {</span>
+            case 0:
+<span class="fc" id="L64">                this.palabras = new String[] {&quot;Welcome.&quot;,&quot;Continue&quot;,</span>
+                    &quot;Flight Information&quot;,&quot;Captain&quot;, &quot;Flight&quot;, &quot;Departure&quot;,
+                    &quot;Departure&quot;, &quot;Estimated arrival time&quot;, &quot;Destination&quot;, 
+                    &quot;Time information&quot;, &quot;and weather on arrival&quot;,
+                    &quot;Welcome aboard.&quot;, &quot;Flight attendant&quot;,&quot;Delayed&quot;,&quot;Select genre&quot;,
+                    &quot;classical&quot;,&quot;Pop&quot;,&quot;Rock&quot;,&quot;Electronics&quot;,&quot;Reggae&quot;,&quot;Alternative&quot;,
+                    &quot;Stopped&quot;,&quot;Playing&quot;};
+<span class="fc" id="L71">                break;</span>
+            case 1:
+<span class="fc" id="L73">                this.palabras = new String[] {&quot;欢迎&quot;,&quot;繼續&quot;,&quot;航班信息&quot;,&quot;队长&quot;,&quot;机票&quot;,</span>
+                    &quot;出发&quot;,&quot;出发&quot;,&quot;预计抵达时间&quot;,&quot;目的地&quot;,&quot;时间信息&quot;,&quot;以及天气的到来&quot;,
+                    &quot;欢迎乘坐。&quot;,&quot;主持人&quot;,&quot;航班延误&quot;,&quot;选择风格&quot;,&quot;古典&quot;,&quot;流行的&quot;,&quot;岩石&quot;,
+                    &quot;电子&quot;,&quot;雷鬼&quot;,&quot;另类&quot;,&quot;被捕&quot;,&quot;我打&quot;};
+<span class="fc" id="L77">                break;</span>
+            case 2:
+<span class="fc" id="L79">                this.palabras = new String[] {&quot;Bienvenido.&quot;,&quot;Continuar&quot;,</span>
+                    &quot;Información del vuelo&quot;,&quot;Capitán&quot;,&quot;Vuelo&quot;,&quot;Origen&quot;,
+                    &quot;Hora de salida&quot;,&quot;Hora estimada de arribo&quot;,&quot;destino&quot;,
+                    &quot;informacion de hora&quot;, &quot;y clima en destino&quot;,&quot;Bienvenido a bordo.&quot;,
+                    &quot;Azafata&quot;,&quot;El vuelo está demorado&quot;,&quot;Seleccione un género&quot;,
+                    &quot;Clásica&quot;,&quot;Pop&quot;,&quot;Rock&quot;,&quot;Electrónica&quot;,&quot;Reggae&quot;,&quot;Alternativa&quot;,
+                    &quot;Detenido&quot;,&quot;Reproduciendo&quot;};
+<span class="fc" id="L86">                break;</span>
+            case 3:
+<span class="fc" id="L88">                this.palabras = new String[] {&quot;Добро пожаловать.&quot;,&quot;Продолжить&quot;,</span>
+                    &quot;Информация о рейсах&quot;,&quot;Капитан&quot;, &quot;Полет&quot;, &quot;отъезд&quot;, &quot;отъезд&quot;,
+                    &quot;время Ожидаемое прибытие&quot;, &quot;назначения&quot;, &quot;время информация&quot;,
+                    &quot;и погода по прибытии&quot;, &quot;Добро пожаловать.&quot;, &quot;Хозяйка&quot;,
+                    &quot;Рейс задерживается&quot;,&quot;Выберите жанр&quot;,&quot;классический&quot;,&quot;Поп&quot;,
+                    &quot;рок&quot;,&quot;электроника&quot;,&quot;Регги&quot;,&quot;альтернатива&quot;,&quot;арестованный&quot;,
+                    &quot;Я играл&quot;};
+<span class="fc" id="L95">                break;</span>
+            case 4:
+<span class="fc" id="L97">                this.palabras = new String[] {&quot;ترحيب&quot;,&quot;تواصل&quot;,&quot;معلومات الطيران&quot;,</span>
+                    &quot;القبطان&quot;,&quot;الطيران&quot;,&quot;المغادرة&quot;,&quot;المغادرة&quot;, &quot;والوقت&quot; ,
+                    &quot; للوصول&quot;, &quot;والمقصد&quot;, &quot;المعلومات&quot;,&quot; لدى وصوه&quot;, &quot;مرحبا&quot;,
+                    &quot;تأخر الرحلة&quot;,&quot;تحديد النوع&quot;,&quot;كلاسيكي&quot;,&quot;فرقعة&quot;,&quot;صخرة &quot;,
+                    &quot;إلكترونيات&quot;,&quot;الريغي &quot;,&quot;البديل &quot;,&quot;أوقف &quot;,&quot;د لعبت&quot;};
+<span class="fc" id="L102">                break;</span>
+            case 5:
+<span class="fc" id="L104">                this.palabras = new String[] {&quot;Bem-vindo.&quot;,&quot;Continue&quot;,</span>
+                    &quot;Informação de Voo&quot;,&quot;Capitão&quot;, &quot;Flight&quot;, &quot;Origem&quot;, 
+                    &quot;tempo da partida&quot;,&quot;tempo estimado de chegada&quot;, &quot;destino&quot;,
+                    &quot;informações de tempo &quot;,&quot;e clima na destino&quot;, 
+                    &quot;Bem-vindo a bordo.&quot;,&quot;Aeromoça&quot;,&quot;O vôo está atrasado&quot;,
+                    &quot;Selecione um gênero&quot;,&quot;Clássico&quot;,&quot;Estouro&quot;,&quot;Rocha&quot;,
+                    &quot;Eletrônica&quot;,&quot;Reggae&quot;,&quot;Alternativa&quot;,&quot;Detido&quot;,&quot;Joguei&quot;};
+<span class="fc" id="L111">                break;</span>
+            case 6:
+<span class="fc" id="L113">                this.palabras = new String[] {&quot;Benvenuto.&quot;,&quot;Continua&quot;,</span>
+                    &quot;Informazioni Volo&quot;,&quot;capitano&quot;,&quot;volo&quot;,&quot;origine&quot;,
+                    &quot;Orario di partenza&quot;,&quot;Tempo stimato di arrivo&quot;,&quot;destinazione&quot;,
+                    &quot;informazioni in tempo&quot;,&quot;e il clima all'arrivo&quot;,
+                    &quot;Benvenuti a bordo.&quot;,&quot;Assistente di volo&quot;,
+                    &quot;Il volo è in ritardo&quot;,&quot;Selezionare un genere&quot;,&quot;Classico&quot;,
+                    &quot;Pop&quot;,&quot;Rock&quot;,&quot;Elettronica&quot;,&quot;Reggae&quot;,&quot;Alternativa&quot;,&quot;Arrestato&quot;,
+                    &quot;ho giocato&quot;};
+<span class="fc" id="L121">                break;</span>
+            case 7:
+<span class="fc" id="L123">                this.palabras = new String[] {&quot;歓迎.&quot;,&quot;続ける&quot;,&quot;フライト情報&quot;,&quot;船長&quot;,</span>
+                    &quot;フライト&quot;,&quot;起源&quot;,&quot;出発時刻&quot;,&quot;到着予定時刻&quot;,&quot;先&quot;,&quot;時刻情報&quot;,
+                    &quot;到着時に、気候&quot;,&quot;ご搭乗ありがとうございます。&quot;,&quot;スチュワーデス&quot;,
+                    &quot;フライトが遅れている&quot;,&quot;ジャンルを選択&quot;,&quot;クラシカル&quot;,&quot;ポップ&quot;,&quot;ロック&quot;,
+                    &quot;エレクトロニクス&quot;,&quot;レゲエ&quot;,&quot;代替案&quot;,&quot;逮捕される&quot;,&quot;私は〜をした&quot;};
+<span class="fc" id="L128">                break;</span>
+            case 8:
+<span class="fc" id="L130">                this.palabras = new String[] {&quot;Willkommen.&quot;,&quot;Weitermachen&quot;,</span>
+                    &quot;Fluginformationen&quot;,&quot;Kapitän&quot;,&quot;Flug&quot;,&quot;Herkunft&quot;,
+                    &quot;Abfahrtszeit&quot;,&quot;Geschätzte Ankunftszeit&quot;,&quot;Ziel&quot;,
+                    &quot;Zeitinformationen&quot;,&quot;Klima und bei der Ankunft&quot;,
+                    &quot;Willkommen an Bord.&quot;,&quot;Stewardess&quot;,&quot;Der Flug ist verspätet&quot;,
+                    &quot;Wählen Sie ein Genre&quot;,&quot;Klassik&quot;,&quot;Pop&quot;,&quot;Rock&quot;,&quot;Elektronik&quot;,
+                    &quot;Reggae&quot;,&quot;Alternative&quot;,&quot;Arrested&quot;,&quot;Ich spielte&quot;};
+<span class="fc" id="L137">                break;</span>
+            case 9:
+<span class="fc" id="L139">                this.palabras = new String[] {&quot;Accueil.&quot;,&quot;Continuez&quot;,</span>
+                    &quot;Informations sur le vol&quot;,&quot;capitaine&quot;,&quot;vol&quot;,&quot;origine&quot;,
+                    &quot;Heure de départ&quot;,&quot;Heure d'arrivée estimée&quot;,&quot;destination&quot;,
+                    &quot;des informations de temps&quot;,&quot;et le climat à l'arrivée&quot;,
+                    &quot;Bienvenue à bord.&quot;,&quot;hôtesse de l'air&quot;,&quot;Le vol est retardé&quot;,
+                &quot;Je choisis un genre&quot;, &quot;Classique&quot;, &quot;Pop&quot;, &quot;Rock&quot;, &quot;Electronique&quot;,
+                &quot;Reggae&quot;, &quot;Alternative&quot;, &quot;Arrêté&quot;, &quot;Lecture&quot;};
+<span class="fc" id="L146">                break;</span>
+            default:
+<span class="nc" id="L148">                this.palabras = new String[] {&quot;Welcome.&quot;,&quot;Continue&quot;,</span>
+                    &quot;Flight Information&quot;,&quot;Captain&quot;, &quot;Flight&quot;, &quot;Departure&quot;,
+                    &quot;Departure&quot;, &quot;Estimated arrival time&quot;, &quot;Destination&quot;, 
+                    &quot;Time information&quot;, &quot;and weather on arrival&quot;,
+                    &quot;Welcome aboard.&quot;, &quot;Flight attendant&quot;,&quot;Delayed&quot;,&quot;Select genre&quot;,
+                    &quot;classical&quot;,&quot;Pop&quot;,&quot;Rock&quot;,&quot;Electronics&quot;,&quot;Reggae&quot;,&quot;Alternative&quot;,
+                    &quot;Stopped&quot;,&quot;Playing&quot;};
+                break;
+        }
+<span class="fc" id="L157">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

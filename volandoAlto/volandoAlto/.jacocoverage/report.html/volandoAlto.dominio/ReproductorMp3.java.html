@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>ReproductorMp3.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;volandoAlto&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">volandoAlto.dominio</a> &gt; <span class="el_source">ReproductorMp3.java</span></div><h1>ReproductorMp3.java</h1><pre class="source lang-java linenums">package volandoAlto.dominio;
+
+import volandoAlto.interfaz.Cliente;
+import java.io.IOException;
+import java.util.ArrayList;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.advanced.AdvancedPlayer;
+import javazoom.jl.player.advanced.PlaybackEvent;
+import javazoom.jl.player.advanced.PlaybackListener;
+
+/**
+ *
+ * @author Br1
+ */
+public class ReproductorMp3 extends PlaybackListener implements Runnable {
+
+    private String filePath;
+    private AdvancedPlayer player;
+    private Thread playerThread;
+    private ArrayList&lt;String&gt; listaReproduccion;
+<span class="fc" id="L21">    private int cancionActual = 0;</span>
+    private boolean detenido;
+    private String[] nombreCanciones;
+    private Cliente ventanaMusica;
+
+    /**
+     *
+     * @param vMusica
+     */
+<span class="fc" id="L30">    public ReproductorMp3(Cliente vMusica) {</span>
+<span class="fc" id="L31">        this.setListaReproduccion(&quot;clasica&quot;);</span>
+<span class="fc" id="L32">        this.filePath = &quot;//media//music//clasica//Handel Royal Fireworks.mp3&quot;;</span>
+<span class="fc" id="L33">        this.cancionActual = 0;</span>
+<span class="fc" id="L34">        this.detenido = true;</span>
+<span class="fc" id="L35">        this.ventanaMusica = vMusica;</span>
+<span class="fc" id="L36">    }</span>
+
+    /**
+     *
+     * @return
+     */
+    public AdvancedPlayer getPlayer() {
+<span class="nc" id="L43">        return player;</span>
+    }
+
+    /**
+     *
+     * @param player
+     */
+    public void setPlayer(AdvancedPlayer player) {
+<span class="nc" id="L51">        this.player = player;</span>
+<span class="nc" id="L52">    }</span>
+
+    /**
+     *
+     * @return
+     */
+    public Thread getPlayerThread() {
+<span class="nc" id="L59">        return playerThread;</span>
+    }
+
+    /**
+     *
+     * @param playerThread
+     */
+    public void setPlayerThread(Thread playerThread) {
+<span class="nc" id="L67">        this.playerThread = playerThread;</span>
+<span class="nc" id="L68">    }</span>
+
+    /**
+     *
+     * @return
+     */
+    public String[] getNombreCanciones() {
+<span class="nc" id="L75">        return nombreCanciones;</span>
+    }
+
+    /**
+     *
+     * @param nombreCanciones
+     */
+    public void setNombreCanciones(String[] nombreCanciones) {
+<span class="nc" id="L83">        this.nombreCanciones = nombreCanciones;</span>
+<span class="nc" id="L84">    }</span>
+
+    /**
+     *
+     * @return
+     */
+    public String getFilePath() {
+<span class="fc" id="L91">        return filePath;</span>
+    }
+
+    /**
+     *
+     * @param filePath
+     */
+    public void setFilePath(String filePath) {
+<span class="fc" id="L99">        this.filePath = filePath;</span>
+<span class="fc" id="L100">    }</span>
+
+    /**
+     *
+     * @return
+     */
+    public ArrayList&lt;String&gt; getListaReproduccion() {
+<span class="fc" id="L107">        return listaReproduccion;</span>
+    }
+
+    /**
+     *
+     * @param genero
+     */
+    public void setListaReproduccion(String genero) {
+<span class="fc" id="L115">        this.listaReproduccion = new ArrayList&lt;String&gt;();</span>
+<span class="pc bpc" id="L116" title="8 of 26 branches missed.">        switch (genero) {</span>
+            case &quot;clasica&quot;:
+<span class="fc" id="L118">                this.nombreCanciones = new String[] {&quot;Handel Royal Fireworks&quot;,&quot;Spring from Four Seasons&quot;,&quot;Largo from Four Seasons&quot;};</span>
+<span class="fc" id="L119">                this.listaReproduccion.add(&quot;//media//music//clasica//Handel Royal Fireworks.mp3&quot;);</span>
+<span class="fc" id="L120">                this.listaReproduccion.add(&quot;//media//music//clasica//Vivaldi - Spring from Four Seasons.mp3&quot;);</span>
+<span class="fc" id="L121">                this.listaReproduccion.add(&quot;//media//music//clasica//Vivaldi -Largo from Four Seasons.mp3&quot;);</span>
+<span class="fc" id="L122">                break;</span>
+            case &quot;rock&quot;:
+<span class="fc" id="L124">                this.nombreCanciones = new String[] {&quot;Jailhouse Rock&quot;,&quot;Great Balls of Fire&quot;};</span>
+<span class="fc" id="L125">                this.listaReproduccion.add(&quot;//media//music//rock//Jailhouse Rock.mp3&quot;);</span>
+<span class="fc" id="L126">                this.listaReproduccion.add(&quot;//media//music//rock//Great Balls of Fire.mp3&quot;);</span>
+<span class="fc" id="L127">                break;</span>
+            case &quot;pop&quot;:
+<span class="fc" id="L129">                this.nombreCanciones = new String[] {&quot;Dancing in the Street&quot;,&quot;My Girl&quot;};</span>
+<span class="fc" id="L130">                this.listaReproduccion.add(&quot;//media//music//pop//Dancing in the Street.mp3&quot;);</span>
+<span class="fc" id="L131">                this.listaReproduccion.add(&quot;//media//music//pop//My Girl.mp3&quot;);</span>
+<span class="fc" id="L132">                break;</span>
+            case &quot;electronica&quot;:
+<span class="fc" id="L134">                this.nombreCanciones = new String[] {&quot;Ich Bin Meine Maschine&quot;,&quot;Knowing We'll Be Here&quot;,&quot;Midnight&quot;};</span>
+<span class="fc" id="L135">                this.listaReproduccion.add(&quot;//media//music//electronica//Ich Bin Meine Maschine.mp3&quot;);</span>
+<span class="fc" id="L136">                this.listaReproduccion.add(&quot;//media//music//electronica//Knowing We'll Be Here.mp3&quot;);</span>
+<span class="fc" id="L137">                this.listaReproduccion.add(&quot;//media//music//electronica//Midnight.mp3&quot;);</span>
+<span class="fc" id="L138">                break;</span>
+            case &quot;alternativa&quot;:
+<span class="fc" id="L140">                this.nombreCanciones = new String[] {&quot;Snow&quot;,&quot;Bonzo Goes to Bitburg&quot;,&quot;Story Of My Life&quot;};</span>
+<span class="fc" id="L141">                this.listaReproduccion.add(&quot;//media//music//alternativa//Snow.mp3&quot;);</span>
+<span class="fc" id="L142">                this.listaReproduccion.add(&quot;//media//music//alternativa//Bonzo Goes to Bitburg.mp3&quot;);</span>
+<span class="fc" id="L143">                this.listaReproduccion.add(&quot;//media//music//alternativa//Story Of My Life.mp3&quot;);</span>
+<span class="fc" id="L144">                break;</span>
+            case &quot;reggae&quot;:
+<span class="fc" id="L146">                this.nombreCanciones = new String[] {&quot;Funky Kingston&quot;,&quot;No woman no cry&quot;,&quot;The harder they come&quot;};</span>
+<span class="fc" id="L147">                this.listaReproduccion.add(&quot;//media//music//reggae//Funky Kingston.mp3&quot;);</span>
+<span class="fc" id="L148">                this.listaReproduccion.add(&quot;//media//music//reggae//No woman no cry.mp3&quot;);</span>
+<span class="fc" id="L149">                this.listaReproduccion.add(&quot;//media//music//reggae//The harder they come.mp3&quot;);</span>
+            default:
+                break;
+        }
+<span class="fc" id="L153">        this.setFilePath(this.listaReproduccion.get(0));</span>
+<span class="fc" id="L154">    }</span>
+    
+    /**
+     *
+     * @return
+     */
+    public String getNombreCancionActual() {
+<span class="fc" id="L161">        return this.nombreCanciones[this.cancionActual];</span>
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public int getCancionActual() {
+<span class="fc" id="L169">        return cancionActual;</span>
+    }
+
+    /**
+     *
+     * @param cancionActual
+     */
+    public void setCancionActual(int cancionActual) {
+<span class="nc" id="L177">        this.cancionActual = cancionActual;</span>
+<span class="nc" id="L178">    }</span>
+
+    /**
+     *
+     */
+    public void play() {
+        try {
+<span class="fc" id="L185">            this.detenido = false;</span>
+<span class="fc" id="L186">            String urlAsString</span>
+                    = &quot;file:///&quot;
+                    + new java.io.File(&quot;.&quot;).getCanonicalPath()
+                    + &quot;/&quot;
+                    + this.filePath;
+
+<span class="fc" id="L192">            this.player = new AdvancedPlayer(</span>
+                    new java.net.URL(urlAsString).openStream(),
+                    javazoom.jl.player.FactoryRegistry.systemRegistry().createAudioDevice()
+            );
+
+<span class="fc" id="L197">            this.player.setPlayBackListener(this);</span>
+<span class="fc" id="L198">            this.playerThread = new Thread(this, &quot;AudioPlayerThread&quot;);</span>
+
+<span class="fc" id="L200">            this.playerThread.start();</span>
+<span class="pc" id="L201">        } catch (IOException | JavaLayerException ex) {}</span>
+<span class="fc" id="L202">    }</span>
+
+    /**
+     *
+     * @return
+     */
+    public boolean isDetenido() {
+<span class="fc" id="L209">        return detenido;</span>
+    }
+
+    /**
+     *
+     * @param detenido
+     */
+    public void setDetenido(boolean detenido) {
+<span class="nc" id="L217">        this.detenido = detenido;</span>
+<span class="nc" id="L218">    }</span>
+
+    /**
+     *
+     */
+    public void parar() {
+<span class="pc bpc" id="L224" title="1 of 2 branches missed.">        if (this.detenido == false) {</span>
+<span class="fc" id="L225">            this.detenido = true;</span>
+<span class="fc" id="L226">            this.player.stop();</span>
+        }
+<span class="fc" id="L228">    }</span>
+
+    /**
+     *
+     */
+    public void siguienteCancion() {
+<span class="pc bpc" id="L234" title="1 of 2 branches missed.">        if (this.detenido == false) {</span>
+<span class="fc" id="L235">            this.player.stop();</span>
+        }
+<span class="fc" id="L237">    }</span>
+
+    /**
+     *
+     * @param playbackEvent
+     */
+    @Override
+    public void playbackStarted(PlaybackEvent playbackEvent) {
+  
+<span class="fc" id="L246">    }</span>
+
+    /**
+     *
+     * @param playbackEvent
+     */
+    @Override
+    public void playbackFinished(PlaybackEvent playbackEvent) {
+<span class="fc bfc" id="L254" title="All 4 branches covered.">                if (this.cancionActual &lt; this.listaReproduccion.size() - 1 &amp;&amp; this.detenido == false) {</span>
+<span class="fc" id="L255">            this.cancionActual++;</span>
+<span class="fc" id="L256">            this.filePath = this.listaReproduccion.get(this.cancionActual);</span>
+<span class="fc" id="L257">            this.play();</span>
+        } else {
+<span class="fc" id="L259">            this.detenido = true;</span>
+<span class="fc" id="L260">            this.cancionActual = 0;</span>
+<span class="fc" id="L261">            this.filePath = this.listaReproduccion.get(0);</span>
+        }
+<span class="fc" id="L263">    }</span>
+
+    @Override
+    public void run() {
+        try {
+<span class="fc" id="L268">            this.ventanaMusica.ActualizarNombreCancion();</span>
+<span class="fc" id="L269">            this.player.play();</span>
+<span class="pc" id="L270">        } catch (JavaLayerException ex) {}</span>
+
+<span class="fc" id="L272">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
