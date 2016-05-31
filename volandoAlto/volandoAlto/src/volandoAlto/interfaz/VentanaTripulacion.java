@@ -95,7 +95,6 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jMenu1 = new javax.swing.JMenu();
-        jTextField1 = new javax.swing.JTextField();
         jPanelVuelo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -143,11 +142,6 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         jButton2.setText("Registrar ");
 
         jButton3.setText("Volver");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanelCiudadesLayout = new javax.swing.GroupLayout(jPanelCiudades);
         jPanelCiudades.setLayout(jPanelCiudadesLayout);
@@ -165,20 +159,18 @@ public class VentanaTripulacion extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3)
                     .addGroup(jPanelCiudadesLayout.createSequentialGroup()
                         .addGap(133, 133, 133)
-                        .addComponent(jLabel12))
-                    .addGroup(jPanelCiudadesLayout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel12)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanelCiudadesLayout.setVerticalGroup(
             jPanelCiudadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCiudadesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addGap(6, 6, 6)
+                .addComponent(jButton3)
+                .addGap(11, 11, 11)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,12 +180,10 @@ public class VentanaTripulacion extends javax.swing.JFrame {
                 .addGroup(jPanelCiudadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jMenu1.setText("jMenu1");
-
-        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tripulacion");
@@ -493,12 +483,6 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         this.jPanelMantenimiento.setVisible(false);
     }//GEN-LAST:event_btnCiudadesActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        this.jPanelCiudades.setVisible(false);
-        this.jPanelVuelo.setVisible(true);
-        this.jPanelMantenimiento.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private boolean datosValidos() {
         boolean valido = true;
         if (this.txtCapitan.getText().isEmpty() || this.txtCapitan.getText().length() > 25
@@ -560,7 +544,6 @@ public class VentanaTripulacion extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblCambiosAplicados;
     private javax.swing.JTextField txtCapitan;
     private javax.swing.JTextField txtCodigoVuelo;
