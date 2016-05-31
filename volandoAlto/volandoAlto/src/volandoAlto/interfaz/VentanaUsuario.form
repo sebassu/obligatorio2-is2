@@ -855,18 +855,18 @@
                 <Property name="borderPainted" type="boolean" value="false"/>
                 <Property name="contentAreaFilled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lblAzafataActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblHoraEnDestino">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI Light" size="24" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Informacion de hora"/>
+                <Property name="text" type="java.lang.String" value="Informaci&#xf3;n de hora"/>
                 <Property name="alignmentY" type="float" value="0.0"/>
               </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Informaci&#xf3;n de hora"/>
+              </AccessibilityProperties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblClimaEnDestino">
               <Properties>

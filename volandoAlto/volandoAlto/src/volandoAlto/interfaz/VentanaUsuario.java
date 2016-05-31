@@ -4,6 +4,9 @@ import volandoAlto.dominio.Idioma;
 import volandoAlto.dominio.ReproductorMp3;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.Timer;
 
 /**
  *
@@ -521,14 +524,9 @@ public class VentanaUsuario extends javax.swing.JFrame {
         lblAzafata.setBorder(null);
         lblAzafata.setBorderPainted(false);
         lblAzafata.setContentAreaFilled(false);
-        lblAzafata.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                lblAzafataActionPerformed(evt);
-            }
-        });
 
         lblHoraEnDestino.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
-        lblHoraEnDestino.setText("Informacion de hora");
+        lblHoraEnDestino.setText("Información de hora");
         lblHoraEnDestino.setAlignmentY(0.0F);
 
         lblClimaEnDestino.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
@@ -669,6 +667,8 @@ public class VentanaUsuario extends javax.swing.JFrame {
                 .addComponent(lblAzafata, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64))
         );
+
+        lblHoraEnDestino.getAccessibleContext().setAccessibleName("Información de hora");
 
         pnlMapas.setAlignmentX(0.0F);
         pnlMapas.setAlignmentY(0.0F);
@@ -965,10 +965,6 @@ public class VentanaUsuario extends javax.swing.JFrame {
         this.ocultarPaneles();
         this.pnlMapas.setVisible(true);
     }//GEN-LAST:event_btnMapasActionPerformed
-
-    private void lblAzafataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblAzafataActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lblAzafataActionPerformed
 
     private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
         this.pnlBotones.setVisible(false);

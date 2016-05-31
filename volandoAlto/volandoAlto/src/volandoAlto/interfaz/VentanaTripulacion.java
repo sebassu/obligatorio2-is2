@@ -1,7 +1,10 @@
 package volandoAlto.interfaz;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import volandoAlto.dominio.Idioma;
 import java.util.Calendar;
+import javax.swing.Timer;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -20,6 +23,14 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         Idioma idioma = new Idioma();
         ventanaCliente = new VentanaUsuario(idioma);
         ventanaCliente.setVisible(true);
+        ActionListener taskPerformer = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Calendar c = Calendar.getInstance();
+                VentanaTripulacion.this.setHora(c);
+            }
+        };
+        new Timer(1000, taskPerformer).start();
     }
 
     /**
@@ -183,7 +194,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setText("LLegada");
+        jLabel9.setText("Llegada");
 
         txtHoraLlegada.setText("00");
         txtHoraLlegada.setMinimumSize(new java.awt.Dimension(6, 21));
@@ -445,31 +456,26 @@ public class VentanaTripulacion extends javax.swing.JFrame {
                     this.txtMinutoLlegada.getText(),
                     this.chkDemorado.isSelected());
             this.lblCambiosAplicados.setText("Cambios aplicados");
-        }
-        else {
+        } else {
             this.lblCambiosAplicados.setText("Formato incorrecto");
         }
     }//GEN-LAST:event_btnAplicarCambiosActionPerformed
 
     private boolean datosValidos() {
         boolean valido = true;
-        if(this.txtCapitan.getText().isEmpty() || this.txtCapitan.getText().length()>25 || !StringUtils.isAlphaSpace(this.txtCapitan.getText())) {
+        if (this.txtCapitan.getText().isEmpty() || this.txtCapitan.getText().length() > 25 || !StringUtils.isAlphaSpace(this.txtCapitan.getText())) {
             valido = false;
-        }
-        else if(this.txtCodigoVuelo.getText().isEmpty() || this.txtCodigoVuelo.getText().length()>10 || !StringUtils.isAlphanumeric(this.txtCodigoVuelo.getText())) {
+        } else if (this.txtCodigoVuelo.getText().isEmpty() || this.txtCodigoVuelo.getText().length() > 10 || !StringUtils.isAlphanumeric(this.txtCodigoVuelo.getText())) {
             valido = false;
-        }
-        else if(this.cmbOrigen.getSelectedItem().toString().equalsIgnoreCase(this.cmbDestino.getSelectedItem().toString())) {
+        } else if (this.cmbOrigen.getSelectedItem().toString().equalsIgnoreCase(this.cmbDestino.getSelectedItem().toString())) {
             valido = false;
-        }
-        else if(this.txtHoraLlegada.getText().isEmpty() || this.txtMinutoLlegada.getText().isEmpty() || 
-                this.txtHoraLlegada.getText().length()!=2 || this.txtMinutoLlegada.getText().length()!=2 ||
-                !StringUtils.isNumeric(this.txtHoraLlegada.getText()) || !StringUtils.isNumeric(this.txtMinutoLlegada.getText())) {
+        } else if (this.txtHoraLlegada.getText().isEmpty() || this.txtMinutoLlegada.getText().isEmpty()
+                || this.txtHoraLlegada.getText().length() != 2 || this.txtMinutoLlegada.getText().length() != 2
+                || !StringUtils.isNumeric(this.txtHoraLlegada.getText()) || !StringUtils.isNumeric(this.txtMinutoLlegada.getText())) {
             valido = false;
-        }
-        else if(this.txtHoraSalida.getText().isEmpty() || this.txtMinutoSalida.getText().isEmpty() || 
-                this.txtHoraSalida.getText().length()!=2 || this.txtMinutoSalida.getText().length()!=2 ||
-                !StringUtils.isNumeric(this.txtHoraSalida.getText()) || !StringUtils.isNumeric(this.txtMinutoSalida.getText())) {
+        } else if (this.txtHoraSalida.getText().isEmpty() || this.txtMinutoSalida.getText().isEmpty()
+                || this.txtHoraSalida.getText().length() != 2 || this.txtMinutoSalida.getText().length() != 2
+                || !StringUtils.isNumeric(this.txtHoraSalida.getText()) || !StringUtils.isNumeric(this.txtMinutoSalida.getText())) {
             valido = false;
         }
         return valido;
