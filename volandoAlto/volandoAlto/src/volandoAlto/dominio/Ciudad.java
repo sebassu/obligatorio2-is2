@@ -6,7 +6,7 @@ import java.util.TimeZone;
  *
  * @author pabloMorales
  */
-public class CiudadDestino {
+public class Ciudad {
 
     private String nombre;
     private TimeZone zonaHoraria;
