@@ -3,13 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/alumnoFI/Desktop/volandoAlto/volandoAlto/src/volandoAlto/interfaz/VentanaUsuario.java</file>
-            <file>file:/C:/Users/alumnoFI/Desktop/volandoAlto/volandoAlto/src/volandoAlto/dominio/Idioma.java</file>
-            <file>file:/C:/Users/alumnoFI/Desktop/volandoAlto/volandoAlto/test/volandoAlto/dominio/ReproductorMp3Test.java</file>
-            <file>file:/C:/Users/alumnoFI/Desktop/volandoAlto/volandoAlto/test/volandoAlto/dominio/IdiomaTest.java</file>
-            <file>file:/C:/Users/alumnoFI/Desktop/volandoAlto/volandoAlto/src/volandoAlto/dominio/Principial.java</file>
-            <file>file:/C:/Users/alumnoFI/Desktop/volandoAlto/volandoAlto/src/volandoAlto/dominio/ReproductorMp3.java</file>
-            <file>file:/C:/Users/alumnoFI/Desktop/volandoAlto/volandoAlto/src/volandoAlto/interfaz/VentanaTripulacion.java</file>
+            <file>file:/C:/Users/alumnoFI/Documents/obligatorio-2-is2/volandoAlto/volandoAlto/src/volandoAlto/dominio/Principal.java</file>
+            <file>file:/C:/Users/alumnoFI/Documents/obligatorio-2-is2/volandoAlto/volandoAlto/src/volandoAlto/interfaz/VentanaUsuario.java</file>
+            <file>file:/C:/Users/alumnoFI/Documents/obligatorio-2-is2/volandoAlto/volandoAlto/src/volandoAlto/dominio/AccesoADatos.java</file>
+            <file>file:/C:/Users/alumnoFI/Documents/obligatorio-2-is2/volandoAlto/volandoAlto/src/volandoAlto/dominio/Idioma.java</file>
+            <file>file:/C:/Users/alumnoFI/Documents/obligatorio-2-is2/volandoAlto/volandoAlto/src/volandoAlto/dominio/Vuelo.java</file>
+            <file>file:/C:/Users/alumnoFI/Documents/obligatorio-2-is2/volandoAlto/volandoAlto/src/volandoAlto/dominio/Ciudad.java</file>
+            <file>file:/C:/Users/alumnoFI/Documents/obligatorio-2-is2/volandoAlto/volandoAlto/src/volandoAlto/interfaz/VentanaTripulacion.java</file>
         </group>
     </open-files>
 </project-private>
