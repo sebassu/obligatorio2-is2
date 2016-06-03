@@ -1,5 +1,6 @@
 package volandoAlto.dominio;
 
+import java.util.Objects;
 import java.util.TimeZone;
 
 /**
@@ -45,7 +46,28 @@ public class Ciudad {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return this.nombre;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Ciudad other = (Ciudad) obj;
+        return Objects.equals(this.nombre, other.nombre);
     }
 }

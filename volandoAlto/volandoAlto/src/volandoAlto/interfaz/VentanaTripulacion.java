@@ -159,6 +159,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setText("Ciudades");
 
+        jListCiudades.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
         jScrollPane1.setViewportView(jListCiudades);
 
         btnEliminar.setText("Eliminar");
@@ -638,6 +639,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
 
     private void btnRegistrarNuevaCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarNuevaCiudadActionPerformed
         this.jPanelCiudades.setVisible(false);
+        limpiarCamposjPanelRgistrarCiudad();
         this.jPanelRegistrarCiudad.setVisible(true);
     }//GEN-LAST:event_btnRegistrarNuevaCiudadActionPerformed
 
@@ -648,6 +650,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
             this.cargarListaJListCiudades();
             JOptionPane.showMessageDialog(this.jPanelCiudades, "Ciudad eliminada", "OK",
                     JOptionPane.INFORMATION_MESSAGE);
+            cargarListaJListCiudades();
         } else {
             JOptionPane.showMessageDialog(this.jPanelCiudades, "Debe primero seleccionar una ciudad",
                     "Error", JOptionPane.ERROR_MESSAGE);
@@ -657,19 +660,30 @@ public class VentanaTripulacion extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         String nombre = (this.jTextFieldNombreCiudad.getText());
         if (!esVacio(nombre)) {
-            String gmtZonaHoraria = this.jComboBoxZonaHoraria.getSelectedItem().toString();
-            volandoAlto.RegistrarCiudad(nombre, gmtZonaHoraria);
-            JOptionPane.showMessageDialog(this.jPanelCiudades, "Ciudad registrada"
-                    + " con éxito", "OK", JOptionPane.INFORMATION_MESSAGE);
-            cargarListaJListCiudades();
+            if (contieneSoloLetras(nombre)) {
+
+                String gmtZonaHoraria = this.jComboBoxZonaHoraria.getSelectedItem().toString();
+                try {
+                    volandoAlto.RegistrarCiudad(nombre, gmtZonaHoraria);
+                    JOptionPane.showMessageDialog(this.jPanelRegistrarCiudad, "Ciudad registrada"
+                            + " con éxito", "OK", JOptionPane.INFORMATION_MESSAGE);
+                    cargarListaJListCiudades();
+                } catch (IllegalStateException ex) {
+                    JOptionPane.showMessageDialog(this.jPanelRegistrarCiudad, ex.getMessage(),
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this.jPanelRegistrarCiudad, "Nombre inválido", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         } else {
-            JOptionPane.showMessageDialog(this.jPanelCiudades, "Debe especificar un"
+            JOptionPane.showMessageDialog(this.jPanelRegistrarCiudad, "Debe especificar un"
                     + " nombre para la ciudad a registrar", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
         this.jPanelRegistrarCiudad.setVisible(false);
+        cargarListaJListCiudades();
         this.jPanelCiudades.setVisible(true);
     }//GEN-LAST:event_btnVolver1ActionPerformed
 
@@ -766,4 +780,17 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         return "".equals(texto.trim());
     }
 
+    private boolean contieneSoloLetras(String text) {
+        char[] aux = text.toCharArray();
+        for (int i = 0; i < aux.length; i++) {
+            if (aux[i] != ' ' && !Character.isAlphabetic(aux[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private void limpiarCamposjPanelRgistrarCiudad() {
+        this.jTextFieldNombreCiudad.setText("");
+    }
 }

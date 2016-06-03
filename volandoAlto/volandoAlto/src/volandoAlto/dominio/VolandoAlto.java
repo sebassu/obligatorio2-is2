@@ -46,13 +46,20 @@ public class VolandoAlto {
         this.ciudades.remove(ciudadSeleccionada);
     }
 
-    public void RegistrarCiudad(String nombre, String gmtZonaHoraria) {
-        
+    public void RegistrarCiudad(String nombre, String gmtZonaHoraria) throws IllegalStateException {
         String timeZoneId = "Etc/" + gmtZonaHoraria;
         TimeZone zonaHoraria = TimeZone.getTimeZone(timeZoneId);
         
         Ciudad ciudadARegistrar = new Ciudad(nombre, zonaHoraria);
+
+        if(ciudadRegistrada(ciudadARegistrar)){
+            throw new IllegalStateException("Ciudad ya registrada");
+        }
         
         this.ciudades.add(ciudadARegistrar);
+    }
+
+    private boolean ciudadRegistrada(Ciudad ciudad) {
+        return this.ciudades.contains(ciudad);
     }
 }
