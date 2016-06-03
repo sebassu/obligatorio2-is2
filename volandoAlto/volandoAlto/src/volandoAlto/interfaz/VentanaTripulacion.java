@@ -32,6 +32,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         this.volandoAlto = volandoAlto;
         this.jPanelCiudades.setVisible(false);
         this.jPanelRegistrarCiudad.setVisible(false);
+        this.jPanelListaMotivosAzafata.setVisible(false);
         ventanaCliente = new VentanaUsuario(idioma);
         ventanaCliente.setLocationRelativeTo(null);
         ventanaCliente.setVisible(true);
@@ -107,7 +108,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         jListCiudades = new javax.swing.JList<>();
         btnEliminar = new javax.swing.JButton();
         btnRegistrarNuevaCiudad = new javax.swing.JButton();
-        btnVolver = new javax.swing.JButton();
+        btnVolverDesdeCiudades = new javax.swing.JButton();
         jPanelPrincipal = new javax.swing.JPanel();
         jPanelVuelo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -146,6 +147,21 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jComboBoxZonaHoraria = new javax.swing.JComboBox<>();
+        jPanelListaMotivosAzafata = new javax.swing.JPanel();
+        jSeparator5 = new javax.swing.JSeparator();
+        jLabel16 = new javax.swing.JLabel();
+        btnVolverDesdeAzafata = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListCiudades1 = new javax.swing.JList<>();
+        btnRegistrarNuevoMotivo = new javax.swing.JButton();
+        btnEliminar1 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jTextFieldNombreMotivo = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jSeparator6 = new javax.swing.JSeparator();
+        btnVolverDesdeRegistrarMOtivoAzafata = new javax.swing.JButton();
+        btnRegistrarMotivo = new javax.swing.JButton();
 
         jMenu1.setText("jMenu1");
 
@@ -176,10 +192,10 @@ public class VentanaTripulacion extends javax.swing.JFrame {
             }
         });
 
-        btnVolver.setText("Volver");
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+        btnVolverDesdeCiudades.setText("Volver");
+        btnVolverDesdeCiudades.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
+                btnVolverDesdeCiudadesActionPerformed(evt);
             }
         });
 
@@ -191,7 +207,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelCiudadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVolver)
+                    .addComponent(btnVolverDesdeCiudades)
                     .addGroup(jPanelCiudadesLayout.createSequentialGroup()
                         .addGap(133, 133, 133)
                         .addComponent(jLabel12))
@@ -209,7 +225,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
             jPanelCiudadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCiudadesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnVolver)
+                .addComponent(btnVolverDesdeCiudades)
                 .addGap(11, 11, 11)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -220,7 +236,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
                 .addGroup(jPanelCiudadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRegistrarNuevaCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jPanelVuelo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -414,6 +430,11 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         });
 
         btnMotivosLlamadoAzafata.setText("Motivos llamado azafata");
+        btnMotivosLlamadoAzafata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMotivosLlamadoAzafataActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelMantenimientoLayout = new javax.swing.GroupLayout(jPanelMantenimiento);
         jPanelMantenimiento.setLayout(jPanelMantenimientoLayout);
@@ -536,14 +557,85 @@ public class VentanaTripulacion extends javax.swing.JFrame {
                 .addContainerGap(183, Short.MAX_VALUE))
         );
 
+        jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel16.setText("Motivos para llamar a la azafata");
+
+        btnVolverDesdeAzafata.setText("Volver");
+        btnVolverDesdeAzafata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverDesdeAzafataActionPerformed(evt);
+            }
+        });
+
+        jListCiudades1.setFont(new java.awt.Font("Tahoma", 0, 17)); // NOI18N
+        jScrollPane2.setViewportView(jListCiudades1);
+
+        btnRegistrarNuevoMotivo.setText("Registrar Nuevo");
+        btnRegistrarNuevoMotivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarNuevoMotivoActionPerformed(evt);
+            }
+        });
+
+        btnEliminar1.setText("Eliminar");
+        btnEliminar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminar1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelListaMotivosAzafataLayout = new javax.swing.GroupLayout(jPanelListaMotivosAzafata);
+        jPanelListaMotivosAzafata.setLayout(jPanelListaMotivosAzafataLayout);
+        jPanelListaMotivosAzafataLayout.setHorizontalGroup(
+            jPanelListaMotivosAzafataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelListaMotivosAzafataLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addGap(78, 78, 78))
+            .addGroup(jPanelListaMotivosAzafataLayout.createSequentialGroup()
+                .addGroup(jPanelListaMotivosAzafataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelListaMotivosAzafataLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanelListaMotivosAzafataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelListaMotivosAzafataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanelListaMotivosAzafataLayout.createSequentialGroup()
+                                    .addComponent(btnRegistrarNuevoMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, 0)
+                                    .addComponent(btnEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelListaMotivosAzafataLayout.createSequentialGroup()
+                                .addComponent(btnVolverDesdeAzafata)
+                                .addGap(257, 257, 257))))
+                    .addGroup(jPanelListaMotivosAzafataLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanelListaMotivosAzafataLayout.setVerticalGroup(
+            jPanelListaMotivosAzafataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelListaMotivosAzafataLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnVolverDesdeAzafata)
+                .addGap(11, 11, 11)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanelListaMotivosAzafataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRegistrarNuevoMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanelMenuPrincipalVentanaTripulacionLayout = new javax.swing.GroupLayout(jPanelMenuPrincipalVentanaTripulacion);
         jPanelMenuPrincipalVentanaTripulacion.setLayout(jPanelMenuPrincipalVentanaTripulacionLayout);
         jPanelMenuPrincipalVentanaTripulacionLayout.setHorizontalGroup(
             jPanelMenuPrincipalVentanaTripulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createSequentialGroup()
                     .addContainerGap()
@@ -554,6 +646,8 @@ public class VentanaTripulacion extends javax.swing.JFrame {
                     .addContainerGap()
                     .addComponent(jPanelRegistrarCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanelListaMotivosAzafata, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelMenuPrincipalVentanaTripulacionLayout.setVerticalGroup(
             jPanelMenuPrincipalVentanaTripulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -569,6 +663,70 @@ public class VentanaTripulacion extends javax.swing.JFrame {
                     .addGap(3, 3, 3)
                     .addComponent(jPanelRegistrarCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanelListaMotivosAzafata, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel17.setText("Nombre:");
+
+        jLabel18.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel18.setText("Registrar motivo");
+
+        btnVolverDesdeRegistrarMOtivoAzafata.setText("Volver");
+        btnVolverDesdeRegistrarMOtivoAzafata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverDesdeRegistrarMOtivoAzafataActionPerformed(evt);
+            }
+        });
+
+        btnRegistrarMotivo.setText("Registrar");
+        btnRegistrarMotivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarMotivoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel18)
+                .addGap(109, 109, 109))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnRegistrarMotivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextFieldNombreMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnVolverDesdeRegistrarMOtivoAzafata))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnVolverDesdeRegistrarMOtivoAzafata)
+                .addGap(21, 21, 21)
+                .addComponent(jLabel18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldNombreMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17))
+                .addGap(56, 56, 56)
+                .addComponent(btnRegistrarMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(165, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -579,12 +737,22 @@ public class VentanaTripulacion extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jPanelMenuPrincipalVentanaTripulacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelMenuPrincipalVentanaTripulacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
@@ -632,10 +800,10 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         this.jPanelCiudades.setVisible(true);
     }//GEN-LAST:event_btnCiudadesActionPerformed
 
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+    private void btnVolverDesdeCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverDesdeCiudadesActionPerformed
         this.jPanelCiudades.setVisible(false);
         this.jPanelPrincipal.setVisible(true);
-    }//GEN-LAST:event_btnVolverActionPerformed
+    }//GEN-LAST:event_btnVolverDesdeCiudadesActionPerformed
 
     private void btnRegistrarNuevaCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarNuevaCiudadActionPerformed
         this.jPanelCiudades.setVisible(false);
@@ -687,6 +855,33 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         this.jPanelCiudades.setVisible(true);
     }//GEN-LAST:event_btnVolver1ActionPerformed
 
+    private void btnVolverDesdeAzafataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverDesdeAzafataActionPerformed
+        this.jPanelListaMotivosAzafata.setVisible(false);
+        this.jPanelPrincipal.setVisible(true);
+    }//GEN-LAST:event_btnVolverDesdeAzafataActionPerformed
+
+    private void btnMotivosLlamadoAzafataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotivosLlamadoAzafataActionPerformed
+        this.jPanelPrincipal.setVisible(false);
+        
+        this.jPanelListaMotivosAzafata.setVisible(true);
+    }//GEN-LAST:event_btnMotivosLlamadoAzafataActionPerformed
+
+    private void btnRegistrarNuevoMotivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarNuevoMotivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarNuevoMotivoActionPerformed
+
+    private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminar1ActionPerformed
+
+    private void btnVolverDesdeRegistrarMOtivoAzafataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverDesdeRegistrarMOtivoAzafataActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnVolverDesdeRegistrarMOtivoAzafataActionPerformed
+
+    private void btnRegistrarMotivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarMotivoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnRegistrarMotivoActionPerformed
+
     private boolean datosValidos() {
         boolean valido = true;
         if (this.txtCapitan.getText().isEmpty() || this.txtCapitan.getText().length() > 25
@@ -721,11 +916,16 @@ public class VentanaTripulacion extends javax.swing.JFrame {
     private javax.swing.JButton btnAplicarCambios;
     private javax.swing.JButton btnCiudades;
     private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnEliminar1;
     private javax.swing.JButton btnMotivosLlamadoAzafata;
     private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnRegistrarMotivo;
     private javax.swing.JButton btnRegistrarNuevaCiudad;
-    private javax.swing.JButton btnVolver;
+    private javax.swing.JButton btnRegistrarNuevoMotivo;
     private javax.swing.JButton btnVolver1;
+    private javax.swing.JButton btnVolverDesdeAzafata;
+    private javax.swing.JButton btnVolverDesdeCiudades;
+    private javax.swing.JButton btnVolverDesdeRegistrarMOtivoAzafata;
     private javax.swing.JCheckBox chkDemorado;
     private javax.swing.JComboBox cmbDestino;
     private javax.swing.JComboBox cmbOrigen;
@@ -737,6 +937,9 @@ public class VentanaTripulacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -746,19 +949,26 @@ public class VentanaTripulacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<Object> jListCiudades;
+    private javax.swing.JList<Object> jListCiudades1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCiudades;
+    private javax.swing.JPanel jPanelListaMotivosAzafata;
     private javax.swing.JPanel jPanelMantenimiento;
     private javax.swing.JPanel jPanelMenuPrincipalVentanaTripulacion;
     private javax.swing.JPanel jPanelPrincipal;
     private javax.swing.JPanel jPanelRegistrarCiudad;
     private javax.swing.JPanel jPanelVuelo;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTextField jTextFieldNombreCiudad;
+    private javax.swing.JTextField jTextFieldNombreMotivo;
     private javax.swing.JLabel lblCambiosAplicados;
     private javax.swing.JTextField txtCapitan;
     private javax.swing.JTextField txtCodigoVuelo;
