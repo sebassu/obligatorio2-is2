@@ -11,6 +11,11 @@ public class Ciudad {
     private String nombre;
     private TimeZone zonaHoraria;
 
+    public Ciudad(String unNombre, TimeZone unaZonaHoraria) {
+        nombre = unNombre;
+        zonaHoraria = unaZonaHoraria;
+    }
+
     /**
      * @return the nombre
      */
@@ -37,5 +42,10 @@ public class Ciudad {
      */
     public void setZonaHoraria(TimeZone zonaHoraria) {
         this.zonaHoraria = zonaHoraria;
+    }
+
+    @Override
+    public String toString(){
+        return this.nombre;
     }
 }

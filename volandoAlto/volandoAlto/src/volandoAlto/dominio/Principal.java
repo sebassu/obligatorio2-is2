@@ -10,9 +10,10 @@ public class Principal {
 
     public static void main(String[] args) {
         try {
+            VolandoAlto volandoAlto = new VolandoAlto();
             UIManager.setLookAndFeel(
                     UIManager.getSystemLookAndFeelClassName());
-            VentanaTripulacion vT = new VentanaTripulacion();
+            VentanaTripulacion vT = new VentanaTripulacion(volandoAlto);
             vT.setVisible(true);
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
             Logger.getLogger(ReproductorMp3.class.getName()).log(Level.SEVERE, null, e);

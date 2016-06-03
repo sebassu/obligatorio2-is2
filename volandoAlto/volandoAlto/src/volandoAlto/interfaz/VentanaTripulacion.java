@@ -1,11 +1,17 @@
 package volandoAlto.interfaz;
 
+import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import volandoAlto.dominio.Idioma;
 import java.util.Calendar;
+import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.UIManager;
 import org.apache.commons.lang3.StringUtils;
+import volandoAlto.dominio.Ciudad;
+import volandoAlto.dominio.VolandoAlto;
 
 /**
  *
@@ -15,15 +21,21 @@ public class VentanaTripulacion extends javax.swing.JFrame {
 
     VentanaUsuario ventanaCliente;
 
+    private VolandoAlto volandoAlto;
+
     /**
      *
      */
-    public VentanaTripulacion() {
+    public VentanaTripulacion(VolandoAlto volandoAlto) {
         initComponents();
         Idioma idioma = new Idioma();
+        this.volandoAlto = volandoAlto;
         this.jPanelCiudades.setVisible(false);
+        this.jPanelRegistrarCiudad.setVisible(false);
         ventanaCliente = new VentanaUsuario(idioma);
+        ventanaCliente.setLocationRelativeTo(null);
         ventanaCliente.setVisible(true);
+        cargarListaJListCiudades();
         ActionListener taskPerformer = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,11 +104,11 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        jListCiudades = new javax.swing.JList<>();
+        btnEliminar = new javax.swing.JButton();
+        btnRegistrarNuevaCiudad = new javax.swing.JButton();
+        btnVolver = new javax.swing.JButton();
+        jPanelPrincipal = new javax.swing.JPanel();
         jPanelVuelo = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -125,6 +137,15 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JSeparator();
         btnCiudades = new javax.swing.JButton();
         btnMotivosLlamadoAzafata = new javax.swing.JButton();
+        jPanelRegistrarCiudad = new javax.swing.JPanel();
+        btnVolver1 = new javax.swing.JButton();
+        jLabel13 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        btnRegistrar = new javax.swing.JButton();
+        jTextFieldNombreCiudad = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jComboBoxZonaHoraria = new javax.swing.JComboBox<>();
 
         jMenu1.setText("jMenu1");
 
@@ -138,18 +159,28 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setText("Ciudades");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        jScrollPane1.setViewportView(jListCiudades);
+
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
         });
-        jScrollPane1.setViewportView(jList1);
 
-        jButton1.setText("Eliminar");
+        btnRegistrarNuevaCiudad.setText("Registrar Nueva");
+        btnRegistrarNuevaCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarNuevaCiudadActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Registrar ");
-
-        jButton3.setText("Volver");
+        btnVolver.setText("Volver");
+        btnVolver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolverActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelCiudadesLayout = new javax.swing.GroupLayout(jPanelCiudades);
         jPanelCiudades.setLayout(jPanelCiudadesLayout);
@@ -158,37 +189,37 @@ public class VentanaTripulacion extends javax.swing.JFrame {
             .addGroup(jPanelCiudadesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanelCiudadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelCiudadesLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, 0)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelCiudadesLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3)
+                    .addComponent(btnVolver)
                     .addGroup(jPanelCiudadesLayout.createSequentialGroup()
                         .addGap(133, 133, 133)
-                        .addComponent(jLabel12)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(jLabel12))
+                    .addGroup(jPanelCiudadesLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanelCiudadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanelCiudadesLayout.createSequentialGroup()
+                                .addComponent(btnRegistrarNuevaCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelCiudadesLayout.setVerticalGroup(
             jPanelCiudadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelCiudadesLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jButton3)
+                .addContainerGap()
+                .addComponent(btnVolver)
                 .addGap(11, 11, 11)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(8, 8, 8)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelCiudadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(203, Short.MAX_VALUE))
+                    .addComponent(btnRegistrarNuevaCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanelVuelo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -276,52 +307,51 @@ public class VentanaTripulacion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1)
-                    .addGroup(jPanelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanelVueloLayout.createSequentialGroup()
-                            .addComponent(chkDemorado)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnAplicarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanelVueloLayout.createSequentialGroup()
-                            .addGroup(jPanelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanelVueloLayout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtCodigoVuelo))
-                                    .addGroup(jPanelVueloLayout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lblCambiosAplicados))
-                                    .addGroup(jPanelVueloLayout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(txtCapitan, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanelVueloLayout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(22, 22, 22)
-                                        .addComponent(cmbOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanelVueloLayout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cmbDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addComponent(jLabel6)
+                    .addGroup(jPanelVueloLayout.createSequentialGroup()
+                        .addComponent(chkDemorado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAplicarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelVueloLayout.createSequentialGroup()
+                        .addGroup(jPanelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(jPanelVueloLayout.createSequentialGroup()
-                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel2)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel8)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtMinutoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtCodigoVuelo))
                                 .addGroup(jPanelVueloLayout.createSequentialGroup()
-                                    .addComponent(jLabel9)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLabel10)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtMinutoLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addComponent(jLabel1)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(lblCambiosAplicados))
+                                .addGroup(jPanelVueloLayout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(txtCapitan, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanelVueloLayout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(22, 22, 22)
+                                    .addComponent(cmbOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanelVueloLayout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(cmbDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel6)
+                            .addGroup(jPanelVueloLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtMinutoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanelVueloLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtMinutoLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelVueloLayout.setVerticalGroup(
@@ -389,13 +419,10 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         jPanelMantenimientoLayout.setHorizontalGroup(
             jPanelMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMantenimientoLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanelMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelMantenimientoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator2))
-                    .addGroup(jPanelMantenimientoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel11)))
+                    .addComponent(jSeparator2)
+                    .addComponent(jLabel11))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMantenimientoLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -418,53 +445,129 @@ public class VentanaTripulacion extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelVuelo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelMantenimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+        javax.swing.GroupLayout jPanelPrincipalLayout = new javax.swing.GroupLayout(jPanelPrincipal);
+        jPanelPrincipal.setLayout(jPanelPrincipalLayout);
+        jPanelPrincipalLayout.setHorizontalGroup(
+            jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanelVuelo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanelMantenimiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+        jPanelPrincipalLayout.setVerticalGroup(
+            jPanelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelPrincipalLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addComponent(jPanelVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelMantenimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btnVolver1.setText("Volver");
+        btnVolver1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVolver1ActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel13.setText("Registrar Ciudad");
+
+        btnRegistrar.setText("Registrar");
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setText("Nombre:");
+
+        jLabel15.setText("Zona Horaria:");
+
+        jComboBoxZonaHoraria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "GMT+12", "GMT+11", "GMT+10", "GMT+9", "GMT+8", "GMT+7", "GMT+6", "GMT+5", "GMT+4", "GMT+3", "GMT+2", "GMT+1", "GMT+0", "GMT-1", "GMT-2", "GMT-3", "GMT-4", "GMT-5", "GMT-6", "GMT-7", "GMT-8", "GMT-9", "GMT-10", "GMT-11", "GMT-12", "GMT-13", "GMT-14" }));
+
+        javax.swing.GroupLayout jPanelRegistrarCiudadLayout = new javax.swing.GroupLayout(jPanelRegistrarCiudad);
+        jPanelRegistrarCiudad.setLayout(jPanelRegistrarCiudadLayout);
+        jPanelRegistrarCiudadLayout.setHorizontalGroup(
+            jPanelRegistrarCiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRegistrarCiudadLayout.createSequentialGroup()
+                .addGroup(jPanelRegistrarCiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelRegistrarCiudadLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanelRegistrarCiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnVolver1)))
+                    .addGroup(jPanelRegistrarCiudadLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanelRegistrarCiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel15))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelRegistrarCiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(jTextFieldNombreCiudad)
+                            .addComponent(jComboBoxZonaHoraria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarCiudadLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel13)
+                .addGap(117, 117, 117))
+        );
+        jPanelRegistrarCiudadLayout.setVerticalGroup(
+            jPanelRegistrarCiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelRegistrarCiudadLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnVolver1)
+                .addGap(11, 11, 11)
+                .addComponent(jLabel13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addGroup(jPanelRegistrarCiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldNombreCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14))
+                .addGap(56, 56, 56)
+                .addGroup(jPanelRegistrarCiudadLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxZonaHoraria, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(60, 60, 60)
+                .addComponent(btnRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanelMenuPrincipalVentanaTripulacionLayout = new javax.swing.GroupLayout(jPanelMenuPrincipalVentanaTripulacion);
         jPanelMenuPrincipalVentanaTripulacion.setLayout(jPanelMenuPrincipalVentanaTripulacionLayout);
         jPanelMenuPrincipalVentanaTripulacionLayout.setHorizontalGroup(
             jPanelMenuPrincipalVentanaTripulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 368, Short.MAX_VALUE)
+            .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
             .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanelCiudades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap()
+                    .addComponent(jPanelCiudades, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                    .addContainerGap()))
             .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMenuPrincipalVentanaTripulacionLayout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jPanelRegistrarCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanelMenuPrincipalVentanaTripulacionLayout.setVerticalGroup(
             jPanelMenuPrincipalVentanaTripulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 622, Short.MAX_VALUE)
+            .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createSequentialGroup()
+                .addComponent(jPanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(31, Short.MAX_VALUE))
             .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanelCiudades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanelCiudades, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
             .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createSequentialGroup()
+                    .addGap(3, 3, 3)
+                    .addComponent(jPanelRegistrarCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -473,14 +576,14 @@ public class VentanaTripulacion extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanelMenuPrincipalVentanaTripulacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelMenuPrincipalVentanaTripulacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanelMenuPrincipalVentanaTripulacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanelMenuPrincipalVentanaTripulacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -524,10 +627,51 @@ public class VentanaTripulacion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAplicarCambiosActionPerformed
 
     private void btnCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCiudadesActionPerformed
+        this.jPanelPrincipal.setVisible(false);
         this.jPanelCiudades.setVisible(true);
-        this.jPanelVuelo.setVisible(false);
-        this.jPanelMantenimiento.setVisible(false);
     }//GEN-LAST:event_btnCiudadesActionPerformed
+
+    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+        this.jPanelCiudades.setVisible(false);
+        this.jPanelPrincipal.setVisible(true);
+    }//GEN-LAST:event_btnVolverActionPerformed
+
+    private void btnRegistrarNuevaCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarNuevaCiudadActionPerformed
+        this.jPanelCiudades.setVisible(false);
+        this.jPanelRegistrarCiudad.setVisible(true);
+    }//GEN-LAST:event_btnRegistrarNuevaCiudadActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        Ciudad ciudadSeleccionada = ObtenerCiudadSeleccionada();
+        if (ciudadSeleccionada != null) {
+            volandoAlto.EliminarCiudad(ciudadSeleccionada);
+            this.cargarListaJListCiudades();
+            JOptionPane.showMessageDialog(this.jPanelCiudades, "Ciudad eliminada", "OK",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this.jPanelCiudades, "Debe primero seleccionar una ciudad",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+        String nombre = (this.jTextFieldNombreCiudad.getText());
+        if (!esVacio(nombre)) {
+            String gmtZonaHoraria = this.jComboBoxZonaHoraria.getSelectedItem().toString();
+            volandoAlto.RegistrarCiudad(nombre, gmtZonaHoraria);
+            JOptionPane.showMessageDialog(this.jPanelCiudades, "Ciudad registrada"
+                    + " con éxito", "OK", JOptionPane.INFORMATION_MESSAGE);
+            cargarListaJListCiudades();
+        } else {
+            JOptionPane.showMessageDialog(this.jPanelCiudades, "Debe especificar un"
+                    + " nombre para la ciudad a registrar", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+
+    private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
+        this.jPanelRegistrarCiudad.setVisible(false);
+        this.jPanelCiudades.setVisible(true);
+    }//GEN-LAST:event_btnVolver1ActionPerformed
 
     private boolean datosValidos() {
         boolean valido = true;
@@ -562,17 +706,23 @@ public class VentanaTripulacion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAplicarCambios;
     private javax.swing.JButton btnCiudades;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnMotivosLlamadoAzafata;
+    private javax.swing.JButton btnRegistrar;
+    private javax.swing.JButton btnRegistrarNuevaCiudad;
+    private javax.swing.JButton btnVolver;
+    private javax.swing.JButton btnVolver1;
     private javax.swing.JCheckBox chkDemorado;
     private javax.swing.JComboBox cmbDestino;
     private javax.swing.JComboBox cmbOrigen;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBoxZonaHoraria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -581,17 +731,20 @@ public class VentanaTripulacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<Object> jListCiudades;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelCiudades;
     private javax.swing.JPanel jPanelMantenimiento;
     private javax.swing.JPanel jPanelMenuPrincipalVentanaTripulacion;
+    private javax.swing.JPanel jPanelPrincipal;
+    private javax.swing.JPanel jPanelRegistrarCiudad;
     private javax.swing.JPanel jPanelVuelo;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JTextField jTextFieldNombreCiudad;
     private javax.swing.JLabel lblCambiosAplicados;
     private javax.swing.JTextField txtCapitan;
     private javax.swing.JTextField txtCodigoVuelo;
@@ -600,5 +753,17 @@ public class VentanaTripulacion extends javax.swing.JFrame {
     private javax.swing.JTextField txtMinutoLlegada;
     private javax.swing.JTextField txtMinutoSalida;
     // End of variables declaration//GEN-END:variables
+
+    private void cargarListaJListCiudades() {
+        this.jListCiudades.setListData(volandoAlto.getCiudades().toArray());
+    }
+
+    private Ciudad ObtenerCiudadSeleccionada() {
+        return (Ciudad) this.jListCiudades.getSelectedValue();
+    }
+
+    private boolean esVacio(String texto) {
+        return "".equals(texto.trim());
+    }
 
 }

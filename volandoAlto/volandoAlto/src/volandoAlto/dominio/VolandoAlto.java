@@ -6,12 +6,13 @@
 package volandoAlto.dominio;
 
 import java.util.ArrayList;
+import java.util.TimeZone;
 
 /**
  *
  * @author alumnoFI
  */
-public class AccesoADatos {
+public class VolandoAlto {
 
     private final ArrayList<Ciudad> ciudades;
     private Vuelo vueloActual;
@@ -37,7 +38,21 @@ public class AccesoADatos {
         this.vueloActual = vueloActual;
     }
 
-    public AccesoADatos() {
+    public VolandoAlto() {
         this.ciudades = new ArrayList<>();
+    }
+
+    public void EliminarCiudad(Ciudad ciudadSeleccionada) {
+        this.ciudades.remove(ciudadSeleccionada);
+    }
+
+    public void RegistrarCiudad(String nombre, String gmtZonaHoraria) {
+        
+        String timeZoneId = "Etc/" + gmtZonaHoraria;
+        TimeZone zonaHoraria = TimeZone.getTimeZone(timeZoneId);
+        
+        Ciudad ciudadARegistrar = new Ciudad(nombre, zonaHoraria);
+        
+        this.ciudades.add(ciudadARegistrar);
     }
 }
