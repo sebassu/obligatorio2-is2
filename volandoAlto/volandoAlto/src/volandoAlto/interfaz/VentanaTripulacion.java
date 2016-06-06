@@ -1,14 +1,11 @@
 package volandoAlto.interfaz;
 
-import com.sun.corba.se.impl.protocol.giopmsgheaders.Message;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import volandoAlto.dominio.Idioma;
 import java.util.Calendar;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
-import javax.swing.UIManager;
 import org.apache.commons.lang3.StringUtils;
 import volandoAlto.dominio.Ciudad;
 import volandoAlto.dominio.VolandoAlto;
@@ -21,10 +18,10 @@ public class VentanaTripulacion extends javax.swing.JFrame {
 
     VentanaUsuario ventanaCliente;
 
-    private VolandoAlto volandoAlto;
+    private final VolandoAlto volandoAlto;
 
     /**
-     *
+     * @param volandoAlto Objeto fachada del sistema.
      */
     public VentanaTripulacion(VolandoAlto volandoAlto) {
         initComponents();

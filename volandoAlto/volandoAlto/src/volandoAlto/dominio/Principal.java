@@ -1,5 +1,7 @@
 package volandoAlto.dominio;
 
+import volandoAlto.persistencia.Serializacion;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -8,15 +10,36 @@ import volandoAlto.interfaz.VentanaTripulacion;
 
 public class Principal {
 
+    private static VolandoAlto abrirSistema() {
+        VolandoAlto ret;
+        try {
+            ret = Serializacion.deserializar();
+        } catch (IOException | ClassNotFoundException e) {
+            ret = new VolandoAlto();
+        }
+        return ret;
+    }
+
     public static void main(String[] args) {
         try {
-            VolandoAlto volandoAlto = new VolandoAlto();
+            final VolandoAlto volandoAlto = abrirSistema();
             UIManager.setLookAndFeel(
                     UIManager.getSystemLookAndFeelClassName());
             VentanaTripulacion vT = new VentanaTripulacion(volandoAlto);
             vT.setVisible(true);
-        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-            Logger.getLogger(ReproductorMp3.class.getName()).log(Level.SEVERE, null, e);
+            Runtime.getRuntime().addShutdownHook(new Thread() {
+                @Override
+                public void run() {
+                    try {
+                        Serializacion.serializar(volandoAlto);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+        } catch (UnsupportedLookAndFeelException | ClassNotFoundException |
+                InstantiationException | IllegalAccessException e) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 }
