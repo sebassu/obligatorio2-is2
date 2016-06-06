@@ -4,24 +4,13 @@ import volandoAlto.dominio.Idioma;
 import volandoAlto.dominio.ReproductorMp3;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
 
-/**
- *
- * @author Br1
- */
 public class VentanaUsuario extends javax.swing.JFrame {
 
     Idioma idiomaActual;
     ReproductorMp3 reproductorMusica;
     private int panelActual;
 
-    /**
-     *
-     * @param idioma
-     */
     public VentanaUsuario(Idioma idioma) {
         initComponents();
         idiomaActual = idioma;
@@ -38,9 +27,6 @@ public class VentanaUsuario extends javax.swing.JFrame {
         this.actualizarNombreCancion();
     }
 
-    /**
-     *
-     */
     public void deseleccionarBotones() {
         this.btnVuelo.setBackground(new Color(0, 204, 204));
         this.btnJuegos.setBackground(new Color(0, 204, 204));
@@ -1170,17 +1156,10 @@ public class VentanaUsuario extends javax.swing.JFrame {
         this.actualizarNombreCancion();
     }//GEN-LAST:event_btnAlternativaActionPerformed
 
-    /**
-     *
-     * @param genero
-     */
     public void setTextoGenero(String genero) {
         this.lblGeneroSeleccionado.setText(genero + ":");
     }
 
-    /**
-     *
-     */
     public void ocultarPaneles() {
         this.pnlVuelo.setVisible(false);
         this.pnlApagado.setVisible(false);
@@ -1190,9 +1169,6 @@ public class VentanaUsuario extends javax.swing.JFrame {
         this.pnlMusica.setVisible(false);
     }
 
-    /**
-     *
-     */
     public void cargarPalabras() {
         String[] palabras = this.idiomaActual.getPalabras();
         this.lblBienvenido.setText(palabras[0]);
@@ -1217,9 +1193,6 @@ public class VentanaUsuario extends javax.swing.JFrame {
         this.lblEstadoReproduccion.setText(palabras[21]);
     }
 
-    /**
-     *
-     */
     public void actualizarNombreCancion() {
         this.lblNombreCancion.setText(this.reproductorMusica.getNombreCancionActual());
     }
@@ -1287,18 +1260,6 @@ public class VentanaUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel pnlVuelo;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     *
-     * @param nombreCapitan
-     * @param codigoVuelo
-     * @param origen
-     * @param destino
-     * @param horaSalida
-     * @param minutoSalida
-     * @param horaLlegada
-     * @param minutoLlegada
-     * @param demorado
-     */
     public void aplicarCambios(String nombreCapitan,
             String codigoVuelo,
             String origen,
@@ -1324,10 +1285,6 @@ public class VentanaUsuario extends javax.swing.JFrame {
         }
     }
 
-    /**
-     *
-     * @param hora
-     */
     public void actualizarHora(String hora) {
         this.lblHoraActualEnDestino.setText(hora);
     }

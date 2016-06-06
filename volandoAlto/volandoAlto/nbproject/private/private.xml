@@ -4,7 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/alumnoFI/Documents/obligatorio-2-is2/volandoAlto/volandoAlto/src/volandoAlto/dominio/Principal.java</file>
+            <file>file:/C:/Users/alumnoFI/Documents/obligatorio-2-is2/volandoAlto/volandoAlto/src/volandoAlto/persistencia/Serializacion.java</file>
+            <file>file:/C:/Users/alumnoFI/Documents/obligatorio-2-is2/volandoAlto/volandoAlto/src/volandoAlto/persistencia/ArchivoLectura.java</file>
             <file>file:/C:/Users/alumnoFI/Documents/obligatorio-2-is2/volandoAlto/volandoAlto/src/volandoAlto/interfaz/VentanaUsuario.java</file>
+            <file>file:/C:/Users/alumnoFI/Documents/obligatorio-2-is2/volandoAlto/volandoAlto/src/volandoAlto/dominio/ReproductorMp3.java</file>
             <file>file:/C:/Users/alumnoFI/Documents/obligatorio-2-is2/volandoAlto/volandoAlto/src/volandoAlto/dominio/Idioma.java</file>
             <file>file:/C:/Users/alumnoFI/Documents/obligatorio-2-is2/volandoAlto/volandoAlto/src/volandoAlto/dominio/Vuelo.java</file>
             <file>file:/C:/Users/alumnoFI/Documents/obligatorio-2-is2/volandoAlto/volandoAlto/src/volandoAlto/dominio/VolandoAlto.java</file>

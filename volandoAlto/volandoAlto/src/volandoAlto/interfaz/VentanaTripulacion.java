@@ -794,6 +794,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
 
     private void btnCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCiudadesActionPerformed
         this.jPanelPrincipal.setVisible(false);
+        cargarListaJListCiudades();
         this.jPanelCiudades.setVisible(true);
     }//GEN-LAST:event_btnCiudadesActionPerformed
 
@@ -859,7 +860,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
 
     private void btnMotivosLlamadoAzafataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMotivosLlamadoAzafataActionPerformed
         this.jPanelPrincipal.setVisible(false);
-        
+
         this.jPanelListaMotivosAzafata.setVisible(true);
     }//GEN-LAST:event_btnMotivosLlamadoAzafataActionPerformed
 

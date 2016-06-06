@@ -1,39 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package volandoAlto.dominio;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.TimeZone;
 
-/**
- *
- * @author alumnoFI
- */
-public class VolandoAlto {
+public class VolandoAlto implements Serializable {
 
     private final ArrayList<Ciudad> ciudades;
     private Vuelo vueloActual;
+    private HashMap<String, Idioma> listadoIdiomas;
 
-    /**
-     * @return the ciudades
-     */
     public ArrayList<Ciudad> getCiudades() {
         return ciudades;
     }
 
-    /**
-     * @return the vueloActual
-     */
     public Vuelo getVueloActual() {
         return vueloActual;
     }
 
-    /**
-     * @param vueloActual the vueloActual to set
-     */
     public void setVueloActual(Vuelo vueloActual) {
         this.vueloActual = vueloActual;
     }
@@ -49,13 +34,10 @@ public class VolandoAlto {
     public void RegistrarCiudad(String nombre, String gmtZonaHoraria) throws IllegalStateException {
         String timeZoneId = "Etc/" + gmtZonaHoraria;
         TimeZone zonaHoraria = TimeZone.getTimeZone(timeZoneId);
-        
         Ciudad ciudadARegistrar = new Ciudad(nombre, zonaHoraria);
-
-        if(ciudadRegistrada(ciudadARegistrar)){
+        if (ciudadRegistrada(ciudadARegistrar)) {
             throw new IllegalStateException("Ciudad ya registrada");
         }
-        
         this.ciudades.add(ciudadARegistrar);
     }
 

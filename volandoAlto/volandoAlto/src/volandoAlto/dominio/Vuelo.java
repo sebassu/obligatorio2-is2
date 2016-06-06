@@ -5,14 +5,15 @@
  */
 package volandoAlto.dominio;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  *
  * @author alumnoFI
  */
-public class Vuelo {
- 
+public class Vuelo implements Serializable {
+
     private String codigoDeVuelo;
     private String capitan;
     private Ciudad ciudadOrigen;
@@ -103,6 +104,5 @@ public class Vuelo {
     public void setHoraLlegada(Calendar horaLlegada) {
         this.horaLlegada = horaLlegada;
     }
-    
-    
+
 }

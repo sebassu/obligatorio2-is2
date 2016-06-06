@@ -1,5 +1,6 @@
 package volandoAlto.dominio;
 
+import java.io.Serializable;
 import java.util.Objects;
 import java.util.TimeZone;
 
@@ -7,7 +8,7 @@ import java.util.TimeZone;
  *
  * @author pabloMorales
  */
-public class Ciudad {
+public class Ciudad implements Serializable {
 
     private String nombre;
     private TimeZone zonaHoraria;
