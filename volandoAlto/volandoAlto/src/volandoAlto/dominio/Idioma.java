@@ -4,10 +4,12 @@ import java.awt.Font;
 
 public class Idioma {
 
+    private final String nombre;
     private final String[] palabras;
     private final Font fuenteIdioma;
 
-    public Idioma(String[] unasPalabras, String nombreFuente) {
+    public Idioma(String unNombre, String[] unasPalabras, String nombreFuente) {
+        nombre = unNombre;
         palabras = unasPalabras;
         fuenteIdioma = new Font(nombreFuente, Font.PLAIN, 12);
     }
@@ -18,5 +20,12 @@ public class Idioma {
 
     public Font getFuente() {
         return fuenteIdioma;
+    }
+
+    /**
+     * @return the nombre
+     */
+    public String getNombre() {
+        return nombre;
     }
 }

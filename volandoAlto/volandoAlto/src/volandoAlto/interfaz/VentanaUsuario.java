@@ -4,16 +4,22 @@ import volandoAlto.dominio.Idioma;
 import volandoAlto.dominio.ReproductorMp3;
 import java.awt.Color;
 import java.awt.Font;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+import volandoAlto.dominio.VolandoAlto;
 
 public class VentanaUsuario extends javax.swing.JFrame {
 
-    Idioma idiomaActual;
+    VolandoAlto volandoAlto;
     ReproductorMp3 reproductorMusica;
     private int panelActual;
+    private  JComponent contentPane;
 
-    public VentanaUsuario(Idioma idioma) {
+    public VentanaUsuario(VolandoAlto volandoAlto) {
         initComponents();
-        idiomaActual = idioma;
+        this.contentPane = new ComboBoxIdiomas(volandoAlto);
+        this.contentPane.setOpaque(true);
+        this.setContentPane(contentPane);
         this.pnlIdioma.setVisible(true);
         this.pnlApagado.setVisible(false);
         this.pnlBotones.setVisible(false);
@@ -322,9 +328,9 @@ public class VentanaUsuario extends javax.swing.JFrame {
         pnlIdiomaLayout.setVerticalGroup(
             pnlIdiomaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlIdiomaLayout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(lblBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(pnlIdiomaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlIdiomaLayout.createSequentialGroup()
                         .addGroup(pnlIdiomaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -654,8 +660,6 @@ public class VentanaUsuario extends javax.swing.JFrame {
                 .addGap(64, 64, 64))
         );
 
-        lblHoraEnDestino.getAccessibleContext().setAccessibleName("Información de hora");
-
         pnlMapas.setAlignmentX(0.0F);
         pnlMapas.setAlignmentY(0.0F);
         pnlMapas.setMaximumSize(new java.awt.Dimension(928, 576));
@@ -983,56 +987,56 @@ public class VentanaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnInglesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInglesActionPerformed
-        this.idiomaActual.setIdiomaActual(0);
+        this.volandoAlto.setIdiomaActual(idiomaActual);
         this.cargarPalabras();
         this.lblBienvenido.setFont(new java.awt.Font("Segoe UI Light", 0, 75));
         this.lblContinuar.setFont(new java.awt.Font("Segoe UI Light", 0, 20));
     }//GEN-LAST:event_btnInglesActionPerformed
 
     private void btnChinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinoActionPerformed
-        this.idiomaActual.setIdiomaActual(1);
+        this.volandoAlto.setIdiomaActual(1);
         this.cargarPalabras();
         this.lblBienvenido.setFont(new Font("Arial Unicode MS", Font.BOLD, 75));
         this.lblContinuar.setFont(new Font("Arial Unicode MS", Font.BOLD, 20));
     }//GEN-LAST:event_btnChinoActionPerformed
 
     private void btnEspañolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEspañolActionPerformed
-        this.idiomaActual.setIdiomaActual(2);
+        this.volandoAlto.setIdiomaActual(2);
         this.cargarPalabras();
         this.lblBienvenido.setFont(new java.awt.Font("Segoe UI Light", 0, 75));
         this.lblContinuar.setFont(new java.awt.Font("Segoe UI Light", 0, 20));
     }//GEN-LAST:event_btnEspañolActionPerformed
 
     private void btnRusoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRusoActionPerformed
-        this.idiomaActual.setIdiomaActual(3);
+        this.volandoAlto.setIdiomaActual(3);
         this.cargarPalabras();
         this.lblBienvenido.setFont(new java.awt.Font("Segoe UI Light", 0, 75));
         this.lblContinuar.setFont(new java.awt.Font("Segoe UI Light", 0, 20));
     }//GEN-LAST:event_btnRusoActionPerformed
 
     private void btnArabeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArabeActionPerformed
-        this.idiomaActual.setIdiomaActual(4);
+        this.volandoAlto.setIdiomaActual(4);
         this.cargarPalabras();
         this.lblBienvenido.setFont(new java.awt.Font("Lucida Sans Regular", 0, 75));
         this.lblContinuar.setFont(new java.awt.Font("Lucida Sans Regular", 0, 20));
     }//GEN-LAST:event_btnArabeActionPerformed
 
     private void btnPortugalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPortugalActionPerformed
-        this.idiomaActual.setIdiomaActual(5);
+        this.volandoAlto.setIdiomaActual(5);
         this.cargarPalabras();
         this.lblBienvenido.setFont(new java.awt.Font("Segoe UI Light", 0, 75));
         this.lblContinuar.setFont(new java.awt.Font("Segoe UI Light", 0, 20));
     }//GEN-LAST:event_btnPortugalActionPerformed
 
     private void btnItaliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItaliaActionPerformed
-        this.idiomaActual.setIdiomaActual(6);
+        this.volandoAlto.setIdiomaActual(6);
         this.cargarPalabras();
         this.lblBienvenido.setFont(new java.awt.Font("Segoe UI Light", 0, 75));
         this.lblContinuar.setFont(new java.awt.Font("Segoe UI Light", 0, 20));
     }//GEN-LAST:event_btnItaliaActionPerformed
 
     private void btnJaponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJaponActionPerformed
-        this.idiomaActual.setIdiomaActual(7);
+        this.volandoAlto.setIdiomaActual(7);
         this.cargarPalabras();
         this.pnlVuelo.setFont(Font.decode("Arial Unicode MS"));
         this.lblBienvenido.setFont(new Font("Arial Unicode MS", Font.BOLD, 75));
@@ -1040,14 +1044,14 @@ public class VentanaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnJaponActionPerformed
 
     private void btnAlemanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlemanActionPerformed
-        this.idiomaActual.setIdiomaActual(8);
+        this.volandoAlto.setIdiomaActual(8);
         this.cargarPalabras();
         this.lblBienvenido.setFont(new java.awt.Font("Segoe UI Light", 0, 75));
         this.lblContinuar.setFont(new java.awt.Font("Segoe UI Light", 0, 20));
     }//GEN-LAST:event_btnAlemanActionPerformed
 
     private void btnFrancesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFrancesActionPerformed
-        this.idiomaActual.setIdiomaActual(9);
+        this.volandoAlto.setIdiomaActual(9);
         this.cargarPalabras();
         this.lblBienvenido.setFont(new java.awt.Font("Segoe UI Light", 0, 75));
         this.lblContinuar.setFont(new java.awt.Font("Segoe UI Light", 0, 20));
@@ -1074,7 +1078,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
 
     private void btnReproducirCancionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReproducirCancionActionPerformed
         if (this.reproductorMusica.isDetenido() == true) {
-            this.lblEstadoReproduccion.setText(this.idiomaActual.getPalabras()[22]);
+            this.lblEstadoReproduccion.setText(volandoAlto.getIdiomaActual().getPalabras()[22]);
             reproductorMusica.play();
         }
     }//GEN-LAST:event_btnReproducirCancionActionPerformed
@@ -1085,26 +1089,26 @@ public class VentanaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDetenerCancionActionPerformed
 
     private void btnClasicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClasicaActionPerformed
-        this.setTextoGenero(this.idiomaActual.getPalabras()[15]);
+        this.setTextoGenero(volandoAlto.getIdiomaActual().getPalabras()[15]);
         reproductorMusica.parar();
-        this.lblEstadoReproduccion.setText(this.idiomaActual.getPalabras()[21]);
+        this.lblEstadoReproduccion.setText(volandoAlto.getIdiomaActual().getPalabras()[21]);
         this.reproductorMusica.setListaReproduccion("clasica");
         this.actualizarNombreCancion();
     }//GEN-LAST:event_btnClasicaActionPerformed
 
     private void btnRockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRockActionPerformed
-        this.setTextoGenero(this.idiomaActual.getPalabras()[17]);
+        this.setTextoGenero(volandoAlto.getIdiomaActual().getPalabras()[17]);
         reproductorMusica.parar();
-        this.lblEstadoReproduccion.setText(this.idiomaActual.getPalabras()[21]);
+        this.lblEstadoReproduccion.setText(volandoAlto.getIdiomaActual().getPalabras()[21]);
         this.reproductorMusica.setListaReproduccion("rock");
         this.actualizarNombreCancion();
     }//GEN-LAST:event_btnRockActionPerformed
 
     private void btnPopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPopActionPerformed
-        this.setTextoGenero(this.idiomaActual.getPalabras()[16]);
+        this.setTextoGenero(volandoAlto.getIdiomaActual().getPalabras()[16]);
         this.lblEstadoReproduccion.setText("Detenido");
         reproductorMusica.parar();
-        this.lblEstadoReproduccion.setText(this.idiomaActual.getPalabras()[21]);
+        this.lblEstadoReproduccion.setText(volandoAlto.getIdiomaActual().getPalabras()[21]);
         this.reproductorMusica.setListaReproduccion("pop");
         this.actualizarNombreCancion();
     }//GEN-LAST:event_btnPopActionPerformed
@@ -1112,7 +1116,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         this.reproductorMusica.siguienteCancion();
         if (this.reproductorMusica.isDetenido()) {
-            this.lblEstadoReproduccion.setText(this.idiomaActual.getPalabras()[21]);
+            this.lblEstadoReproduccion.setText(volandoAlto.getIdiomaActual().getPalabras()[21]);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
@@ -1133,25 +1137,25 @@ public class VentanaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnJuegosActionPerformed
 
     private void btnElectronicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElectronicaActionPerformed
-        this.setTextoGenero(this.idiomaActual.getPalabras()[18]);
+        this.setTextoGenero(volandoAlto.getIdiomaActual().getPalabras()[18]);
         reproductorMusica.parar();
-        this.lblEstadoReproduccion.setText(this.idiomaActual.getPalabras()[21]);
+        this.lblEstadoReproduccion.setText(volandoAlto.getIdiomaActual().getPalabras()[21]);
         this.reproductorMusica.setListaReproduccion("electronica");
         this.actualizarNombreCancion();
     }//GEN-LAST:event_btnElectronicaActionPerformed
 
     private void btnReggaeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReggaeActionPerformed
-        this.setTextoGenero(this.idiomaActual.getPalabras()[19]);
+        this.setTextoGenero(volandoAlto.getIdiomaActual().getPalabras()[19]);
         reproductorMusica.parar();
-        this.lblEstadoReproduccion.setText(this.idiomaActual.getPalabras()[21]);
+        this.lblEstadoReproduccion.setText(volandoAlto.getIdiomaActual().getPalabras()[21]);
         this.reproductorMusica.setListaReproduccion("reggae");
         this.actualizarNombreCancion();
     }//GEN-LAST:event_btnReggaeActionPerformed
 
     private void btnAlternativaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlternativaActionPerformed
-        this.setTextoGenero(this.idiomaActual.getPalabras()[20]);
+        this.setTextoGenero(volandoAlto.getIdiomaActual().getPalabras()[20]);
         reproductorMusica.parar();
-        this.lblEstadoReproduccion.setText(this.idiomaActual.getPalabras()[21]);
+        this.lblEstadoReproduccion.setText(volandoAlto.getIdiomaActual().getPalabras()[21]);
         this.reproductorMusica.setListaReproduccion("alternativa");
         this.actualizarNombreCancion();
     }//GEN-LAST:event_btnAlternativaActionPerformed
@@ -1170,7 +1174,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
     }
 
     public void cargarPalabras() {
-        String[] palabras = this.idiomaActual.getPalabras();
+        String[] palabras = volandoAlto.getIdiomaActual().getPalabras();
         this.lblBienvenido.setText(palabras[0]);
         this.lblContinuar.setText(palabras[1]);
         this.lblInfoVuelo.setText(palabras[2]);
@@ -1275,11 +1279,11 @@ public class VentanaUsuario extends javax.swing.JFrame {
         this.lblDestino.setText(destino);
         this.lblHoraSalida.setText(horaSalida + ":" + minutoSalida);
         if (demorado) {
-            String texto = this.idiomaActual.getPalabras()[13];
+            String texto = volandoAlto.getIdiomaActual().getPalabras()[13];
             this.lblEstadoLlegada.setText(texto);
             this.lblHoraLlegada.setText("");
         } else {
-            String texto = this.idiomaActual.getPalabras()[7];
+            String texto = volandoAlto.getIdiomaActual().getPalabras()[7];
             this.lblEstadoLlegada.setText(texto);
             this.lblHoraLlegada.setText(horaLlegada + ":" + minutoLlegada);
         }

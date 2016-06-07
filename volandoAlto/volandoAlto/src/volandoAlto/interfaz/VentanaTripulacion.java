@@ -2,7 +2,6 @@ package volandoAlto.interfaz;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import volandoAlto.dominio.Idioma;
 import java.util.Calendar;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -25,12 +24,11 @@ public class VentanaTripulacion extends javax.swing.JFrame {
      */
     public VentanaTripulacion(VolandoAlto volandoAlto) {
         initComponents();
-        Idioma idioma = new Idioma();
         this.volandoAlto = volandoAlto;
         this.jPanelCiudades.setVisible(false);
         this.jPanelRegistrarCiudad.setVisible(false);
         this.jPanelListaMotivosAzafata.setVisible(false);
-        ventanaCliente = new VentanaUsuario(idioma);
+        ventanaCliente = new VentanaUsuario(volandoAlto);
         ventanaCliente.setLocationRelativeTo(null);
         ventanaCliente.setVisible(true);
         cargarListaJListCiudades();
