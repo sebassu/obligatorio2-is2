@@ -15,7 +15,7 @@ public class VolandoAlto implements Serializable {
     private Idioma idiomaActual;
     private final ArrayList<Ciudad> ciudades;
     private Vuelo vueloActual;
-    private HashMap<String, Idioma> listadoIdiomas;
+    private HashMap<String, Idioma> idiomasRegistrados;
 
     public ArrayList<Ciudad> getCiudades() {
         return ciudades;
@@ -31,6 +31,7 @@ public class VolandoAlto implements Serializable {
 
     public VolandoAlto() {
         this.ciudades = new ArrayList<>();
+        this.idiomasRegistrados = new HashMap<>();
     }
 
     public void EliminarCiudad(Ciudad ciudadSeleccionada) {
