@@ -1,7 +1,6 @@
 package volandoAlto.dominio;
 
 import java.awt.Font;
-import java.io.Serializable;
 
 public class Idioma {
 
@@ -23,9 +22,6 @@ public class Idioma {
         return fuenteIdioma;
     }
 
-    /**
-     * @return the nombre
-     */
     public String getNombre() {
         return nombre;
     }

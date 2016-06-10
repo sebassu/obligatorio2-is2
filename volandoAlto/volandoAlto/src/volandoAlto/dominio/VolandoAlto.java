@@ -10,12 +10,12 @@ import volandoAlto.persistencia.ArchivoLectura;
 
 public class VolandoAlto implements Serializable {
 
-    private Idioma idiomaActual;
+    private transient Idioma idiomaActual;
     private final ArrayList<Ciudad> ciudades;
     private Vuelo vueloActual;
     private transient ArrayList<Idioma> idiomasRegistrados;
     private final ArrayList<String> motivosAzafata;
-
+    
     public ArrayList<Ciudad> getCiudades() {
         return ciudades;
     }
@@ -68,7 +68,7 @@ public class VolandoAlto implements Serializable {
                 String linea = archivo.linea();
                 String[] datos = linea.split("#");
                 String[] palabras = quitarPrimerYUltimoElemento(datos);
-                String nombreIdioma = datos[0];
+                String nombreIdioma = datos[0].replaceAll("[ñÑ \\W]", "");
                 String fontIdioma = datos[datos.length - 1];
                 Idioma idiomaAAgregar = new Idioma(nombreIdioma, palabras, fontIdioma);
                 this.getIdiomasRegistrados().add(idiomaAAgregar);
@@ -112,5 +112,9 @@ public class VolandoAlto implements Serializable {
 
     public ArrayList<Idioma> getIdiomasRegistrados() {
         return idiomasRegistrados;
+    }
+
+    public boolean ExistenIdiomasRegistrados() {
+        return !this.idiomasRegistrados.isEmpty();
     }
 }

@@ -5,7 +5,6 @@ import volandoAlto.dominio.ReproductorMp3;
 import java.awt.Color;
 import java.awt.Image;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -22,19 +21,23 @@ public class VentanaUsuario extends javax.swing.JFrame {
         this.volandoAlto = volandoAlto;
         Object[] iconosIdiomas = ObtenerImageIconsDeIdiomas();
         initComponents();
-        this.pnlIdioma.setVisible(true);
+        if (volandoAlto.ExistenIdiomasRegistrados()) {
+            this.pnlIdioma.setVisible(true);
+            this.pnlVuelo.setVisible(false);
+            this.pnlBotones.setVisible(false);
+        } else {
+            this.pnlVuelo.setVisible(true);
+            this.pnlBotones.setVisible(true);
+            this.pnlIdioma.setVisible(false);
+        }
         this.pnlApagado.setVisible(false);
-        this.pnlBotones.setVisible(false);
         this.pnlJuegos.setVisible(false);
         this.pnlMapas.setVisible(false);
-        this.pnlVuelo.setVisible(false);
         this.pnlVideo.setVisible(false);
         this.pnlMusica.setVisible(false);
         this.reproductorMusica = new ReproductorMp3(this);
         this.panelActual = 0;
         jComboBoxIdiomas.setModel(new DefaultComboBoxModel<>(iconosIdiomas));
-        pnlIdioma.add(jComboBoxIdiomas);
-        jComboBoxIdiomas.setVisible(true);
         this.actualizarNombreCancion();
     }
 
@@ -856,6 +859,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
+        ObtenerIdiomaSeleccionadoYActualizarPalabras();
         this.pnlIdioma.setVisible(false);
         this.pnlApagado.setVisible(false);
         this.pnlBotones.setVisible(true);
@@ -959,9 +963,18 @@ public class VentanaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAlternativaActionPerformed
 
     private void CambiarIdiomaSeleccionado(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CambiarIdiomaSeleccionado
-
-
+        ObtenerIdiomaSeleccionadoYActualizarPalabras();
     }//GEN-LAST:event_CambiarIdiomaSeleccionado
+
+    private void ObtenerIdiomaSeleccionadoYActualizarPalabras() {
+        int indexSelecionado = this.jComboBoxIdiomas.getSelectedIndex();
+        if (indexSelecionado > 0) {
+            Idioma idiomaSeleccionado = volandoAlto.getIdiomasRegistrados().get(indexSelecionado);
+            volandoAlto.setIdiomaActual(idiomaSeleccionado);
+        } else {
+
+        }
+    }
 
     public void setTextoGenero(String genero) {
         this.lblGeneroSeleccionado.setText(genero + ":");
@@ -1098,8 +1111,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
                 imageIcon = new ImageIcon(imagenEscalada);
                 retorno.add(imageIcon);
             } catch (NullPointerException e) {
-                //Logger.getLogger(VentanaUsuario.class.getName()).log(Level.SEVERE, null, e);
-                System.out.println(idiomaAux.getNombre());
+                Logger.getLogger(VentanaUsuario.class.getName()).log(Level.SEVERE, null, e);
             }
         }
         return retorno.toArray();

@@ -158,6 +158,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         btnVolverDesdeRegistrarMOtivoAzafata = new javax.swing.JButton();
         btnRegistrarMotivo = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
 
         jMenu1.setText("jMenu1");
 
@@ -645,6 +646,8 @@ public class VentanaTripulacion extends javax.swing.JFrame {
             }
         });
 
+        jLabel19.setText("(Se espera que el motivo esté en inglés)");
+
         javax.swing.GroupLayout jPanelRegistrarMotivoLayout = new javax.swing.GroupLayout(jPanelRegistrarMotivo);
         jPanelRegistrarMotivo.setLayout(jPanelRegistrarMotivoLayout);
         jPanelRegistrarMotivoLayout.setHorizontalGroup(
@@ -652,18 +655,19 @@ public class VentanaTripulacion extends javax.swing.JFrame {
             .addGroup(jPanelRegistrarMotivoLayout.createSequentialGroup()
                 .addGroup(jPanelRegistrarMotivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelRegistrarMotivoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnVolverDesdeRegistrarMOtivoAzafata))
+                    .addGroup(jPanelRegistrarMotivoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelRegistrarMotivoLayout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(jLabel17)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanelRegistrarMotivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnRegistrarMotivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTextFieldNombreMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanelRegistrarMotivoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnVolverDesdeRegistrarMOtivoAzafata))
-                    .addGroup(jPanelRegistrarMotivoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jTextFieldNombreMotivo)
+                            .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarMotivoLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -683,7 +687,9 @@ public class VentanaTripulacion extends javax.swing.JFrame {
                 .addGroup(jPanelRegistrarMotivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldNombreMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
-                .addGap(56, 56, 56)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel19)
+                .addGap(36, 36, 36)
                 .addComponent(btnRegistrarMotivo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(291, Short.MAX_VALUE))
         );
@@ -972,6 +978,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
