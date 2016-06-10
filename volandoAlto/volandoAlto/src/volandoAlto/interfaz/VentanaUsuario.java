@@ -1,41 +1,26 @@
 package volandoAlto.interfaz;
 
-import java.awt.BorderLayout;
 import volandoAlto.dominio.Idioma;
 import volandoAlto.dominio.ReproductorMp3;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import volandoAlto.dominio.VolandoAlto;
 
 public class VentanaUsuario extends javax.swing.JFrame {
-    
+
     VolandoAlto volandoAlto;
     ReproductorMp3 reproductorMusica;
     private int panelActual;
-    private JFrame frameComboBox;
-    
+
     public VentanaUsuario(VolandoAlto volandoAlto) {
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/volandoAlto/interfaz/France.png")); // load the image to a imageIcon
-        Image image = imageIcon.getImage(); // transform it 
-        Image newimg = image.getScaledInstance(120, 120, java.awt.Image.SCALE_SMOOTH); // scale it the smooth way  
-        imageIcon = new ImageIcon(newimg);
-        Object[] items
-                = {
-                    imageIcon,
-                    imageIcon,
-                    imageIcon,
-                    imageIcon,
-                    imageIcon, imageIcon, imageIcon, imageIcon, imageIcon, imageIcon, imageIcon, imageIcon, imageIcon, imageIcon, imageIcon, imageIcon, imageIcon, imageIcon, imageIcon, imageIcon, imageIcon, imageIcon, imageIcon, imageIcon,
-                    new ImageIcon(getClass().getResource("/volandoAlto/interfaz/Italy.png"))
-                
-                };
+        this.volandoAlto = volandoAlto;
+        Object[] iconosIdiomas = ObtenerImageIconsDeIdiomas();
         initComponents();
         this.pnlIdioma.setVisible(true);
         this.pnlApagado.setVisible(false);
@@ -47,12 +32,12 @@ public class VentanaUsuario extends javax.swing.JFrame {
         this.pnlMusica.setVisible(false);
         this.reproductorMusica = new ReproductorMp3(this);
         this.panelActual = 0;
-        JComboBox jComboBox1 = new JComboBox(items);
-        pnlIdioma.add(jComboBox1);
-        jComboBox1.setVisible(true);
+        jComboBoxIdiomas.setModel(new DefaultComboBoxModel<>(iconosIdiomas));
+        pnlIdioma.add(jComboBoxIdiomas);
+        jComboBoxIdiomas.setVisible(true);
         this.actualizarNombreCancion();
     }
-    
+
     public void deseleccionarBotones() {
         this.btnVuelo.setBackground(new Color(0, 204, 204));
         this.btnJuegos.setBackground(new Color(0, 204, 204));
@@ -60,7 +45,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
         this.btnVideo.setBackground(new Color(0, 204, 204));
         this.btnMapas.setBackground(new Color(0, 204, 204));
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -70,18 +55,9 @@ public class VentanaUsuario extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         pnlIdioma = new javax.swing.JPanel();
         lblBienvenido = new javax.swing.JLabel();
-        btnIngles = new javax.swing.JButton();
-        btnEspañol = new javax.swing.JButton();
-        btnAleman = new javax.swing.JButton();
-        btnFrances = new javax.swing.JButton();
-        btnItalia = new javax.swing.JButton();
-        btnPortugal = new javax.swing.JButton();
-        btnChino = new javax.swing.JButton();
-        btnArabe = new javax.swing.JButton();
-        btnRuso = new javax.swing.JButton();
-        btnJapon = new javax.swing.JButton();
         lblContinuar = new javax.swing.JLabel();
         btnContinuar = new javax.swing.JButton();
+        jComboBoxIdiomas = new javax.swing.JComboBox<>();
         pnlBotones = new javax.swing.JPanel();
         btnVuelo = new javax.swing.JButton();
         btnMapas = new javax.swing.JButton();
@@ -186,106 +162,6 @@ public class VentanaUsuario extends javax.swing.JFrame {
         lblBienvenido.setText("Welcome.");
         lblBienvenido.setAlignmentY(0.0F);
 
-        btnIngles.setIcon(new javax.swing.ImageIcon(getClass().getResource("/volandoAlto/interfaz/United-Kingdom.png"))); // NOI18N
-        btnIngles.setAlignmentY(0.0F);
-        btnIngles.setBorderPainted(false);
-        btnIngles.setContentAreaFilled(false);
-        btnIngles.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInglesActionPerformed(evt);
-            }
-        });
-
-        btnEspañol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/volandoAlto/interfaz/Spain.png"))); // NOI18N
-        btnEspañol.setAlignmentY(0.0F);
-        btnEspañol.setBorderPainted(false);
-        btnEspañol.setContentAreaFilled(false);
-        btnEspañol.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEspañolActionPerformed(evt);
-            }
-        });
-
-        btnAleman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/volandoAlto/interfaz/Germany.png"))); // NOI18N
-        btnAleman.setAlignmentY(0.0F);
-        btnAleman.setBorderPainted(false);
-        btnAleman.setContentAreaFilled(false);
-        btnAleman.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlemanActionPerformed(evt);
-            }
-        });
-
-        btnFrances.setIcon(new javax.swing.ImageIcon(getClass().getResource("/volandoAlto/interfaz/France.png"))); // NOI18N
-        btnFrances.setAlignmentY(0.0F);
-        btnFrances.setBorderPainted(false);
-        btnFrances.setContentAreaFilled(false);
-        btnFrances.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFrancesActionPerformed(evt);
-            }
-        });
-
-        btnItalia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/volandoAlto/interfaz/Italy.png"))); // NOI18N
-        btnItalia.setAlignmentY(0.0F);
-        btnItalia.setBorderPainted(false);
-        btnItalia.setContentAreaFilled(false);
-        btnItalia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnItaliaActionPerformed(evt);
-            }
-        });
-
-        btnPortugal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/volandoAlto/interfaz/Portugal.png"))); // NOI18N
-        btnPortugal.setAlignmentY(0.0F);
-        btnPortugal.setBorderPainted(false);
-        btnPortugal.setContentAreaFilled(false);
-        btnPortugal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPortugalActionPerformed(evt);
-            }
-        });
-
-        btnChino.setIcon(new javax.swing.ImageIcon(getClass().getResource("/volandoAlto/interfaz/China.png"))); // NOI18N
-        btnChino.setAlignmentY(0.0F);
-        btnChino.setBorderPainted(false);
-        btnChino.setContentAreaFilled(false);
-        btnChino.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnChinoActionPerformed(evt);
-            }
-        });
-
-        btnArabe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/volandoAlto/interfaz/Saudi-Arabia.png"))); // NOI18N
-        btnArabe.setAlignmentY(0.0F);
-        btnArabe.setBorderPainted(false);
-        btnArabe.setContentAreaFilled(false);
-        btnArabe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnArabeActionPerformed(evt);
-            }
-        });
-
-        btnRuso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/volandoAlto/interfaz/Russia.png"))); // NOI18N
-        btnRuso.setAlignmentY(0.0F);
-        btnRuso.setBorderPainted(false);
-        btnRuso.setContentAreaFilled(false);
-        btnRuso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRusoActionPerformed(evt);
-            }
-        });
-
-        btnJapon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/volandoAlto/interfaz/Japan.png"))); // NOI18N
-        btnJapon.setAlignmentY(0.0F);
-        btnJapon.setBorderPainted(false);
-        btnJapon.setContentAreaFilled(false);
-        btnJapon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnJaponActionPerformed(evt);
-            }
-        });
-
         lblContinuar.setFont(new java.awt.Font("Segoe UI Light", 0, 20)); // NOI18N
         lblContinuar.setForeground(new java.awt.Color(51, 51, 51));
         lblContinuar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -305,6 +181,12 @@ public class VentanaUsuario extends javax.swing.JFrame {
             }
         });
 
+        jComboBoxIdiomas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                CambiarIdiomaSeleccionado(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlIdiomaLayout = new javax.swing.GroupLayout(pnlIdioma);
         pnlIdioma.setLayout(pnlIdiomaLayout);
         pnlIdiomaLayout.setHorizontalGroup(
@@ -312,62 +194,28 @@ public class VentanaUsuario extends javax.swing.JFrame {
             .addGroup(pnlIdiomaLayout.createSequentialGroup()
                 .addGroup(pnlIdiomaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlIdiomaLayout.createSequentialGroup()
-                        .addGap(252, 252, 252)
-                        .addGroup(pnlIdiomaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(pnlIdiomaLayout.createSequentialGroup()
-                                .addComponent(btnPortugal)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnItalia)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnJapon)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAleman)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFrances))
-                            .addGroup(pnlIdiomaLayout.createSequentialGroup()
-                                .addComponent(btnIngles)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnChino)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnEspañol)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnRuso)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnArabe)))
-                        .addGap(0, 253, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlIdiomaLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(pnlIdiomaLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(pnlIdiomaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblBienvenido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblContinuar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(lblBienvenido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1004, Short.MAX_VALUE)
+                            .addComponent(lblContinuar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(pnlIdiomaLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlIdiomaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jComboBoxIdiomas, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlIdiomaLayout.setVerticalGroup(
             pnlIdiomaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlIdiomaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addGroup(pnlIdiomaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlIdiomaLayout.createSequentialGroup()
-                        .addGroup(pnlIdiomaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnIngles)
-                            .addComponent(btnChino)
-                            .addComponent(btnEspañol)
-                            .addComponent(btnRuso))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlIdiomaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnJapon)
-                            .addComponent(btnFrances)
-                            .addComponent(btnAleman)
-                            .addComponent(btnItalia)
-                            .addComponent(btnPortugal)))
-                    .addComponent(btnArabe))
-                .addGap(55, 55, 55)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxIdiomas, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -956,7 +804,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
     private int getPanelActual() {
         return panelActual;
     }
-    
+
     private void setPanelActual(int panelActual) {
         this.panelActual = panelActual;
     }
@@ -1006,77 +854,6 @@ public class VentanaUsuario extends javax.swing.JFrame {
         }
         this.pnlBotones.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void btnInglesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInglesActionPerformed
-        // this.volandoAlto.setIdiomaActual(idiomaActual);
-        this.cargarPalabras();
-        this.lblBienvenido.setFont(new java.awt.Font("Segoe UI Light", 0, 75));
-        this.lblContinuar.setFont(new java.awt.Font("Segoe UI Light", 0, 20));
-    }//GEN-LAST:event_btnInglesActionPerformed
-
-    private void btnChinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChinoActionPerformed
-        //   this.volandoAlto.setIdiomaActual(1);
-        this.cargarPalabras();
-        this.lblBienvenido.setFont(new Font("Arial Unicode MS", Font.BOLD, 75));
-        this.lblContinuar.setFont(new Font("Arial Unicode MS", Font.BOLD, 20));
-    }//GEN-LAST:event_btnChinoActionPerformed
-
-    private void btnEspañolActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEspañolActionPerformed
-        //      this.volandoAlto.setIdiomaActual(2);
-        this.cargarPalabras();
-        this.lblBienvenido.setFont(new java.awt.Font("Segoe UI Light", 0, 75));
-        this.lblContinuar.setFont(new java.awt.Font("Segoe UI Light", 0, 20));
-    }//GEN-LAST:event_btnEspañolActionPerformed
-
-    private void btnRusoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRusoActionPerformed
-        //   this.volandoAlto.setIdiomaActual(3);
-        this.cargarPalabras();
-        this.lblBienvenido.setFont(new java.awt.Font("Segoe UI Light", 0, 75));
-        this.lblContinuar.setFont(new java.awt.Font("Segoe UI Light", 0, 20));
-    }//GEN-LAST:event_btnRusoActionPerformed
-
-    private void btnArabeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArabeActionPerformed
-        //   this.volandoAlto.setIdiomaActual(4);
-        this.cargarPalabras();
-        this.lblBienvenido.setFont(new java.awt.Font("Lucida Sans Regular", 0, 75));
-        this.lblContinuar.setFont(new java.awt.Font("Lucida Sans Regular", 0, 20));
-    }//GEN-LAST:event_btnArabeActionPerformed
-
-    private void btnPortugalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPortugalActionPerformed
-        //    this.volandoAlto.setIdiomaActual(5);
-        this.cargarPalabras();
-        this.lblBienvenido.setFont(new java.awt.Font("Segoe UI Light", 0, 75));
-        this.lblContinuar.setFont(new java.awt.Font("Segoe UI Light", 0, 20));
-    }//GEN-LAST:event_btnPortugalActionPerformed
-
-    private void btnItaliaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnItaliaActionPerformed
-        //    this.volandoAlto.setIdiomaActual(6);
-        this.cargarPalabras();
-        this.lblBienvenido.setFont(new java.awt.Font("Segoe UI Light", 0, 75));
-        this.lblContinuar.setFont(new java.awt.Font("Segoe UI Light", 0, 20));
-    }//GEN-LAST:event_btnItaliaActionPerformed
-
-    private void btnJaponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJaponActionPerformed
-        this.volandoAlto.setIdiomaActual(7);
-        this.cargarPalabras();
-        this.pnlVuelo.setFont(Font.decode("Arial Unicode MS"));
-        this.lblBienvenido.setFont(new Font("Arial Unicode MS", Font.BOLD, 75));
-        this.lblContinuar.setFont(new Font("Arial Unicode MS", Font.BOLD, 20));
-    }//GEN-LAST:event_btnJaponActionPerformed
-
-    private void btnAlemanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlemanActionPerformed
-        //   this.volandoAlto.setIdiomaActual(8);
-        this.cargarPalabras();
-        this.lblBienvenido.setFont(new java.awt.Font("Segoe UI Light", 0, 75));
-        this.lblContinuar.setFont(new java.awt.Font("Segoe UI Light", 0, 20));
-    }//GEN-LAST:event_btnAlemanActionPerformed
-
-    private void btnFrancesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFrancesActionPerformed
-        //  this.volandoAlto.setIdiomaActual(9);
-        this.cargarPalabras();
-        this.lblBienvenido.setFont(new java.awt.Font("Segoe UI Light", 0, 75));
-        this.lblContinuar.setFont(new java.awt.Font("Segoe UI Light", 0, 20));
-    }//GEN-LAST:event_btnFrancesActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
         this.pnlIdioma.setVisible(false);
@@ -1180,11 +957,16 @@ public class VentanaUsuario extends javax.swing.JFrame {
         this.reproductorMusica.setListaReproduccion("alternativa");
         this.actualizarNombreCancion();
     }//GEN-LAST:event_btnAlternativaActionPerformed
-    
+
+    private void CambiarIdiomaSeleccionado(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CambiarIdiomaSeleccionado
+
+
+    }//GEN-LAST:event_CambiarIdiomaSeleccionado
+
     public void setTextoGenero(String genero) {
         this.lblGeneroSeleccionado.setText(genero + ":");
     }
-    
+
     public void ocultarPaneles() {
         this.pnlVuelo.setVisible(false);
         this.pnlApagado.setVisible(false);
@@ -1193,7 +975,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
         this.pnlVideo.setVisible(false);
         this.pnlMusica.setVisible(false);
     }
-    
+
     public void cargarPalabras() {
         String[] palabras = volandoAlto.getIdiomaActual().getPalabras();
         this.lblBienvenido.setText(palabras[0]);
@@ -1217,39 +999,30 @@ public class VentanaUsuario extends javax.swing.JFrame {
         this.btnAlternativa.setText(palabras[20]);
         this.lblEstadoReproduccion.setText(palabras[21]);
     }
-    
+
     public void actualizarNombreCancion() {
         this.lblNombreCancion.setText(this.reproductorMusica.getNombreCancionActual());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAleman;
     private javax.swing.JButton btnAlternativa;
     private javax.swing.JButton btnApagar;
-    private javax.swing.JButton btnArabe;
-    private javax.swing.JButton btnChino;
     private javax.swing.JButton btnClasica;
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnDetenerCancion;
     private javax.swing.JButton btnElectronica;
-    private javax.swing.JButton btnEspañol;
-    private javax.swing.JButton btnFrances;
-    private javax.swing.JButton btnIngles;
-    private javax.swing.JButton btnItalia;
-    private javax.swing.JButton btnJapon;
     private javax.swing.JButton btnJuegos;
     private javax.swing.JButton btnMapas;
     private javax.swing.JButton btnMusica;
     private javax.swing.JButton btnPop;
-    private javax.swing.JButton btnPortugal;
     private javax.swing.JButton btnReggae;
     private javax.swing.JButton btnReproducirCancion;
     private javax.swing.JButton btnRock;
-    private javax.swing.JButton btnRuso;
     private javax.swing.JButton btnVideo;
     private javax.swing.JButton btnVuelo;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox<Object> jComboBoxIdiomas;
     private javax.swing.JButton lblAzafata;
     private javax.swing.JLabel lblBienvenido;
     private javax.swing.JLabel lblBienvenidoBordo;
@@ -1309,8 +1082,26 @@ public class VentanaUsuario extends javax.swing.JFrame {
             this.lblHoraLlegada.setText(horaLlegada + ":" + minutoLlegada);
         }
     }
-    
+
     public void actualizarHora(String hora) {
         this.lblHoraActualEnDestino.setText(hora);
+    }
+
+    private Object[] ObtenerImageIconsDeIdiomas() {
+        ArrayList<Object> retorno = new ArrayList<>();
+        for (Idioma idiomaAux : volandoAlto.getIdiomasRegistrados()) {
+            try {
+                ImageIcon imageIcon = new ImageIcon(getClass().getResource("/volandoAlto/interfaz/"
+                        + idiomaAux.getNombre() + ".png"));
+                Image unaImagen = imageIcon.getImage();
+                Image imagenEscalada = unaImagen.getScaledInstance(150, 150, java.awt.Image.SCALE_SMOOTH);
+                imageIcon = new ImageIcon(imagenEscalada);
+                retorno.add(imageIcon);
+            } catch (NullPointerException e) {
+                //Logger.getLogger(VentanaUsuario.class.getName()).log(Level.SEVERE, null, e);
+                System.out.println(idiomaAux.getNombre());
+            }
+        }
+        return retorno.toArray();
     }
 }

@@ -3,7 +3,6 @@ package volandoAlto.dominio;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,12 +11,12 @@ import volandoAlto.persistencia.ArchivoLectura;
 public class VolandoAlto implements Serializable {
 
     private Idioma idiomaActual;
-    private final Collection<Ciudad> ciudades;
+    private final ArrayList<Ciudad> ciudades;
     private Vuelo vueloActual;
-    private final Collection<Idioma> idiomasRegistrados;
-    private final Collection<String> motivosAzafata;
+    private transient ArrayList<Idioma> idiomasRegistrados;
+    private final ArrayList<String> motivosAzafata;
 
-    public Collection<Ciudad> getCiudades() {
+    public ArrayList<Ciudad> getCiudades() {
         return ciudades;
     }
 
@@ -72,7 +71,7 @@ public class VolandoAlto implements Serializable {
                 String nombreIdioma = datos[0];
                 String fontIdioma = datos[datos.length - 1];
                 Idioma idiomaAAgregar = new Idioma(nombreIdioma, palabras, fontIdioma);
-                this.idiomasRegistrados.add(idiomaAAgregar);
+                this.getIdiomasRegistrados().add(idiomaAAgregar);
             }
         } catch (IOException ex) {
             Logger.getLogger(VolandoAlto.class.getName()).log(Level.SEVERE, null, ex);
@@ -88,7 +87,7 @@ public class VolandoAlto implements Serializable {
         return retorno;
     }
 
-    public Collection<String> getMotivosAzafata() {
+    public ArrayList<String> getMotivosAzafata() {
         return motivosAzafata;
     }
 
@@ -105,5 +104,13 @@ public class VolandoAlto implements Serializable {
 
     public void ElminarMotivo(String motivo) {
         this.motivosAzafata.remove(motivo);
+    }
+
+    public void setIdiomasRegistrados(ArrayList<Idioma> unosIdiomas) {
+        this.idiomasRegistrados = unosIdiomas;
+    }
+
+    public ArrayList<Idioma> getIdiomasRegistrados() {
+        return idiomasRegistrados;
     }
 }

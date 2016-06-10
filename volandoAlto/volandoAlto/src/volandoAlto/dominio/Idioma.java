@@ -1,6 +1,7 @@
 package volandoAlto.dominio;
 
 import java.awt.Font;
+import java.io.Serializable;
 
 public class Idioma {
 

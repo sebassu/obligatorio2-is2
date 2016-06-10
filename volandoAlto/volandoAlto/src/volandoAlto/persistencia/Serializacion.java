@@ -8,6 +8,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import volandoAlto.dominio.Idioma;
 
 //Clase auxiliar para solucionar la persistencia del Sistema.
 public class Serializacion {
@@ -41,6 +43,7 @@ public class Serializacion {
         try (ObjectInputStream aux = new ObjectInputStream(
                 new BufferedInputStream(new FileInputStream("DatosSistema.dat")))) {
             retorno = (VolandoAlto) aux.readObject();
+            retorno.setIdiomasRegistrados(new ArrayList<Idioma>());
             aux.close();
         }
         return retorno;

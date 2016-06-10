@@ -20,12 +20,7 @@ public class ComboBoxIcon extends JFrame {
         imageIcon = new ImageIcon(newimg);
         Object[] items
                 = {
-                    imageIcon,
-                    imageIcon,
-                    imageIcon,
-                    imageIcon,
-                    imageIcon,imageIcon,imageIcon,imageIcon,imageIcon,imageIcon,imageIcon,imageIcon,imageIcon,imageIcon,imageIcon,imageIcon,imageIcon,imageIcon,imageIcon,imageIcon,imageIcon,imageIcon,imageIcon,imageIcon,
-                    new ImageIcon(getClass().getResource("/volandoAlto/interfaz/Italy.png"))
+                   new ImageIcon(getClass().getResource("/volandoAlto/interfaz/Italy.png"))
 
                 };
         comboBox = new JComboBox(items);
