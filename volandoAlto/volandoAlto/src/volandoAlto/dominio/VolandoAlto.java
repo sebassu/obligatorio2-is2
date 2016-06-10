@@ -1,10 +1,9 @@
 package volandoAlto.dominio;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collection;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,11 +12,12 @@ import volandoAlto.persistencia.ArchivoLectura;
 public class VolandoAlto implements Serializable {
 
     private Idioma idiomaActual;
-    private final ArrayList<Ciudad> ciudades;
+    private final Collection<Ciudad> ciudades;
     private Vuelo vueloActual;
-    private HashMap<String, Idioma> idiomasRegistrados;
+    private final Collection<Idioma> idiomasRegistrados;
+    private final Collection<String> motivosAzafata;
 
-    public ArrayList<Ciudad> getCiudades() {
+    public Collection<Ciudad> getCiudades() {
         return ciudades;
     }
 
@@ -31,7 +31,8 @@ public class VolandoAlto implements Serializable {
 
     public VolandoAlto() {
         this.ciudades = new ArrayList<>();
-        this.idiomasRegistrados = new HashMap<>();
+        this.idiomasRegistrados = new ArrayList<>();
+        this.motivosAzafata = new ArrayList<>();
     }
 
     public void EliminarCiudad(Ciudad ciudadSeleccionada) {
@@ -71,6 +72,7 @@ public class VolandoAlto implements Serializable {
                 String nombreIdioma = datos[0];
                 String fontIdioma = datos[datos.length - 1];
                 Idioma idiomaAAgregar = new Idioma(nombreIdioma, palabras, fontIdioma);
+                this.idiomasRegistrados.add(idiomaAAgregar);
             }
         } catch (IOException ex) {
             Logger.getLogger(VolandoAlto.class.getName()).log(Level.SEVERE, null, ex);
@@ -79,10 +81,29 @@ public class VolandoAlto implements Serializable {
 
     private String[] quitarPrimerYUltimoElemento(String[] datos) {
         int largo = datos.length;
-        String [] retorno = new String[largo-2];
-        for (int i = 1; i < largo-2; i++) {
-            retorno[i-1] = datos[i];
+        String[] retorno = new String[largo - 2];
+        for (int i = 1; i < largo - 2; i++) {
+            retorno[i - 1] = datos[i];
         }
         return retorno;
+    }
+
+    public Collection<String> getMotivosAzafata() {
+        return motivosAzafata;
+    }
+
+    public void RegistrarMotivo(String motivo) {
+        if (motivoRegistrado(motivo)) {
+            throw new IllegalStateException("Motivo ya registrado");
+        }
+        this.motivosAzafata.add(motivo);
+    }
+
+    private boolean motivoRegistrado(String motivo) {
+        return this.motivosAzafata.contains(motivo);
+    }
+
+    public void ElminarMotivo(String motivo) {
+        this.motivosAzafata.remove(motivo);
     }
 }

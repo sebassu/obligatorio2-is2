@@ -232,7 +232,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
                 .addGroup(jPanelCiudadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRegistrarNuevaCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         jPanelVuelo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -649,10 +649,6 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         jPanelRegistrarMotivo.setLayout(jPanelRegistrarMotivoLayout);
         jPanelRegistrarMotivoLayout.setHorizontalGroup(
             jPanelRegistrarMotivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarMotivoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel18)
-                .addGap(109, 109, 109))
             .addGroup(jPanelRegistrarMotivoLayout.createSequentialGroup()
                 .addGroup(jPanelRegistrarMotivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelRegistrarMotivoLayout.createSequentialGroup()
@@ -669,6 +665,10 @@ public class VentanaTripulacion extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelRegistrarMotivoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel18)
+                .addGap(115, 115, 115))
         );
         jPanelRegistrarMotivoLayout.setVerticalGroup(
             jPanelRegistrarMotivoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -807,7 +807,6 @@ public class VentanaTripulacion extends javax.swing.JFrame {
 
     private void btnRegistrarNuevaCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarNuevaCiudadActionPerformed
         this.jPanelCiudades.setVisible(false);
-        limpiarCamposjPanelRgistrarCiudad();
         this.jPanelRegistrarCiudad.setVisible(true);
     }//GEN-LAST:event_btnRegistrarNuevaCiudadActionPerformed
 
@@ -828,8 +827,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         String nombre = (this.jTextFieldNombreCiudad.getText());
         if (!esVacio(nombre)) {
-            if (contieneSoloLetras(nombre)) {
-
+            if (StringUtils.isAlphaSpace(nombre)) {
                 String gmtZonaHoraria = this.jComboBoxZonaHoraria.getSelectedItem().toString();
                 try {
                     volandoAlto.RegistrarCiudad(nombre, gmtZonaHoraria);
@@ -851,6 +849,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
 
     private void btnVolver1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolver1ActionPerformed
         this.jPanelRegistrarCiudad.setVisible(false);
+        limpiarCamposjPanelRgistrarCiudad();
         cargarListaJListCiudades();
         this.jPanelCiudades.setVisible(true);
     }//GEN-LAST:event_btnVolver1ActionPerformed
@@ -871,16 +870,48 @@ public class VentanaTripulacion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarNuevoMotivoActionPerformed
 
     private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
-        // TODO add your handling code here:
+        String motivo = ObtenerMotivoSeleccionado();
+        if(motivo != null){
+            volandoAlto.ElminarMotivo(motivo);
+            cargarListaJListMotivos();
+            JOptionPane.showMessageDialog(this.jPanelListaMotivosAzafata, "Motivo eliminado", "Éxito",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this.jPanelListaMotivosAzafata, "Debe seleccionar "
+                    + "un motivo a eliminar", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnEliminar1ActionPerformed
 
+    private String ObtenerMotivoSeleccionado() {
+        return (String) this.jListMotivos.getSelectedValue();
+    }
     private void btnVolverDesdeRegistrarMOtivoAzafataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverDesdeRegistrarMOtivoAzafataActionPerformed
         this.jPanelRegistrarMotivo.setVisible(false);
+        this.jTextFieldNombreMotivo.setText("");
+        cargarListaJListMotivos();
         this.jPanelListaMotivosAzafata.setVisible(true);
     }//GEN-LAST:event_btnVolverDesdeRegistrarMOtivoAzafataActionPerformed
 
     private void btnRegistrarMotivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarMotivoActionPerformed
-        // TODO add your handling code here:
+        String motivo = jTextFieldNombreMotivo.getText().trim();
+        if (!motivo.isEmpty()) {
+            if (StringUtils.isAlphaSpace(motivo)) {
+                try {
+                    volandoAlto.RegistrarMotivo(motivo);
+                    JOptionPane.showMessageDialog(this.jPanelRegistrarMotivo, "Motivo registrado correctamente",
+                            "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                } catch (IllegalStateException e) {
+                    JOptionPane.showMessageDialog(this.jPanelRegistrarMotivo, "Motivo ya registrado",
+                            "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this.jPanelRegistrarMotivo, "El nombre indicado no puede contener numeros",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this.jPanelRegistrarMotivo, "El nombre del motivo no puede ser vacío",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnRegistrarMotivoActionPerformed
 
     private boolean datosValidos() {
@@ -991,21 +1022,11 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         return "".equals(texto.trim());
     }
 
-    private boolean contieneSoloLetras(String text) {
-        char[] aux = text.toCharArray();
-        for (int i = 0; i < aux.length; i++) {
-            if (aux[i] != ' ' && !Character.isAlphabetic(aux[i])) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     private void limpiarCamposjPanelRgistrarCiudad() {
         this.jTextFieldNombreCiudad.setText("");
     }
 
     private void cargarListaJListMotivos() {
-        
+        this.jListMotivos.setListData(volandoAlto.getMotivosAzafata().toArray());
     }
 }

@@ -1057,7 +1057,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnItaliaActionPerformed
 
     private void btnJaponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJaponActionPerformed
-        //   this.volandoAlto.setIdiomaActual(7);
+        this.volandoAlto.setIdiomaActual(7);
         this.cargarPalabras();
         this.pnlVuelo.setFont(Font.decode("Arial Unicode MS"));
         this.lblBienvenido.setFont(new Font("Arial Unicode MS", Font.BOLD, 75));
