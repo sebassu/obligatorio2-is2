@@ -6,11 +6,14 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import volandoAlto.dominio.VolandoAlto;
+import volandoAlto.dominio.Vuelo;
 
 public class VentanaUsuario extends javax.swing.JFrame {
 
@@ -22,6 +25,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
         this.volandoAlto = volandoAlto;
         Object[] iconosIdiomas = ObtenerImageIconsDeIdiomas();
         initComponents();
+        cargarComboBoxMotivosAzafata();
         if (volandoAlto.ExistenIdiomasRegistrados()) {
             this.pnlIdioma.setVisible(true);
             this.pnlVuelo.setVisible(false);
@@ -36,7 +40,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
         this.pnlMapas.setVisible(false);
         this.pnlVideo.setVisible(false);
         this.pnlMusica.setVisible(false);
-        this.reproductorMusica = new ReproductorMp3(this);
+        this.reproductorMusica = new ReproductorMp3();
         this.panelActual = 0;
         jComboBoxIdiomas.setModel(new DefaultComboBoxModel<>(iconosIdiomas));
         this.actualizarNombreCancion();
@@ -71,7 +75,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
         btnApagar = new javax.swing.JButton();
         pnlVuelo = new javax.swing.JPanel();
         lblBienvenidoBordo = new javax.swing.JLabel();
-        lblAzafata = new javax.swing.JButton();
+        btnAzafata = new javax.swing.JButton();
         lblHoraEnDestino = new javax.swing.JLabel();
         lblClimaEnDestino = new javax.swing.JLabel();
         lblInfoVuelo = new javax.swing.JLabel();
@@ -88,6 +92,8 @@ public class VentanaUsuario extends javax.swing.JFrame {
         lblHoraLlegada = new javax.swing.JLabel();
         lblEtiquetaDestino = new javax.swing.JLabel();
         lblHoraActualEnDestino = new javax.swing.JLabel();
+        jComboBoxMotivosAzafata = new javax.swing.JComboBox();
+        jButton3 = new javax.swing.JButton();
         pnlMapas = new javax.swing.JPanel();
         pnlVideo = new javax.swing.JPanel();
         pnlMusica = new javax.swing.JPanel();
@@ -383,13 +389,18 @@ public class VentanaUsuario extends javax.swing.JFrame {
         lblBienvenidoBordo.setText("Bienvenido a Bordo.");
         lblBienvenidoBordo.setAlignmentY(0.0F);
 
-        lblAzafata.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
-        lblAzafata.setIcon(new javax.swing.ImageIcon(getClass().getResource("/volandoAlto/interfaz/azafata.png"))); // NOI18N
-        lblAzafata.setText("Azafata");
-        lblAzafata.setAlignmentY(0.0F);
-        lblAzafata.setBorder(null);
-        lblAzafata.setBorderPainted(false);
-        lblAzafata.setContentAreaFilled(false);
+        btnAzafata.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
+        btnAzafata.setIcon(new javax.swing.ImageIcon(getClass().getResource("/volandoAlto/interfaz/azafata.png"))); // NOI18N
+        btnAzafata.setText("Azafata");
+        btnAzafata.setAlignmentY(0.0F);
+        btnAzafata.setBorder(null);
+        btnAzafata.setBorderPainted(false);
+        btnAzafata.setContentAreaFilled(false);
+        btnAzafata.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAzafataActionPerformed(evt);
+            }
+        });
 
         lblHoraEnDestino.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         lblHoraEnDestino.setText("Información de hora");
@@ -416,7 +427,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
         lblCodigoVuelo.setText("codigo");
 
         lblDestino.setFont(new java.awt.Font("Segoe UI Light", 1, 36)); // NOI18N
-        lblDestino.setText("Rio de Janeiro");
+        lblDestino.setText("Ciudad");
 
         lblEtiquetaOrigen.setFont(new java.awt.Font("Segoe UI Light", 0, 18)); // NOI18N
         lblEtiquetaOrigen.setText("Origen:");
@@ -442,14 +453,18 @@ public class VentanaUsuario extends javax.swing.JFrame {
         lblHoraActualEnDestino.setFont(new java.awt.Font("Segoe UI Light", 0, 24)); // NOI18N
         lblHoraActualEnDestino.setText("00:00:00");
 
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jButton3.setText("A - Z");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlVueloLayout = new javax.swing.GroupLayout(pnlVuelo);
         pnlVuelo.setLayout(pnlVueloLayout);
         pnlVueloLayout.setHorizontalGroup(
             pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlVueloLayout.createSequentialGroup()
-                .addGap(368, 368, 368)
-                .addComponent(lblAzafata)
-                .addContainerGap(399, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVueloLayout.createSequentialGroup()
                 .addGap(51, 51, 51)
                 .addGroup(pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -487,8 +502,18 @@ public class VentanaUsuario extends javax.swing.JFrame {
                 .addGap(51, 51, 51))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVueloLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblBienvenidoBordo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblBienvenidoBordo, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(pnlVueloLayout.createSequentialGroup()
+                .addGap(368, 368, 368)
+                .addComponent(btnAzafata)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(pnlVueloLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jComboBoxMotivosAzafata, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(314, 314, 314))
         );
         pnlVueloLayout.setVerticalGroup(
             pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -529,9 +554,13 @@ public class VentanaUsuario extends javax.swing.JFrame {
                             .addComponent(lblHoraLlegada))))
                 .addGap(34, 34, 34)
                 .addComponent(lblBienvenidoBordo)
-                .addGap(51, 51, 51)
-                .addComponent(lblAzafata, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64))
+                .addGap(13, 13, 13)
+                .addComponent(jComboBoxMotivosAzafata, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAzafata, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(7, Short.MAX_VALUE))
         );
 
         pnlMapas.setAlignmentX(0.0F);
@@ -974,6 +1003,22 @@ public class VentanaUsuario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_CambiarIdiomaSeleccionado
 
+    private void btnAzafataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAzafataActionPerformed
+        String motivo = this.jComboBoxMotivosAzafata.getSelectedItem().toString();
+        if (motivo != null) {
+            JOptionPane.showMessageDialog(null, "Se realizó un llamado a la azafata: "
+                    + motivo, "Llamado", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAzafataActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (volandoAlto.ExistenIdiomasRegistrados()) {
+            this.pnlIdioma.setVisible(true);
+            this.pnlVuelo.setVisible(false);
+            this.pnlBotones.setVisible(false);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     private void ObtenerIdiomaSeleccionadoYActualizarPalabras() {
         int indexSelecionado = this.jComboBoxIdiomas.getSelectedIndex();
         if (indexSelecionado > -1) {
@@ -1083,6 +1128,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlternativa;
     private javax.swing.JButton btnApagar;
+    private javax.swing.JButton btnAzafata;
     private javax.swing.JButton btnClasica;
     private javax.swing.JButton btnContinuar;
     private javax.swing.JButton btnDetenerCancion;
@@ -1097,9 +1143,10 @@ public class VentanaUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnVideo;
     private javax.swing.JButton btnVuelo;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox<Object> jComboBoxIdiomas;
-    private javax.swing.JButton lblAzafata;
+    private javax.swing.JComboBox jComboBoxMotivosAzafata;
     private javax.swing.JLabel lblBienvenido;
     private javax.swing.JLabel lblBienvenidoBordo;
     private javax.swing.JLabel lblClimaEnDestino;
@@ -1134,29 +1181,34 @@ public class VentanaUsuario extends javax.swing.JFrame {
     private javax.swing.JPanel pnlVuelo;
     // End of variables declaration//GEN-END:variables
 
-    public void aplicarCambios(String nombreCapitan,
-            String codigoVuelo,
-            String origen,
-            String destino,
-            String horaSalida,
-            String minutoSalida,
-            String horaLlegada,
-            String minutoLlegada,
-            boolean demorado) {
-        this.lblNombreCapitan.setText(nombreCapitan);
-        this.lblCodigoVuelo.setText(codigoVuelo);
-        this.lblOrigen.setText(origen);
-        this.lblDestino.setText(destino);
-        this.lblHoraSalida.setText(horaSalida + ":" + minutoSalida);
-        if (demorado) {
+    public void actualizarCambiosDeVuelo() {
+
+        Vuelo vueloActual = volandoAlto.getVueloActual();
+
+        this.lblNombreCapitan.setText(vueloActual.getCapitan());
+        this.lblCodigoVuelo.setText(vueloActual.getCodigoDeVuelo());
+        this.lblOrigen.setText(vueloActual.getCiudadOrigen().toString());
+        this.lblDestino.setText(vueloActual.getCiudadDestino().toString());
+
+        //this.lblHoraSalida.setText(horaSalida + ":" + minutoSalida);
+        Calendar horaSalida = vueloActual.getHoraSalida();
+        this.lblHoraSalida.setText(zero(horaSalida.get(Calendar.HOUR_OF_DAY))
+                + ":" + zero(horaSalida.get(Calendar.MINUTE)));
+        if (vueloActual.isDemorado()) {
             String texto = volandoAlto.getIdiomaActual().getPalabras()[13];
             this.lblEstadoLlegada.setText(texto);
             this.lblHoraLlegada.setText("");
         } else {
-            String texto = volandoAlto.getIdiomaActual().getPalabras()[7];
+            String texto = volandoAlto.getIdiomaActual().getPalabras()[7] + ":";
             this.lblEstadoLlegada.setText(texto);
-            this.lblHoraLlegada.setText(horaLlegada + ":" + minutoLlegada);
+            Calendar horaLlegada = vueloActual.getHoraLlegada();
+            this.lblHoraLlegada.setText(zero(horaLlegada.get(Calendar.HOUR_OF_DAY))
+                    + ":" + zero(horaLlegada.get(Calendar.MINUTE)));
         }
+    }
+
+    public static String zero(int num) {
+        return (num < 10) ? ("0" + num) : ("" + num);
     }
 
     public void actualizarHora(String hora) {
@@ -1178,5 +1230,10 @@ public class VentanaUsuario extends javax.swing.JFrame {
             }
         }
         return retorno.toArray();
+    }
+
+    public void cargarComboBoxMotivosAzafata() {
+        Object[] arrayMotivos = volandoAlto.getMotivosAzafata().toArray();
+        this.jComboBoxMotivosAzafata.setModel(new DefaultComboBoxModel<>(arrayMotivos));
     }
 }
