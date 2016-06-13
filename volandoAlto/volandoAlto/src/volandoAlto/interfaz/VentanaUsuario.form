@@ -235,7 +235,7 @@
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jComboBoxIdiomas" min="-2" pref="174" max="-2" attributes="0"/>
+                      <Component id="jComboBoxIdiomas" min="-2" pref="258" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -246,8 +246,8 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblBienvenido" min="-2" pref="165" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jComboBoxIdiomas" min="-2" pref="157" max="-2" attributes="0"/>
-                      <EmptySpace pref="92" max="32767" attributes="0"/>
+                      <Component id="jComboBoxIdiomas" min="-2" pref="208" max="-2" attributes="0"/>
+                      <EmptySpace pref="41" max="32767" attributes="0"/>
                       <Component id="btnContinuar" min="-2" pref="77" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblContinuar" min="-2" pref="42" max="-2" attributes="0"/>
@@ -302,6 +302,9 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="0"/>
+                </Property>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[576, 576]"/>
                 </Property>
               </Properties>
               <Events>

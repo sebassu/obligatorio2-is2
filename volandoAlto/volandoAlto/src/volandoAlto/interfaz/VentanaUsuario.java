@@ -3,6 +3,7 @@ package volandoAlto.interfaz;
 import volandoAlto.dominio.Idioma;
 import volandoAlto.dominio.ReproductorMp3;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -184,6 +185,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
             }
         });
 
+        jComboBoxIdiomas.setMaximumSize(new java.awt.Dimension(576, 576));
         jComboBoxIdiomas.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 CambiarIdiomaSeleccionado(evt);
@@ -208,7 +210,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlIdiomaLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jComboBoxIdiomas, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxIdiomas, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlIdiomaLayout.setVerticalGroup(
@@ -217,8 +219,8 @@ public class VentanaUsuario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxIdiomas, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addComponent(jComboBoxIdiomas, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -859,7 +861,11 @@ public class VentanaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
-        ObtenerIdiomaSeleccionadoYActualizarPalabras();
+        try {
+            ObtenerIdiomaSeleccionadoYActualizarPalabras();
+        } catch (IllegalStateException e) {
+
+        }
         this.pnlIdioma.setVisible(false);
         this.pnlApagado.setVisible(false);
         this.pnlBotones.setVisible(true);
@@ -964,15 +970,17 @@ public class VentanaUsuario extends javax.swing.JFrame {
 
     private void CambiarIdiomaSeleccionado(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CambiarIdiomaSeleccionado
         ObtenerIdiomaSeleccionadoYActualizarPalabras();
+
     }//GEN-LAST:event_CambiarIdiomaSeleccionado
 
     private void ObtenerIdiomaSeleccionadoYActualizarPalabras() {
         int indexSelecionado = this.jComboBoxIdiomas.getSelectedIndex();
-        if (indexSelecionado > 0) {
+        if (indexSelecionado > -1) {
             Idioma idiomaSeleccionado = volandoAlto.getIdiomasRegistrados().get(indexSelecionado);
             volandoAlto.setIdiomaActual(idiomaSeleccionado);
+            cargarPalabras();
         } else {
-
+            throw new IllegalStateException();
         }
     }
 
@@ -990,27 +998,83 @@ public class VentanaUsuario extends javax.swing.JFrame {
     }
 
     public void cargarPalabras() {
-        String[] palabras = volandoAlto.getIdiomaActual().getPalabras();
+        Idioma idiomaActual = volandoAlto.getIdiomaActual();
+        String[] palabras = idiomaActual.getPalabras();
+        Font fuente = idiomaActual.getFuente();
+
         this.lblBienvenido.setText(palabras[0]);
+        this.lblBienvenido.setFont(fuente.deriveFont(Font.PLAIN, 75));
+
         this.lblContinuar.setText(palabras[1]);
+        this.lblContinuar.setFont(fuente.deriveFont(Font.PLAIN, 20));
+
         this.lblInfoVuelo.setText(palabras[2]);
-        this.lblEtiquetaCapitan.setText(palabras[3]);
-        this.lblEtiquetaVuelo.setText(palabras[4]);
-        this.lblEtiquetaOrigen.setText(palabras[5]);
-        this.lblEtiquetaHoraSalida.setText(palabras[6]);
-        this.lblEstadoLlegada.setText(palabras[7]);
-        this.lblEtiquetaDestino.setText(palabras[8]);
+        this.lblInfoVuelo.setFont(fuente.deriveFont(Font.BOLD, 24));
+
+        this.lblEtiquetaCapitan.setText(palabras[3] + ":");
+        this.lblEtiquetaCapitan.setFont(fuente.deriveFont(Font.PLAIN, 18));
+
+        this.lblEtiquetaVuelo.setText(palabras[4] + ":");
+        this.lblEtiquetaVuelo.setFont(fuente.deriveFont(Font.PLAIN, 18));
+
+        this.lblEtiquetaOrigen.setText(palabras[5] + ":");
+        this.lblEtiquetaOrigen.setFont(fuente.deriveFont(Font.PLAIN, 18));
+
+        this.lblEtiquetaHoraSalida.setText(palabras[6] + ":");
+        this.lblEtiquetaHoraSalida.setFont(fuente.deriveFont(Font.PLAIN, 18));
+
+        this.lblEstadoLlegada.setText(palabras[7] + ":");
+        this.lblEstadoLlegada.setFont(fuente.deriveFont(Font.PLAIN, 18));
+        
+        this.lblEtiquetaDestino.setText(palabras[8] + ":");
+        this.lblEtiquetaDestino.setFont(fuente.deriveFont(Font.PLAIN, 18));
+
         this.lblHoraEnDestino.setText(palabras[9]);
+        this.lblHoraEnDestino.setFont(fuente.deriveFont(Font.PLAIN, 24));
+
         this.lblClimaEnDestino.setText(palabras[10]);
+        this.lblClimaEnDestino.setFont(fuente.deriveFont(Font.PLAIN, 24));
+
+        this.lblDestino.setFont(fuente.deriveFont(Font.BOLD, 36));
+
+        this.lblEtiquetaDestino.setFont(fuente.deriveFont(Font.PLAIN, 36));
+
+        this.lblHoraActualEnDestino.setFont(fuente.deriveFont(Font.PLAIN, 24));
+
+        this.lblHoraSalida.setFont(fuente.deriveFont(Font.PLAIN, 18));
+        
+        this.lblClimaEnDestino.setFont(fuente.deriveFont(Font.PLAIN, 24));      
+
         this.lblBienvenidoBordo.setText(palabras[11]);
+        this.lblBienvenidoBordo.setFont(fuente.deriveFont(Font.PLAIN, 90));
+
         this.lblSeleccioneGenero.setText(palabras[14]);
+        this.lblSeleccioneGenero.setFont(fuente.deriveFont(Font.BOLD, 36));
+
         this.btnClasica.setText(palabras[15]);
+        this.btnClasica.setFont(fuente.deriveFont(Font.PLAIN, 14));
+
         this.btnPop.setText(palabras[16]);
+        this.btnPop.setFont(fuente.deriveFont(Font.PLAIN, 14));
+
         this.btnRock.setText(palabras[17]);
+        this.btnRock.setFont(fuente.deriveFont(Font.PLAIN, 14));
+
         this.btnElectronica.setText(palabras[18]);
+        this.btnElectronica.setFont(fuente.deriveFont(Font.PLAIN, 14));
+
         this.btnReggae.setText(palabras[19]);
+        this.btnReggae.setFont(fuente.deriveFont(Font.PLAIN, 14));
+
         this.btnAlternativa.setText(palabras[20]);
+        this.btnAlternativa.setFont(fuente.deriveFont(Font.PLAIN, 14));
+
+        this.lblGeneroSeleccionado.setFont(fuente.deriveFont(Font.BOLD, 24));
+
+        this.lblNombreCancion.setFont(fuente.deriveFont(Font.BOLD, 36));
+
         this.lblEstadoReproduccion.setText(palabras[21]);
+        this.lblEstadoReproduccion.setFont(fuente.deriveFont(Font.BOLD, 24));
     }
 
     public void actualizarNombreCancion() {
@@ -1107,7 +1171,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
                 ImageIcon imageIcon = new ImageIcon(getClass().getResource("/volandoAlto/interfaz/"
                         + idiomaAux.getNombre() + ".png"));
                 Image unaImagen = imageIcon.getImage();
-                Image imagenEscalada = unaImagen.getScaledInstance(150, 150, java.awt.Image.SCALE_SMOOTH);
+                Image imagenEscalada = unaImagen.getScaledInstance(225, 185, java.awt.Image.SCALE_SMOOTH);
                 imageIcon = new ImageIcon(imagenEscalada);
                 retorno.add(imageIcon);
             } catch (NullPointerException e) {
