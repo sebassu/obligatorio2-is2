@@ -35,12 +35,7 @@ public class Ciudad implements Serializable {
         return this.nombre;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        return hash;
-    }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -54,5 +49,13 @@ public class Ciudad implements Serializable {
         }
         final Ciudad other = (Ciudad) obj;
         return Objects.equals(this.nombre, other.nombre);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 13 * hash + Objects.hashCode(this.nombre);
+        hash = 13 * hash + Objects.hashCode(this.zonaHoraria);
+        return hash;
     }
 }
