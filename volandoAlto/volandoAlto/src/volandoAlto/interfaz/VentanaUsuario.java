@@ -889,6 +889,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
             this.lblEstadoReproduccion.setText(volandoAlto.getIdiomaActual().getPalabras()[22]);
             reproductorMusica.play();
         }
+        actualizarNombreCancion();
     }//GEN-LAST:event_btnReproducirCancionActionPerformed
 
     private void btnDetenerCancionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetenerCancionActionPerformed
@@ -1025,7 +1026,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
 
         this.lblEstadoLlegada.setText(palabras[7] + ":");
         this.lblEstadoLlegada.setFont(fuente.deriveFont(Font.PLAIN, 18));
-        
+
         this.lblEtiquetaDestino.setText(palabras[8] + ":");
         this.lblEtiquetaDestino.setFont(fuente.deriveFont(Font.PLAIN, 18));
 
@@ -1041,9 +1042,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
 
         this.lblHoraActualEnDestino.setFont(fuente.deriveFont(Font.PLAIN, 24));
 
-        this.lblHoraSalida.setFont(fuente.deriveFont(Font.PLAIN, 18));
-        
-        this.lblClimaEnDestino.setFont(fuente.deriveFont(Font.PLAIN, 24));      
+        this.lblClimaEnDestino.setFont(fuente.deriveFont(Font.PLAIN, 24));
 
         this.lblBienvenidoBordo.setText(palabras[11]);
         this.lblBienvenidoBordo.setFont(fuente.deriveFont(Font.PLAIN, 90));

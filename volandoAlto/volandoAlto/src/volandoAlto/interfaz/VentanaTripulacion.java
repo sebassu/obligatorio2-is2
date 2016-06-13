@@ -3,6 +3,7 @@ package volandoAlto.interfaz;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +26,8 @@ public class VentanaTripulacion extends javax.swing.JFrame {
     public VentanaTripulacion(VolandoAlto volandoAlto) {
         initComponents();
         this.volandoAlto = volandoAlto;
+        cargarComboBoxCiudadOrigen();
+        cargarComboBoxCiudadDestino();
         this.jPanelCiudades.setVisible(false);
         this.jPanelRegistrarCiudad.setVisible(false);
         this.jPanelListaMotivosAzafata.setVisible(false);
@@ -119,16 +122,16 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         cmbDestino = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        txtHoraSalida = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        txtMinutoSalida = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtHoraLlegada = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtMinutoLlegada = new javax.swing.JTextField();
         btnAplicarCambios = new javax.swing.JButton();
         chkDemorado = new javax.swing.JCheckBox();
         lblCambiosAplicados = new javax.swing.JLabel();
+        jSpinnerHoraSalida = new javax.swing.JSpinner();
+        jSpinnerMinutoSalida = new javax.swing.JSpinner();
+        jSpinnerHoraLlegada = new javax.swing.JSpinner();
+        jSpinnerMinutoLlegada = new javax.swing.JSpinner();
         jPanelMantenimiento = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -233,7 +236,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
                 .addGroup(jPanelCiudadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRegistrarNuevaCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanelVuelo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -259,7 +262,6 @@ public class VentanaTripulacion extends javax.swing.JFrame {
             }
         });
 
-        cmbOrigen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Montevideo", "Buenos Aires", "Rio de Janeiro", "Paris", "Londres", "Madrid", "Amsterdam" }));
         cmbOrigen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbOrigenActionPerformed(evt);
@@ -270,37 +272,15 @@ public class VentanaTripulacion extends javax.swing.JFrame {
 
         jLabel4.setText("Destino");
 
-        cmbDestino.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Montevideo", "Buenos Aires", "Rio de Janeiro", "Paris", "Londres", "Madrid", "Amsterdam" }));
-        cmbDestino.setSelectedIndex(1);
-
         jLabel6.setText("Estado");
 
         jLabel7.setText("Salida");
 
-        txtHoraSalida.setText("00");
-        txtHoraSalida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtHoraSalidaActionPerformed(evt);
-            }
-        });
-
         jLabel8.setText(":");
-
-        txtMinutoSalida.setText("00");
-        txtMinutoSalida.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtMinutoSalidaActionPerformed(evt);
-            }
-        });
 
         jLabel9.setText("Llegada");
 
-        txtHoraLlegada.setText("00");
-        txtHoraLlegada.setMinimumSize(new java.awt.Dimension(6, 21));
-
         jLabel10.setText(":");
-
-        txtMinutoLlegada.setText("00");
 
         btnAplicarCambios.setText("Aplicar");
         btnAplicarCambios.addActionListener(new java.awt.event.ActionListener() {
@@ -312,6 +292,14 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         chkDemorado.setText("Demorado");
 
         lblCambiosAplicados.setText("  ");
+
+        jSpinnerHoraSalida.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+
+        jSpinnerMinutoSalida.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+
+        jSpinnerHoraLlegada.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+
+        jSpinnerMinutoLlegada.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
 
         javax.swing.GroupLayout jPanelVueloLayout = new javax.swing.GroupLayout(jPanelVuelo);
         jPanelVuelo.setLayout(jPanelVueloLayout);
@@ -347,24 +335,26 @@ public class VentanaTripulacion extends javax.swing.JFrame {
                                 .addGroup(jPanelVueloLayout.createSequentialGroup()
                                     .addComponent(jLabel4)
                                     .addGap(18, 18, 18)
-                                    .addComponent(cmbDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addGroup(jPanelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanelVueloLayout.createSequentialGroup()
+                                            .addComponent(jSpinnerHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jLabel8)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                            .addComponent(jSpinnerMinutoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(0, 0, Short.MAX_VALUE))
+                                        .addComponent(cmbDestino, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addComponent(jLabel6)
                             .addGroup(jPanelVueloLayout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtMinutoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanelVueloLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel7))
+                                .addGap(18, 18, 18)
+                                .addComponent(jSpinnerHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtMinutoLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jSpinnerMinutoLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -396,15 +386,15 @@ public class VentanaTripulacion extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txtHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtMinutoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSpinnerHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinnerMinutoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txtHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(txtMinutoLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSpinnerHoraLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpinnerMinutoLlegada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -725,7 +715,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
             .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanelPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
             .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanelMenuPrincipalVentanaTripulacionLayout.createSequentialGroup()
                     .addComponent(jPanelCiudades, javax.swing.GroupLayout.PREFERRED_SIZE, 525, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -771,32 +761,28 @@ public class VentanaTripulacion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbOrigenActionPerformed
 
-    private void txtHoraSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHoraSalidaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtHoraSalidaActionPerformed
-
-    private void txtMinutoSalidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMinutoSalidaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtMinutoSalidaActionPerformed
-
     private void txtCapitanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCapitanActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCapitanActionPerformed
 
     private void btnAplicarCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarCambiosActionPerformed
         if (this.datosValidos()) {
-            ventanaCliente.aplicarCambios(this.txtCapitan.getText(),
-                    this.txtCodigoVuelo.getText(),
-                    this.cmbOrigen.getSelectedItem().toString(),
-                    this.cmbDestino.getSelectedItem().toString(),
-                    this.txtHoraSalida.getText(),
-                    this.txtMinutoSalida.getText(),
-                    this.txtHoraLlegada.getText(),
-                    this.txtMinutoLlegada.getText(),
-                    this.chkDemorado.isSelected());
+            String horaSalida = this.jSpinnerHoraSalida.getValue().toString();
+            String minutoSalida = this.jSpinnerMinutoSalida.getValue().toString();
+            String horaLlegada = this.jSpinnerHoraLlegada.getValue().toString();
+            String minutoLlegada = this.jSpinnerMinutoLlegada.getValue().toString();
+            String capitan = this.txtCapitan.getText();
+            String codigoDeVuelo = this.txtCodigoVuelo.getText();
+            String ciudadOrigen = this.cmbOrigen.getSelectedItem().toString();
+            String ciudadDestino = this.cmbDestino.getSelectedItem().toString();
+            boolean demorado = this.chkDemorado.isSelected();
+            
+            
+            ventanaCliente.aplicarCambios(capitan, codigoDeVuelo, ciudadOrigen, ciudadDestino,
+                    horaSalida, minutoSalida, horaLlegada, minutoLlegada, demorado);
             this.lblCambiosAplicados.setText("Cambios aplicados");
         } else {
-            this.lblCambiosAplicados.setText("Formato incorrecto");
+            this.lblCambiosAplicados.setText("Datos incorrectos");
         }
     }//GEN-LAST:event_btnAplicarCambiosActionPerformed
 
@@ -808,6 +794,8 @@ public class VentanaTripulacion extends javax.swing.JFrame {
 
     private void btnVolverDesdeCiudadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverDesdeCiudadesActionPerformed
         this.jPanelCiudades.setVisible(false);
+        cargarComboBoxCiudadOrigen();
+        cargarComboBoxCiudadDestino();
         this.jPanelPrincipal.setVisible(true);
     }//GEN-LAST:event_btnVolverDesdeCiudadesActionPerformed
 
@@ -877,12 +865,12 @@ public class VentanaTripulacion extends javax.swing.JFrame {
 
     private void btnEliminar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminar1ActionPerformed
         String motivo = ObtenerMotivoSeleccionado();
-        if(motivo != null){
+        if (motivo != null) {
             volandoAlto.ElminarMotivo(motivo);
             cargarListaJListMotivos();
             JOptionPane.showMessageDialog(this.jPanelListaMotivosAzafata, "Motivo eliminado", "Éxito",
                     JOptionPane.INFORMATION_MESSAGE);
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this.jPanelListaMotivosAzafata, "Debe seleccionar "
                     + "un motivo a eliminar", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -921,30 +909,41 @@ public class VentanaTripulacion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistrarMotivoActionPerformed
 
     private boolean datosValidos() {
+        String horaLlegada = this.jSpinnerHoraLlegada.getValue().toString();
+        String minutoLlegada = this.jSpinnerMinutoLlegada.getValue().toString();
+        String horaSalida = this.jSpinnerHoraSalida.getValue().toString();
+        String minutoSalida = this.jSpinnerMinutoSalida.getValue().toString();
+        
         boolean valido = true;
-        if (this.txtCapitan.getText().isEmpty() || this.txtCapitan.getText().length() > 25
-                || !StringUtils.isAlphaSpace(this.txtCapitan.getText())) {
+        String capitan = this.txtCapitan.getText();
+        String codigoDeVuelo = this.txtCodigoVuelo.getText();
+        
+        if (capitan.isEmpty() || capitan.length() > 25
+                || !StringUtils.isAlphaSpace(capitan)) {
             valido = false;
-        } else if (this.txtCodigoVuelo.getText().isEmpty()
-                || this.txtCodigoVuelo.getText().length() > 10
-                || !StringUtils.isAlphanumeric(this.txtCodigoVuelo.getText())) {
+        } else if (codigoDeVuelo.isEmpty()
+                || codigoDeVuelo.length() > 10
+                || !StringUtils.isAlphanumeric(codigoDeVuelo)) {
             valido = false;
-        } else if (this.cmbOrigen.getSelectedItem().toString().
-                equalsIgnoreCase(this.cmbDestino.getSelectedItem().toString())) {
+        } else if (this.cmbOrigen.getSelectedItem().
+                equals(this.cmbDestino.getSelectedItem())) {
             valido = false;
-        } else if (this.txtHoraLlegada.getText().isEmpty()
-                || this.txtMinutoLlegada.getText().isEmpty()
-                || this.txtHoraLlegada.getText().length() != 2
-                || this.txtMinutoLlegada.getText().length() != 2
-                || !StringUtils.isNumeric(this.txtHoraLlegada.getText())
-                || !StringUtils.isNumeric(this.txtMinutoLlegada.getText())) {
+        } else if (horaLlegada.isEmpty()
+                || minutoLlegada.isEmpty()
+                || horaLlegada.length() != 2
+                || minutoLlegada.length() != 2
+                || !StringUtils.isNumeric(horaLlegada)
+                || !StringUtils.isNumeric(minutoLlegada)) {
             valido = false;
-        } else if (this.txtHoraSalida.getText().isEmpty()
-                || this.txtMinutoSalida.getText().isEmpty()
-                || this.txtHoraSalida.getText().length() != 2
-                || this.txtMinutoSalida.getText().length() != 2
-                || !StringUtils.isNumeric(this.txtHoraSalida.getText())
-                || !StringUtils.isNumeric(this.txtMinutoSalida.getText())) {
+        } else if (horaSalida.isEmpty()
+                || minutoSalida.isEmpty()
+                || horaSalida.length() != 2
+                || minutoSalida.length() != 2
+                || !StringUtils.isNumeric(horaSalida)
+                || !StringUtils.isNumeric(minutoSalida)) {
+            valido = false;
+        } else if (horaSalida.equals(horaLlegada) && 
+                minutoSalida.equals(minutoLlegada)){
             valido = false;
         }
         return valido;
@@ -1006,15 +1005,15 @@ public class VentanaTripulacion extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSpinner jSpinnerHoraLlegada;
+    private javax.swing.JSpinner jSpinnerHoraSalida;
+    private javax.swing.JSpinner jSpinnerMinutoLlegada;
+    private javax.swing.JSpinner jSpinnerMinutoSalida;
     private javax.swing.JTextField jTextFieldNombreCiudad;
     private javax.swing.JTextField jTextFieldNombreMotivo;
     private javax.swing.JLabel lblCambiosAplicados;
     private javax.swing.JTextField txtCapitan;
     private javax.swing.JTextField txtCodigoVuelo;
-    private javax.swing.JTextField txtHoraLlegada;
-    private javax.swing.JTextField txtHoraSalida;
-    private javax.swing.JTextField txtMinutoLlegada;
-    private javax.swing.JTextField txtMinutoSalida;
     // End of variables declaration//GEN-END:variables
 
     private void cargarListaJListCiudades() {
@@ -1035,5 +1034,15 @@ public class VentanaTripulacion extends javax.swing.JFrame {
 
     private void cargarListaJListMotivos() {
         this.jListMotivos.setListData(volandoAlto.getMotivosAzafata().toArray());
+    }
+
+    private void cargarComboBoxCiudadOrigen() {
+        Object[] ArrayCiudades = volandoAlto.getCiudades().toArray();
+        this.cmbOrigen.setModel(new DefaultComboBoxModel<>(ArrayCiudades));
+    }
+
+    private void cargarComboBoxCiudadDestino() {
+        Object[] ArrayCiudades = volandoAlto.getCiudades().toArray();
+        this.cmbDestino.setModel(new DefaultComboBoxModel<>(ArrayCiudades));
     }
 }

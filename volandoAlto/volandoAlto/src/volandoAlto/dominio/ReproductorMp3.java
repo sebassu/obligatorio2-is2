@@ -19,14 +19,12 @@ public class ReproductorMp3 extends PlaybackListener implements Runnable {
     private int cancionActual = 0;
     private boolean detenido;
     private String[] nombreCanciones;
-    private final VentanaUsuario ventanaMusica;
 
     public ReproductorMp3(VentanaUsuario vMusica) {
         this.setListaReproduccion("clasica");
         this.filePath = "//media//music//clasica//Handel Royal Fireworks.mp3";
         this.cancionActual = 0;
         this.detenido = true;
-        this.ventanaMusica = vMusica;
     }
 
     public AdvancedPlayer getPlayer() {
@@ -182,7 +180,6 @@ public class ReproductorMp3 extends PlaybackListener implements Runnable {
 
     @Override
     public void run() {
-        this.ventanaMusica.actualizarNombreCancion();
         try {
             this.player.play();
         } catch (JavaLayerException ex) {
