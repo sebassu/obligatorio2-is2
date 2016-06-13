@@ -35,7 +35,6 @@ public class Ciudad implements Serializable {
         return this.nombre;
     }
 
-    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

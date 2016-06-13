@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Principal.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;volandoAlto&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">volandoAlto.dominio</a> &gt; <span class="el_source">Principal.java</span></div><h1>Principal.java</h1><pre class="source lang-java linenums">package volandoAlto.dominio;
+
+import volandoAlto.persistencia.Serializacion;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import volandoAlto.interfaz.VentanaTripulacion;
+
+<span class="nc" id="L11">public class Principal {</span>
+
+    private static VolandoAlto abrirSistema() {
+        VolandoAlto ret;
+        try {
+<span class="nc" id="L16">            ret = Serializacion.deserializar();</span>
+<span class="nc" id="L17">        } catch (IOException | ClassNotFoundException e) {</span>
+<span class="nc" id="L18">            ret = new VolandoAlto();</span>
+<span class="nc" id="L19">        }</span>
+<span class="nc" id="L20">        return ret;</span>
+    }
+
+    public static void main(String[] args) {
+        try {
+<span class="nc" id="L25">            final VolandoAlto volandoAlto = abrirSistema();</span>
+<span class="nc" id="L26">            volandoAlto.cargarIdiomas();</span>
+<span class="nc" id="L27">            UIManager.setLookAndFeel(</span>
+<span class="nc" id="L28">                    UIManager.getSystemLookAndFeelClassName());</span>
+<span class="nc" id="L29">            VentanaTripulacion vT = new VentanaTripulacion(volandoAlto);</span>
+<span class="nc" id="L30">            vT.setVisible(true);</span>
+<span class="nc" id="L31">            Runtime.getRuntime().addShutdownHook(new Thread() {</span>
+                @Override
+                public void run() {
+                    try {
+<span class="nc" id="L35">                        Serializacion.serializar(volandoAlto);</span>
+<span class="nc" id="L36">                    } catch (IOException ex) {</span>
+<span class="nc" id="L37">                        Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L38">                    }</span>
+<span class="nc" id="L39">                }</span>
+            });
+<span class="nc" id="L41">        } catch (UnsupportedLookAndFeelException | ClassNotFoundException |</span>
+                InstantiationException | IllegalAccessException e) {
+<span class="nc" id="L43">            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, e);</span>
+<span class="nc" id="L44">        }</span>
+<span class="nc" id="L45">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

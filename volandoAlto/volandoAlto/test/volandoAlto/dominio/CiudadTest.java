@@ -9,9 +9,6 @@ import org.junit.rules.ExpectedException;
 
 public class CiudadTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
     @Test
     public void testConstructor1() {
         String unNombre = "Montevideo";
@@ -83,8 +80,8 @@ public class CiudadTest {
 
         assertEquals(ciudad1, ciudad2);
     }
-    
-        @Test
+
+    @Test
     public void testEquals4() {
         ZoneOffset unaZonaHoraria = ZoneOffset.of("-3");
         Ciudad ciudad1 = new Ciudad("Montevideo", unaZonaHoraria);
@@ -95,4 +92,43 @@ public class CiudadTest {
         assertNotEquals(ciudad1, ciudad2);
     }
 
+    @Test
+    public void testEquals5() {
+        ZoneOffset unaZonaHoraria = ZoneOffset.of("-3");
+        Ciudad ciudad = new Ciudad("Montevideo", unaZonaHoraria);
+
+        Object object = new Object();
+
+        assertNotEquals(ciudad, object);
+    }
+
+    @Test
+    public void testEquals6() {
+        ZoneOffset unaZonaHoraria = ZoneOffset.of("-3");
+        Ciudad ciudad = new Ciudad("Montevideo", unaZonaHoraria);
+
+        assertEquals(ciudad, ciudad);
+    }
+
+    
+    @Test
+    public void testSetNombre() {
+        ZoneOffset unaZonaHoraria = ZoneOffset.of("-3");
+        Ciudad ciudad = new Ciudad("Montevideo", unaZonaHoraria);
+
+        ciudad.setNombre("Chile");
+        
+        assertEquals("Chile", ciudad.getNombre());
+    }
+    
+     @Test
+    public void testSetZonaHoraria() {
+        ZoneOffset unaZonaHoraria = ZoneOffset.of("-3");
+        Ciudad ciudad = new Ciudad("Montevideo", unaZonaHoraria);
+
+        ZoneOffset nuevaZonaHoraria = ZoneOffset.of("-5");
+        ciudad.setZonaHoraria(nuevaZonaHoraria);
+        
+        assertEquals(nuevaZonaHoraria, ciudad.getZonaHoraria());
+    }
 }

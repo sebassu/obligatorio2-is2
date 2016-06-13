@@ -1,0 +1,1240 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>VentanaUsuario.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;volandoAlto&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">volandoAlto.interfaz</a> &gt; <span class="el_source">VentanaUsuario.java</span></div><h1>VentanaUsuario.java</h1><pre class="source lang-java linenums">package volandoAlto.interfaz;
+
+import volandoAlto.dominio.Idioma;
+import volandoAlto.dominio.ReproductorMp3;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import volandoAlto.dominio.VolandoAlto;
+import volandoAlto.dominio.Vuelo;
+
+public class VentanaUsuario extends javax.swing.JFrame {
+
+    VolandoAlto volandoAlto;
+    ReproductorMp3 reproductorMusica;
+    private int panelActual;
+
+<span class="nc" id="L24">    public VentanaUsuario(VolandoAlto volandoAlto) {</span>
+<span class="nc" id="L25">        this.volandoAlto = volandoAlto;</span>
+<span class="nc" id="L26">        Object[] iconosIdiomas = ObtenerImageIconsDeIdiomas();</span>
+<span class="nc" id="L27">        initComponents();</span>
+<span class="nc" id="L28">        cargarComboBoxMotivosAzafata();</span>
+<span class="nc bnc" id="L29" title="All 2 branches missed.">        if (volandoAlto.ExistenIdiomasRegistrados()) {</span>
+<span class="nc" id="L30">            this.pnlIdioma.setVisible(true);</span>
+<span class="nc" id="L31">            this.pnlVuelo.setVisible(false);</span>
+<span class="nc" id="L32">            this.pnlBotones.setVisible(false);</span>
+        } else {
+<span class="nc" id="L34">            this.pnlVuelo.setVisible(true);</span>
+<span class="nc" id="L35">            this.pnlBotones.setVisible(true);</span>
+<span class="nc" id="L36">            this.pnlIdioma.setVisible(false);</span>
+        }
+<span class="nc" id="L38">        this.pnlApagado.setVisible(false);</span>
+<span class="nc" id="L39">        this.pnlJuegos.setVisible(false);</span>
+<span class="nc" id="L40">        this.pnlMapas.setVisible(false);</span>
+<span class="nc" id="L41">        this.pnlVideo.setVisible(false);</span>
+<span class="nc" id="L42">        this.pnlMusica.setVisible(false);</span>
+<span class="nc" id="L43">        this.reproductorMusica = new ReproductorMp3();</span>
+<span class="nc" id="L44">        this.panelActual = 0;</span>
+<span class="nc" id="L45">        jComboBoxIdiomas.setModel(new DefaultComboBoxModel&lt;&gt;(iconosIdiomas));</span>
+<span class="nc" id="L46">        this.actualizarNombreCancion();</span>
+<span class="nc" id="L47">    }</span>
+
+    public void deseleccionarBotones() {
+<span class="nc" id="L50">        this.btnVuelo.setBackground(new Color(0, 204, 204));</span>
+<span class="nc" id="L51">        this.btnJuegos.setBackground(new Color(0, 204, 204));</span>
+<span class="nc" id="L52">        this.btnMusica.setBackground(new Color(0, 204, 204));</span>
+<span class="nc" id="L53">        this.btnVideo.setBackground(new Color(0, 204, 204));</span>
+<span class="nc" id="L54">        this.btnMapas.setBackground(new Color(0, 204, 204));</span>
+<span class="nc" id="L55">    }</span>
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    // &lt;editor-fold defaultstate=&quot;collapsed&quot; desc=&quot;Generated Code&quot;&gt;//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+<span class="nc" id="L61">        pnlVentana = new javax.swing.JPanel();</span>
+<span class="nc" id="L62">        pnlApagado = new javax.swing.JPanel();</span>
+<span class="nc" id="L63">        jButton1 = new javax.swing.JButton();</span>
+<span class="nc" id="L64">        pnlIdioma = new javax.swing.JPanel();</span>
+<span class="nc" id="L65">        lblBienvenido = new javax.swing.JLabel();</span>
+<span class="nc" id="L66">        lblContinuar = new javax.swing.JLabel();</span>
+<span class="nc" id="L67">        btnContinuar = new javax.swing.JButton();</span>
+<span class="nc" id="L68">        jComboBoxIdiomas = new javax.swing.JComboBox&lt;&gt;();</span>
+<span class="nc" id="L69">        pnlBotones = new javax.swing.JPanel();</span>
+<span class="nc" id="L70">        btnVuelo = new javax.swing.JButton();</span>
+<span class="nc" id="L71">        btnMapas = new javax.swing.JButton();</span>
+<span class="nc" id="L72">        btnVideo = new javax.swing.JButton();</span>
+<span class="nc" id="L73">        btnMusica = new javax.swing.JButton();</span>
+<span class="nc" id="L74">        btnJuegos = new javax.swing.JButton();</span>
+<span class="nc" id="L75">        btnApagar = new javax.swing.JButton();</span>
+<span class="nc" id="L76">        pnlVuelo = new javax.swing.JPanel();</span>
+<span class="nc" id="L77">        lblBienvenidoBordo = new javax.swing.JLabel();</span>
+<span class="nc" id="L78">        btnAzafata = new javax.swing.JButton();</span>
+<span class="nc" id="L79">        lblHoraEnDestino = new javax.swing.JLabel();</span>
+<span class="nc" id="L80">        lblClimaEnDestino = new javax.swing.JLabel();</span>
+<span class="nc" id="L81">        lblInfoVuelo = new javax.swing.JLabel();</span>
+<span class="nc" id="L82">        lblEtiquetaCapitan = new javax.swing.JLabel();</span>
+<span class="nc" id="L83">        lblNombreCapitan = new javax.swing.JLabel();</span>
+<span class="nc" id="L84">        lblEtiquetaVuelo = new javax.swing.JLabel();</span>
+<span class="nc" id="L85">        lblCodigoVuelo = new javax.swing.JLabel();</span>
+<span class="nc" id="L86">        lblDestino = new javax.swing.JLabel();</span>
+<span class="nc" id="L87">        lblEtiquetaOrigen = new javax.swing.JLabel();</span>
+<span class="nc" id="L88">        lblOrigen = new javax.swing.JLabel();</span>
+<span class="nc" id="L89">        lblEtiquetaHoraSalida = new javax.swing.JLabel();</span>
+<span class="nc" id="L90">        lblHoraSalida = new javax.swing.JLabel();</span>
+<span class="nc" id="L91">        lblEstadoLlegada = new javax.swing.JLabel();</span>
+<span class="nc" id="L92">        lblHoraLlegada = new javax.swing.JLabel();</span>
+<span class="nc" id="L93">        lblEtiquetaDestino = new javax.swing.JLabel();</span>
+<span class="nc" id="L94">        lblHoraActualEnDestino = new javax.swing.JLabel();</span>
+<span class="nc" id="L95">        jComboBoxMotivosAzafata = new javax.swing.JComboBox();</span>
+<span class="nc" id="L96">        jButton3 = new javax.swing.JButton();</span>
+<span class="nc" id="L97">        pnlMapas = new javax.swing.JPanel();</span>
+<span class="nc" id="L98">        pnlVideo = new javax.swing.JPanel();</span>
+<span class="nc" id="L99">        pnlMusica = new javax.swing.JPanel();</span>
+<span class="nc" id="L100">        btnReproducirCancion = new javax.swing.JButton();</span>
+<span class="nc" id="L101">        btnDetenerCancion = new javax.swing.JButton();</span>
+<span class="nc" id="L102">        btnClasica = new javax.swing.JButton();</span>
+<span class="nc" id="L103">        lblSeleccioneGenero = new javax.swing.JLabel();</span>
+<span class="nc" id="L104">        btnRock = new javax.swing.JButton();</span>
+<span class="nc" id="L105">        btnPop = new javax.swing.JButton();</span>
+<span class="nc" id="L106">        jButton5 = new javax.swing.JButton();</span>
+<span class="nc" id="L107">        btnReggae = new javax.swing.JButton();</span>
+<span class="nc" id="L108">        btnAlternativa = new javax.swing.JButton();</span>
+<span class="nc" id="L109">        btnElectronica = new javax.swing.JButton();</span>
+<span class="nc" id="L110">        lblGeneroSeleccionado = new javax.swing.JLabel();</span>
+<span class="nc" id="L111">        lblEstadoReproduccion = new javax.swing.JLabel();</span>
+<span class="nc" id="L112">        lblNombreCancion = new javax.swing.JLabel();</span>
+<span class="nc" id="L113">        pnlJuegos = new javax.swing.JPanel();</span>
+
+<span class="nc" id="L115">        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L116">        setTitle(&quot;Pasajero&quot;);</span>
+<span class="nc" id="L117">        setMinimumSize(new java.awt.Dimension(1024, 604));</span>
+<span class="nc" id="L118">        setResizable(false);</span>
+<span class="nc" id="L119">        getContentPane().setLayout(null);</span>
+
+<span class="nc" id="L121">        pnlVentana.setAlignmentX(0.0F);</span>
+<span class="nc" id="L122">        pnlVentana.setAlignmentY(0.0F);</span>
+<span class="nc" id="L123">        pnlVentana.setMaximumSize(new java.awt.Dimension(1024, 576));</span>
+<span class="nc" id="L124">        pnlVentana.setMinimumSize(new java.awt.Dimension(1024, 576));</span>
+<span class="nc" id="L125">        pnlVentana.setName(&quot;&quot;); // NOI18N</span>
+<span class="nc" id="L126">        pnlVentana.setPreferredSize(new java.awt.Dimension(1024, 576));</span>
+
+<span class="nc" id="L128">        pnlApagado.setBackground(new java.awt.Color(0, 0, 0));</span>
+<span class="nc" id="L129">        pnlApagado.setAlignmentX(0.0F);</span>
+<span class="nc" id="L130">        pnlApagado.setAlignmentY(0.0F);</span>
+<span class="nc" id="L131">        pnlApagado.setMaximumSize(new java.awt.Dimension(1024, 576));</span>
+<span class="nc" id="L132">        pnlApagado.setMinimumSize(new java.awt.Dimension(1024, 576));</span>
+<span class="nc" id="L133">        pnlApagado.setPreferredSize(new java.awt.Dimension(1024, 576));</span>
+<span class="nc" id="L134">        pnlApagado.setVerifyInputWhenFocusTarget(false);</span>
+
+<span class="nc" id="L136">        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/volandoAlto/interfaz/apagar.png&quot;))); // NOI18N</span>
+<span class="nc" id="L137">        jButton1.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L138">        jButton1.setAlignmentY(0.0F);</span>
+<span class="nc" id="L139">        jButton1.setBorderPainted(false);</span>
+<span class="nc" id="L140">        jButton1.setContentAreaFilled(false);</span>
+<span class="nc" id="L141">        jButton1.setFocusPainted(false);</span>
+<span class="nc" id="L142">        jButton1.setFocusable(false);</span>
+<span class="nc" id="L143">        jButton1.setIconTextGap(0);</span>
+<span class="nc" id="L144">        jButton1.setMaximumSize(new java.awt.Dimension(1024, 576));</span>
+<span class="nc" id="L145">        jButton1.setMinimumSize(new java.awt.Dimension(1024, 576));</span>
+<span class="nc" id="L146">        jButton1.setPreferredSize(new java.awt.Dimension(1024, 576));</span>
+<span class="nc" id="L147">        jButton1.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L149">                jButton1ActionPerformed(evt);</span>
+<span class="nc" id="L150">            }</span>
+        });
+
+<span class="nc" id="L153">        javax.swing.GroupLayout pnlApagadoLayout = new javax.swing.GroupLayout(pnlApagado);</span>
+<span class="nc" id="L154">        pnlApagado.setLayout(pnlApagadoLayout);</span>
+<span class="nc" id="L155">        pnlApagadoLayout.setHorizontalGroup(</span>
+<span class="nc" id="L156">            pnlApagadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L157">            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+        );
+<span class="nc" id="L159">        pnlApagadoLayout.setVerticalGroup(</span>
+<span class="nc" id="L160">            pnlApagadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L161">            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+        );
+
+<span class="nc" id="L164">        pnlIdioma.setAlignmentX(0.0F);</span>
+<span class="nc" id="L165">        pnlIdioma.setAlignmentY(0.0F);</span>
+<span class="nc" id="L166">        pnlIdioma.setMaximumSize(new java.awt.Dimension(1024, 576));</span>
+<span class="nc" id="L167">        pnlIdioma.setMinimumSize(new java.awt.Dimension(1024, 576));</span>
+<span class="nc" id="L168">        pnlIdioma.setPreferredSize(new java.awt.Dimension(1024, 576));</span>
+
+<span class="nc" id="L170">        lblBienvenido.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 75)); // NOI18N</span>
+<span class="nc" id="L171">        lblBienvenido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L172">        lblBienvenido.setText(&quot;Welcome.&quot;);</span>
+<span class="nc" id="L173">        lblBienvenido.setAlignmentY(0.0F);</span>
+
+<span class="nc" id="L175">        lblContinuar.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 20)); // NOI18N</span>
+<span class="nc" id="L176">        lblContinuar.setForeground(new java.awt.Color(51, 51, 51));</span>
+<span class="nc" id="L177">        lblContinuar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L178">        lblContinuar.setText(&quot;Continue&quot;);</span>
+<span class="nc" id="L179">        lblContinuar.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L180">        lblContinuar.setAlignmentY(0.0F);</span>
+
+<span class="nc" id="L182">        btnContinuar.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/volandoAlto/interfaz/arrow.png&quot;))); // NOI18N</span>
+<span class="nc" id="L183">        btnContinuar.setAlignmentY(0.0F);</span>
+<span class="nc" id="L184">        btnContinuar.setBorder(null);</span>
+<span class="nc" id="L185">        btnContinuar.setBorderPainted(false);</span>
+<span class="nc" id="L186">        btnContinuar.setContentAreaFilled(false);</span>
+<span class="nc" id="L187">        btnContinuar.setFocusPainted(false);</span>
+<span class="nc" id="L188">        btnContinuar.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L190">                btnContinuarActionPerformed(evt);</span>
+<span class="nc" id="L191">            }</span>
+        });
+
+<span class="nc" id="L194">        jComboBoxIdiomas.setMaximumSize(new java.awt.Dimension(576, 576));</span>
+<span class="nc" id="L195">        jComboBoxIdiomas.addItemListener(new java.awt.event.ItemListener() {</span>
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+<span class="nc" id="L197">                CambiarIdiomaSeleccionado(evt);</span>
+<span class="nc" id="L198">            }</span>
+        });
+
+<span class="nc" id="L201">        javax.swing.GroupLayout pnlIdiomaLayout = new javax.swing.GroupLayout(pnlIdioma);</span>
+<span class="nc" id="L202">        pnlIdioma.setLayout(pnlIdiomaLayout);</span>
+<span class="nc" id="L203">        pnlIdiomaLayout.setHorizontalGroup(</span>
+<span class="nc" id="L204">            pnlIdiomaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L205">            .addGroup(pnlIdiomaLayout.createSequentialGroup()</span>
+<span class="nc" id="L206">                .addGroup(pnlIdiomaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L207">                    .addGroup(pnlIdiomaLayout.createSequentialGroup()</span>
+<span class="nc" id="L208">                        .addContainerGap()</span>
+<span class="nc" id="L209">                        .addGroup(pnlIdiomaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L210">                            .addComponent(lblBienvenido, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1004, Short.MAX_VALUE)</span>
+<span class="nc" id="L211">                            .addComponent(lblContinuar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))</span>
+<span class="nc" id="L212">                    .addGroup(pnlIdiomaLayout.createSequentialGroup()</span>
+<span class="nc" id="L213">                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L214">                        .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L215">                        .addGap(0, 0, Short.MAX_VALUE)))</span>
+<span class="nc" id="L216">                .addContainerGap())</span>
+<span class="nc" id="L217">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlIdiomaLayout.createSequentialGroup()</span>
+<span class="nc" id="L218">                .addGap(0, 0, Short.MAX_VALUE)</span>
+<span class="nc" id="L219">                .addComponent(jComboBoxIdiomas, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L220">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L222">        pnlIdiomaLayout.setVerticalGroup(</span>
+<span class="nc" id="L223">            pnlIdiomaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L224">            .addGroup(pnlIdiomaLayout.createSequentialGroup()</span>
+<span class="nc" id="L225">                .addContainerGap()</span>
+<span class="nc" id="L226">                .addComponent(lblBienvenido, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L227">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L228">                .addComponent(jComboBoxIdiomas, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L229">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)</span>
+<span class="nc" id="L230">                .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L231">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L232">                .addComponent(lblContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L233">                .addGap(20, 20, 20))</span>
+        );
+
+<span class="nc" id="L236">        pnlBotones.setAlignmentX(0.0F);</span>
+<span class="nc" id="L237">        pnlBotones.setAlignmentY(0.0F);</span>
+<span class="nc" id="L238">        pnlBotones.setMaximumSize(new java.awt.Dimension(96, 576));</span>
+<span class="nc" id="L239">        pnlBotones.setMinimumSize(new java.awt.Dimension(96, 576));</span>
+<span class="nc" id="L240">        pnlBotones.setName(&quot;&quot;); // NOI18N</span>
+<span class="nc" id="L241">        pnlBotones.setPreferredSize(new java.awt.Dimension(96, 576));</span>
+
+<span class="nc" id="L243">        btnVuelo.setBackground(new java.awt.Color(102, 204, 255));</span>
+<span class="nc" id="L244">        btnVuelo.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/volandoAlto/interfaz/avion.png&quot;))); // NOI18N</span>
+<span class="nc" id="L245">        btnVuelo.setAlignmentY(0.0F);</span>
+<span class="nc" id="L246">        btnVuelo.setBorderPainted(false);</span>
+<span class="nc" id="L247">        btnVuelo.setContentAreaFilled(false);</span>
+<span class="nc" id="L248">        btnVuelo.setFocusPainted(false);</span>
+<span class="nc" id="L249">        btnVuelo.setIconTextGap(0);</span>
+<span class="nc" id="L250">        btnVuelo.setMargin(new java.awt.Insets(0, 0, 0, 0));</span>
+<span class="nc" id="L251">        btnVuelo.setMaximumSize(new java.awt.Dimension(96, 96));</span>
+<span class="nc" id="L252">        btnVuelo.setMinimumSize(new java.awt.Dimension(96, 96));</span>
+<span class="nc" id="L253">        btnVuelo.setOpaque(true);</span>
+<span class="nc" id="L254">        btnVuelo.setSelected(true);</span>
+<span class="nc" id="L255">        btnVuelo.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L257">                btnVueloActionPerformed(evt);</span>
+<span class="nc" id="L258">            }</span>
+        });
+
+<span class="nc" id="L261">        btnMapas.setBackground(new java.awt.Color(0, 204, 204));</span>
+<span class="nc" id="L262">        btnMapas.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/volandoAlto/interfaz/mapa.png&quot;))); // NOI18N</span>
+<span class="nc" id="L263">        btnMapas.setAlignmentY(0.0F);</span>
+<span class="nc" id="L264">        btnMapas.setBorderPainted(false);</span>
+<span class="nc" id="L265">        btnMapas.setContentAreaFilled(false);</span>
+<span class="nc" id="L266">        btnMapas.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));</span>
+<span class="nc" id="L267">        btnMapas.setFocusPainted(false);</span>
+<span class="nc" id="L268">        btnMapas.setMargin(new java.awt.Insets(0, 0, 0, 0));</span>
+<span class="nc" id="L269">        btnMapas.setMaximumSize(new java.awt.Dimension(96, 96));</span>
+<span class="nc" id="L270">        btnMapas.setMinimumSize(new java.awt.Dimension(96, 96));</span>
+<span class="nc" id="L271">        btnMapas.setOpaque(true);</span>
+<span class="nc" id="L272">        btnMapas.setSelected(true);</span>
+<span class="nc" id="L273">        btnMapas.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L275">                btnMapasActionPerformed(evt);</span>
+<span class="nc" id="L276">            }</span>
+        });
+
+<span class="nc" id="L279">        btnVideo.setBackground(new java.awt.Color(0, 204, 204));</span>
+<span class="nc" id="L280">        btnVideo.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/volandoAlto/interfaz/video.png&quot;))); // NOI18N</span>
+<span class="nc" id="L281">        btnVideo.setAlignmentY(0.0F);</span>
+<span class="nc" id="L282">        btnVideo.setBorderPainted(false);</span>
+<span class="nc" id="L283">        btnVideo.setContentAreaFilled(false);</span>
+<span class="nc" id="L284">        btnVideo.setFocusPainted(false);</span>
+<span class="nc" id="L285">        btnVideo.setIconTextGap(0);</span>
+<span class="nc" id="L286">        btnVideo.setMargin(new java.awt.Insets(0, 0, 0, 0));</span>
+<span class="nc" id="L287">        btnVideo.setMaximumSize(new java.awt.Dimension(96, 96));</span>
+<span class="nc" id="L288">        btnVideo.setMinimumSize(new java.awt.Dimension(96, 96));</span>
+<span class="nc" id="L289">        btnVideo.setOpaque(true);</span>
+<span class="nc" id="L290">        btnVideo.setSelected(true);</span>
+<span class="nc" id="L291">        btnVideo.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L293">                btnVideoActionPerformed(evt);</span>
+<span class="nc" id="L294">            }</span>
+        });
+
+<span class="nc" id="L297">        btnMusica.setBackground(new java.awt.Color(0, 204, 204));</span>
+<span class="nc" id="L298">        btnMusica.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/volandoAlto/interfaz/musica.png&quot;))); // NOI18N</span>
+<span class="nc" id="L299">        btnMusica.setAlignmentY(0.0F);</span>
+<span class="nc" id="L300">        btnMusica.setBorderPainted(false);</span>
+<span class="nc" id="L301">        btnMusica.setContentAreaFilled(false);</span>
+<span class="nc" id="L302">        btnMusica.setFocusPainted(false);</span>
+<span class="nc" id="L303">        btnMusica.setIconTextGap(0);</span>
+<span class="nc" id="L304">        btnMusica.setMargin(new java.awt.Insets(0, 0, 0, 0));</span>
+<span class="nc" id="L305">        btnMusica.setMaximumSize(new java.awt.Dimension(96, 96));</span>
+<span class="nc" id="L306">        btnMusica.setMinimumSize(new java.awt.Dimension(96, 96));</span>
+<span class="nc" id="L307">        btnMusica.setOpaque(true);</span>
+<span class="nc" id="L308">        btnMusica.setSelected(true);</span>
+<span class="nc" id="L309">        btnMusica.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L311">                btnMusicaActionPerformed(evt);</span>
+<span class="nc" id="L312">            }</span>
+        });
+
+<span class="nc" id="L315">        btnJuegos.setBackground(new java.awt.Color(0, 204, 204));</span>
+<span class="nc" id="L316">        btnJuegos.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/volandoAlto/interfaz/juegos.png&quot;))); // NOI18N</span>
+<span class="nc" id="L317">        btnJuegos.setAlignmentY(0.0F);</span>
+<span class="nc" id="L318">        btnJuegos.setBorderPainted(false);</span>
+<span class="nc" id="L319">        btnJuegos.setContentAreaFilled(false);</span>
+<span class="nc" id="L320">        btnJuegos.setFocusPainted(false);</span>
+<span class="nc" id="L321">        btnJuegos.setIconTextGap(0);</span>
+<span class="nc" id="L322">        btnJuegos.setMargin(new java.awt.Insets(0, 0, 0, 0));</span>
+<span class="nc" id="L323">        btnJuegos.setMaximumSize(new java.awt.Dimension(96, 96));</span>
+<span class="nc" id="L324">        btnJuegos.setMinimumSize(new java.awt.Dimension(96, 96));</span>
+<span class="nc" id="L325">        btnJuegos.setOpaque(true);</span>
+<span class="nc" id="L326">        btnJuegos.setSelected(true);</span>
+<span class="nc" id="L327">        btnJuegos.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L329">                btnJuegosActionPerformed(evt);</span>
+<span class="nc" id="L330">            }</span>
+        });
+
+<span class="nc" id="L333">        btnApagar.setBackground(new java.awt.Color(0, 204, 204));</span>
+<span class="nc" id="L334">        btnApagar.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/volandoAlto/interfaz/apagar.png&quot;))); // NOI18N</span>
+<span class="nc" id="L335">        btnApagar.setAlignmentY(0.0F);</span>
+<span class="nc" id="L336">        btnApagar.setBorderPainted(false);</span>
+<span class="nc" id="L337">        btnApagar.setContentAreaFilled(false);</span>
+<span class="nc" id="L338">        btnApagar.setFocusPainted(false);</span>
+<span class="nc" id="L339">        btnApagar.setIconTextGap(0);</span>
+<span class="nc" id="L340">        btnApagar.setMargin(new java.awt.Insets(0, 0, 0, 0));</span>
+<span class="nc" id="L341">        btnApagar.setMaximumSize(new java.awt.Dimension(96, 96));</span>
+<span class="nc" id="L342">        btnApagar.setMinimumSize(new java.awt.Dimension(96, 96));</span>
+<span class="nc" id="L343">        btnApagar.setOpaque(true);</span>
+<span class="nc" id="L344">        btnApagar.setSelected(true);</span>
+<span class="nc" id="L345">        btnApagar.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L347">                btnApagarActionPerformed(evt);</span>
+<span class="nc" id="L348">            }</span>
+        });
+
+<span class="nc" id="L351">        javax.swing.GroupLayout pnlBotonesLayout = new javax.swing.GroupLayout(pnlBotones);</span>
+<span class="nc" id="L352">        pnlBotones.setLayout(pnlBotonesLayout);</span>
+<span class="nc" id="L353">        pnlBotonesLayout.setHorizontalGroup(</span>
+<span class="nc" id="L354">            pnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L355">            .addGroup(pnlBotonesLayout.createSequentialGroup()</span>
+<span class="nc" id="L356">                .addGap(0, 0, 0)</span>
+<span class="nc" id="L357">                .addGroup(pnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L358">                    .addComponent(btnVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L359">                    .addComponent(btnMapas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L360">                    .addComponent(btnVideo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L361">                    .addComponent(btnMusica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L362">                    .addComponent(btnJuegos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L363">                    .addComponent(btnApagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+        );
+<span class="nc" id="L365">        pnlBotonesLayout.setVerticalGroup(</span>
+<span class="nc" id="L366">            pnlBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L367">            .addGroup(pnlBotonesLayout.createSequentialGroup()</span>
+<span class="nc" id="L368">                .addComponent(btnVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L369">                .addGap(0, 0, 0)</span>
+<span class="nc" id="L370">                .addComponent(btnMapas, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L371">                .addGap(0, 0, 0)</span>
+<span class="nc" id="L372">                .addComponent(btnVideo, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L373">                .addGap(0, 0, 0)</span>
+<span class="nc" id="L374">                .addComponent(btnMusica, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L375">                .addGap(0, 0, 0)</span>
+<span class="nc" id="L376">                .addComponent(btnJuegos, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L377">                .addGap(0, 0, 0)</span>
+<span class="nc" id="L378">                .addComponent(btnApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+        );
+
+<span class="nc" id="L381">        pnlVuelo.setAlignmentX(0.0F);</span>
+<span class="nc" id="L382">        pnlVuelo.setAlignmentY(0.0F);</span>
+<span class="nc" id="L383">        pnlVuelo.setMaximumSize(new java.awt.Dimension(928, 576));</span>
+<span class="nc" id="L384">        pnlVuelo.setMinimumSize(new java.awt.Dimension(928, 576));</span>
+<span class="nc" id="L385">        pnlVuelo.setPreferredSize(new java.awt.Dimension(928, 576));</span>
+
+<span class="nc" id="L387">        lblBienvenidoBordo.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 90)); // NOI18N</span>
+<span class="nc" id="L388">        lblBienvenidoBordo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);</span>
+<span class="nc" id="L389">        lblBienvenidoBordo.setText(&quot;Bienvenido a Bordo.&quot;);</span>
+<span class="nc" id="L390">        lblBienvenidoBordo.setAlignmentY(0.0F);</span>
+
+<span class="nc" id="L392">        btnAzafata.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 24)); // NOI18N</span>
+<span class="nc" id="L393">        btnAzafata.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/volandoAlto/interfaz/azafata.png&quot;))); // NOI18N</span>
+<span class="nc" id="L394">        btnAzafata.setText(&quot;Azafata&quot;);</span>
+<span class="nc" id="L395">        btnAzafata.setAlignmentY(0.0F);</span>
+<span class="nc" id="L396">        btnAzafata.setBorder(null);</span>
+<span class="nc" id="L397">        btnAzafata.setBorderPainted(false);</span>
+<span class="nc" id="L398">        btnAzafata.setContentAreaFilled(false);</span>
+<span class="nc" id="L399">        btnAzafata.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L401">                btnAzafataActionPerformed(evt);</span>
+<span class="nc" id="L402">            }</span>
+        });
+
+<span class="nc" id="L405">        lblHoraEnDestino.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 24)); // NOI18N</span>
+<span class="nc" id="L406">        lblHoraEnDestino.setText(&quot;Información de hora&quot;);</span>
+<span class="nc" id="L407">        lblHoraEnDestino.setAlignmentY(0.0F);</span>
+
+<span class="nc" id="L409">        lblClimaEnDestino.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 24)); // NOI18N</span>
+<span class="nc" id="L410">        lblClimaEnDestino.setText(&quot;y clima en destino&quot;);</span>
+<span class="nc" id="L411">        lblClimaEnDestino.setAlignmentY(0.0F);</span>
+
+<span class="nc" id="L413">        lblInfoVuelo.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 1, 24)); // NOI18N</span>
+<span class="nc" id="L414">        lblInfoVuelo.setText(&quot;Información del vuelo&quot;);</span>
+<span class="nc" id="L415">        lblInfoVuelo.setAlignmentY(0.0F);</span>
+
+<span class="nc" id="L417">        lblEtiquetaCapitan.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L418">        lblEtiquetaCapitan.setText(&quot;Capitan: &quot;);</span>
+
+<span class="nc" id="L420">        lblNombreCapitan.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L421">        lblNombreCapitan.setText(&quot;nombre&quot;);</span>
+
+<span class="nc" id="L423">        lblEtiquetaVuelo.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L424">        lblEtiquetaVuelo.setText(&quot;Vuelo:&quot;);</span>
+
+<span class="nc" id="L426">        lblCodigoVuelo.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L427">        lblCodigoVuelo.setText(&quot;codigo&quot;);</span>
+
+<span class="nc" id="L429">        lblDestino.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 1, 36)); // NOI18N</span>
+<span class="nc" id="L430">        lblDestino.setText(&quot;Ciudad&quot;);</span>
+
+<span class="nc" id="L432">        lblEtiquetaOrigen.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L433">        lblEtiquetaOrigen.setText(&quot;Origen:&quot;);</span>
+
+<span class="nc" id="L435">        lblOrigen.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L436">        lblOrigen.setText(&quot;origen&quot;);</span>
+
+<span class="nc" id="L438">        lblEtiquetaHoraSalida.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L439">        lblEtiquetaHoraSalida.setText(&quot;Hora de salida:&quot;);</span>
+
+<span class="nc" id="L441">        lblHoraSalida.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L442">        lblHoraSalida.setText(&quot;hora salida&quot;);</span>
+
+<span class="nc" id="L444">        lblEstadoLlegada.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L445">        lblEstadoLlegada.setText(&quot;Hora estimada de arribo:&quot;);</span>
+
+<span class="nc" id="L447">        lblHoraLlegada.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L448">        lblHoraLlegada.setText(&quot;hora llegada&quot;);</span>
+
+<span class="nc" id="L450">        lblEtiquetaDestino.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 36)); // NOI18N</span>
+<span class="nc" id="L451">        lblEtiquetaDestino.setText(&quot;Destino:&quot;);</span>
+
+<span class="nc" id="L453">        lblHoraActualEnDestino.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 0, 24)); // NOI18N</span>
+<span class="nc" id="L454">        lblHoraActualEnDestino.setText(&quot;00:00:00&quot;);</span>
+
+<span class="nc" id="L456">        jButton3.setFont(new java.awt.Font(&quot;Tahoma&quot;, 0, 18)); // NOI18N</span>
+<span class="nc" id="L457">        jButton3.setText(&quot;A - Z&quot;);</span>
+<span class="nc" id="L458">        jButton3.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L460">                jButton3ActionPerformed(evt);</span>
+<span class="nc" id="L461">            }</span>
+        });
+
+<span class="nc" id="L464">        javax.swing.GroupLayout pnlVueloLayout = new javax.swing.GroupLayout(pnlVuelo);</span>
+<span class="nc" id="L465">        pnlVuelo.setLayout(pnlVueloLayout);</span>
+<span class="nc" id="L466">        pnlVueloLayout.setHorizontalGroup(</span>
+<span class="nc" id="L467">            pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L468">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVueloLayout.createSequentialGroup()</span>
+<span class="nc" id="L469">                .addGap(51, 51, 51)</span>
+<span class="nc" id="L470">                .addGroup(pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L471">                    .addGroup(pnlVueloLayout.createSequentialGroup()</span>
+<span class="nc" id="L472">                        .addComponent(lblEtiquetaOrigen)</span>
+<span class="nc" id="L473">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L474">                        .addComponent(lblOrigen))</span>
+<span class="nc" id="L475">                    .addGroup(pnlVueloLayout.createSequentialGroup()</span>
+<span class="nc" id="L476">                        .addComponent(lblEtiquetaHoraSalida)</span>
+<span class="nc" id="L477">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L478">                        .addComponent(lblHoraSalida))</span>
+<span class="nc" id="L479">                    .addGroup(pnlVueloLayout.createSequentialGroup()</span>
+<span class="nc" id="L480">                        .addComponent(lblEstadoLlegada)</span>
+<span class="nc" id="L481">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L482">                        .addComponent(lblHoraLlegada))</span>
+<span class="nc" id="L483">                    .addGroup(pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)</span>
+<span class="nc" id="L484">                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlVueloLayout.createSequentialGroup()</span>
+<span class="nc" id="L485">                            .addComponent(lblEtiquetaCapitan)</span>
+<span class="nc" id="L486">                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L487">                            .addComponent(lblNombreCapitan))</span>
+<span class="nc" id="L488">                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlVueloLayout.createSequentialGroup()</span>
+<span class="nc" id="L489">                            .addComponent(lblEtiquetaVuelo)</span>
+<span class="nc" id="L490">                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L491">                            .addComponent(lblCodigoVuelo))</span>
+<span class="nc" id="L492">                        .addComponent(lblInfoVuelo)))</span>
+<span class="nc" id="L493">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L494">                .addGroup(pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L495">                    .addComponent(lblHoraEnDestino, javax.swing.GroupLayout.Alignment.TRAILING)</span>
+<span class="nc" id="L496">                    .addComponent(lblClimaEnDestino, javax.swing.GroupLayout.Alignment.TRAILING)</span>
+<span class="nc" id="L497">                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVueloLayout.createSequentialGroup()</span>
+<span class="nc" id="L498">                        .addComponent(lblEtiquetaDestino)</span>
+<span class="nc" id="L499">                        .addGap(18, 18, 18)</span>
+<span class="nc" id="L500">                        .addComponent(lblDestino))</span>
+<span class="nc" id="L501">                    .addComponent(lblHoraActualEnDestino, javax.swing.GroupLayout.Alignment.TRAILING))</span>
+<span class="nc" id="L502">                .addGap(51, 51, 51))</span>
+<span class="nc" id="L503">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVueloLayout.createSequentialGroup()</span>
+<span class="nc" id="L504">                .addContainerGap()</span>
+<span class="nc" id="L505">                .addComponent(lblBienvenidoBordo, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE)</span>
+<span class="nc" id="L506">                .addContainerGap())</span>
+<span class="nc" id="L507">            .addGroup(pnlVueloLayout.createSequentialGroup()</span>
+<span class="nc" id="L508">                .addGap(368, 368, 368)</span>
+<span class="nc" id="L509">                .addComponent(btnAzafata)</span>
+<span class="nc" id="L510">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L511">                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L512">                .addContainerGap())</span>
+<span class="nc" id="L513">            .addGroup(pnlVueloLayout.createSequentialGroup()</span>
+<span class="nc" id="L514">                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)</span>
+<span class="nc" id="L515">                .addComponent(jComboBoxMotivosAzafata, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L516">                .addGap(314, 314, 314))</span>
+        );
+<span class="nc" id="L518">        pnlVueloLayout.setVerticalGroup(</span>
+<span class="nc" id="L519">            pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L520">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVueloLayout.createSequentialGroup()</span>
+<span class="nc" id="L521">                .addGap(45, 45, 45)</span>
+<span class="nc" id="L522">                .addGroup(pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)</span>
+<span class="nc" id="L523">                    .addGroup(pnlVueloLayout.createSequentialGroup()</span>
+<span class="nc" id="L524">                        .addGroup(pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L525">                            .addComponent(lblDestino)</span>
+<span class="nc" id="L526">                            .addComponent(lblEtiquetaDestino))</span>
+<span class="nc" id="L527">                        .addGap(24, 24, 24)</span>
+<span class="nc" id="L528">                        .addComponent(lblHoraActualEnDestino)</span>
+<span class="nc" id="L529">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L530">                        .addComponent(lblHoraEnDestino, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L531">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L532">                        .addComponent(lblClimaEnDestino))</span>
+<span class="nc" id="L533">                    .addGroup(pnlVueloLayout.createSequentialGroup()</span>
+<span class="nc" id="L534">                        .addComponent(lblInfoVuelo)</span>
+<span class="nc" id="L535">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L536">                        .addGroup(pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L537">                            .addComponent(lblEtiquetaCapitan)</span>
+<span class="nc" id="L538">                            .addComponent(lblNombreCapitan))</span>
+<span class="nc" id="L539">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L540">                        .addGroup(pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L541">                            .addComponent(lblEtiquetaVuelo)</span>
+<span class="nc" id="L542">                            .addComponent(lblCodigoVuelo))</span>
+<span class="nc" id="L543">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L544">                        .addGroup(pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L545">                            .addComponent(lblEtiquetaOrigen)</span>
+<span class="nc" id="L546">                            .addComponent(lblOrigen))</span>
+<span class="nc" id="L547">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L548">                        .addGroup(pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L549">                            .addComponent(lblEtiquetaHoraSalida)</span>
+<span class="nc" id="L550">                            .addComponent(lblHoraSalida))</span>
+<span class="nc" id="L551">                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L552">                        .addGroup(pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L553">                            .addComponent(lblEstadoLlegada)</span>
+<span class="nc" id="L554">                            .addComponent(lblHoraLlegada))))</span>
+<span class="nc" id="L555">                .addGap(34, 34, 34)</span>
+<span class="nc" id="L556">                .addComponent(lblBienvenidoBordo)</span>
+<span class="nc" id="L557">                .addGap(13, 13, 13)</span>
+<span class="nc" id="L558">                .addComponent(jComboBoxMotivosAzafata, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L559">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L560">                .addGroup(pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)</span>
+<span class="nc" id="L561">                    .addComponent(btnAzafata, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L562">                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L563">                .addContainerGap(7, Short.MAX_VALUE))</span>
+        );
+
+<span class="nc" id="L566">        pnlMapas.setAlignmentX(0.0F);</span>
+<span class="nc" id="L567">        pnlMapas.setAlignmentY(0.0F);</span>
+<span class="nc" id="L568">        pnlMapas.setMaximumSize(new java.awt.Dimension(928, 576));</span>
+<span class="nc" id="L569">        pnlMapas.setMinimumSize(new java.awt.Dimension(928, 576));</span>
+<span class="nc" id="L570">        pnlMapas.setPreferredSize(new java.awt.Dimension(928, 576));</span>
+
+<span class="nc" id="L572">        javax.swing.GroupLayout pnlMapasLayout = new javax.swing.GroupLayout(pnlMapas);</span>
+<span class="nc" id="L573">        pnlMapas.setLayout(pnlMapasLayout);</span>
+<span class="nc" id="L574">        pnlMapasLayout.setHorizontalGroup(</span>
+<span class="nc" id="L575">            pnlMapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L576">            .addGap(0, 928, Short.MAX_VALUE)</span>
+        );
+<span class="nc" id="L578">        pnlMapasLayout.setVerticalGroup(</span>
+<span class="nc" id="L579">            pnlMapasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L580">            .addGap(0, 576, Short.MAX_VALUE)</span>
+        );
+
+<span class="nc" id="L583">        pnlVideo.setAlignmentX(0.0F);</span>
+<span class="nc" id="L584">        pnlVideo.setAlignmentY(0.0F);</span>
+<span class="nc" id="L585">        pnlVideo.setMaximumSize(new java.awt.Dimension(928, 576));</span>
+<span class="nc" id="L586">        pnlVideo.setMinimumSize(new java.awt.Dimension(928, 576));</span>
+<span class="nc" id="L587">        pnlVideo.setPreferredSize(new java.awt.Dimension(928, 576));</span>
+
+<span class="nc" id="L589">        javax.swing.GroupLayout pnlVideoLayout = new javax.swing.GroupLayout(pnlVideo);</span>
+<span class="nc" id="L590">        pnlVideo.setLayout(pnlVideoLayout);</span>
+<span class="nc" id="L591">        pnlVideoLayout.setHorizontalGroup(</span>
+<span class="nc" id="L592">            pnlVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L593">            .addGap(0, 928, Short.MAX_VALUE)</span>
+        );
+<span class="nc" id="L595">        pnlVideoLayout.setVerticalGroup(</span>
+<span class="nc" id="L596">            pnlVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L597">            .addGap(0, 576, Short.MAX_VALUE)</span>
+        );
+
+<span class="nc" id="L600">        pnlMusica.setAlignmentX(0.0F);</span>
+<span class="nc" id="L601">        pnlMusica.setAlignmentY(0.0F);</span>
+<span class="nc" id="L602">        pnlMusica.setMaximumSize(new java.awt.Dimension(928, 576));</span>
+<span class="nc" id="L603">        pnlMusica.setMinimumSize(new java.awt.Dimension(928, 576));</span>
+<span class="nc" id="L604">        pnlMusica.setPreferredSize(new java.awt.Dimension(928, 576));</span>
+
+<span class="nc" id="L606">        btnReproducirCancion.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/volandoAlto/interfaz/play.png&quot;))); // NOI18N</span>
+<span class="nc" id="L607">        btnReproducirCancion.setToolTipText(&quot;&quot;);</span>
+<span class="nc" id="L608">        btnReproducirCancion.setIconTextGap(0);</span>
+<span class="nc" id="L609">        btnReproducirCancion.setMargin(new java.awt.Insets(2, 20, 2, 14));</span>
+<span class="nc" id="L610">        btnReproducirCancion.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L612">                btnReproducirCancionActionPerformed(evt);</span>
+<span class="nc" id="L613">            }</span>
+        });
+
+<span class="nc" id="L616">        btnDetenerCancion.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/volandoAlto/interfaz/stop.png&quot;))); // NOI18N</span>
+<span class="nc" id="L617">        btnDetenerCancion.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L619">                btnDetenerCancionActionPerformed(evt);</span>
+<span class="nc" id="L620">            }</span>
+        });
+
+<span class="nc" id="L623">        btnClasica.setText(&quot;Clasica&quot;);</span>
+<span class="nc" id="L624">        btnClasica.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L626">                btnClasicaActionPerformed(evt);</span>
+<span class="nc" id="L627">            }</span>
+        });
+
+<span class="nc" id="L630">        lblSeleccioneGenero.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 1, 36)); // NOI18N</span>
+<span class="nc" id="L631">        lblSeleccioneGenero.setText(&quot;Seleccione un genero&quot;);</span>
+
+<span class="nc" id="L633">        btnRock.setText(&quot;Rock&quot;);</span>
+<span class="nc" id="L634">        btnRock.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L636">                btnRockActionPerformed(evt);</span>
+<span class="nc" id="L637">            }</span>
+        });
+
+<span class="nc" id="L640">        btnPop.setText(&quot;Pop&quot;);</span>
+<span class="nc" id="L641">        btnPop.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L643">                btnPopActionPerformed(evt);</span>
+<span class="nc" id="L644">            }</span>
+        });
+
+<span class="nc" id="L647">        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource(&quot;/volandoAlto/interfaz/skip.png&quot;))); // NOI18N</span>
+<span class="nc" id="L648">        jButton5.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L650">                jButton5ActionPerformed(evt);</span>
+<span class="nc" id="L651">            }</span>
+        });
+
+<span class="nc" id="L654">        btnReggae.setText(&quot;Reggae&quot;);</span>
+<span class="nc" id="L655">        btnReggae.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L657">                btnReggaeActionPerformed(evt);</span>
+<span class="nc" id="L658">            }</span>
+        });
+
+<span class="nc" id="L661">        btnAlternativa.setText(&quot;Alternativa&quot;);</span>
+<span class="nc" id="L662">        btnAlternativa.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L664">                btnAlternativaActionPerformed(evt);</span>
+<span class="nc" id="L665">            }</span>
+        });
+
+<span class="nc" id="L668">        btnElectronica.setText(&quot;Electrónica&quot;);</span>
+<span class="nc" id="L669">        btnElectronica.addActionListener(new java.awt.event.ActionListener() {</span>
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+<span class="nc" id="L671">                btnElectronicaActionPerformed(evt);</span>
+<span class="nc" id="L672">            }</span>
+        });
+
+<span class="nc" id="L675">        lblGeneroSeleccionado.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 1, 24)); // NOI18N</span>
+<span class="nc" id="L676">        lblGeneroSeleccionado.setText(&quot;Clasica: &quot;);</span>
+
+<span class="nc" id="L678">        lblEstadoReproduccion.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 1, 24)); // NOI18N</span>
+<span class="nc" id="L679">        lblEstadoReproduccion.setText(&quot;Detenido&quot;);</span>
+
+<span class="nc" id="L681">        lblNombreCancion.setFont(new java.awt.Font(&quot;Segoe UI Light&quot;, 1, 36)); // NOI18N</span>
+<span class="nc" id="L682">        lblNombreCancion.setText(&quot;NOMBRE DE LA CANCION&quot;);</span>
+
+<span class="nc" id="L684">        javax.swing.GroupLayout pnlMusicaLayout = new javax.swing.GroupLayout(pnlMusica);</span>
+<span class="nc" id="L685">        pnlMusica.setLayout(pnlMusicaLayout);</span>
+<span class="nc" id="L686">        pnlMusicaLayout.setHorizontalGroup(</span>
+<span class="nc" id="L687">            pnlMusicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L688">            .addGroup(pnlMusicaLayout.createSequentialGroup()</span>
+<span class="nc" id="L689">                .addGroup(pnlMusicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L690">                    .addGroup(pnlMusicaLayout.createSequentialGroup()</span>
+<span class="nc" id="L691">                        .addGap(35, 35, 35)</span>
+<span class="nc" id="L692">                        .addGroup(pnlMusicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L693">                            .addComponent(lblSeleccioneGenero)</span>
+<span class="nc" id="L694">                            .addGroup(pnlMusicaLayout.createSequentialGroup()</span>
+<span class="nc" id="L695">                                .addComponent(lblGeneroSeleccionado)</span>
+<span class="nc" id="L696">                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)</span>
+<span class="nc" id="L697">                                .addComponent(lblEstadoReproduccion))</span>
+<span class="nc" id="L698">                            .addGroup(pnlMusicaLayout.createSequentialGroup()</span>
+<span class="nc" id="L699">                                .addComponent(btnReproducirCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L700">                                .addGap(18, 18, 18)</span>
+<span class="nc" id="L701">                                .addComponent(btnDetenerCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L702">                                .addGap(18, 18, 18)</span>
+<span class="nc" id="L703">                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L704">                            .addComponent(lblNombreCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L705">                    .addGroup(pnlMusicaLayout.createSequentialGroup()</span>
+<span class="nc" id="L706">                        .addGap(57, 57, 57)</span>
+<span class="nc" id="L707">                        .addGroup(pnlMusicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L708">                            .addGroup(pnlMusicaLayout.createSequentialGroup()</span>
+<span class="nc" id="L709">                                .addComponent(btnClasica, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L710">                                .addGap(18, 18, 18)</span>
+<span class="nc" id="L711">                                .addComponent(btnPop, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L712">                                .addGap(18, 18, 18)</span>
+<span class="nc" id="L713">                                .addComponent(btnRock, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L714">                            .addGroup(pnlMusicaLayout.createSequentialGroup()</span>
+<span class="nc" id="L715">                                .addComponent(btnElectronica, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L716">                                .addGap(18, 18, 18)</span>
+<span class="nc" id="L717">                                .addComponent(btnReggae, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L718">                                .addGap(18, 18, 18)</span>
+<span class="nc" id="L719">                                .addComponent(btnAlternativa, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))</span>
+<span class="nc" id="L720">                .addContainerGap(303, Short.MAX_VALUE))</span>
+        );
+<span class="nc" id="L722">        pnlMusicaLayout.setVerticalGroup(</span>
+<span class="nc" id="L723">            pnlMusicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L724">            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMusicaLayout.createSequentialGroup()</span>
+<span class="nc" id="L725">                .addContainerGap()</span>
+<span class="nc" id="L726">                .addComponent(lblSeleccioneGenero)</span>
+<span class="nc" id="L727">                .addGap(33, 33, 33)</span>
+<span class="nc" id="L728">                .addGroup(pnlMusicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L729">                    .addComponent(btnClasica, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L730">                    .addComponent(btnPop, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L731">                    .addComponent(btnRock, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L732">                .addGap(18, 18, 18)</span>
+<span class="nc" id="L733">                .addGroup(pnlMusicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L734">                    .addComponent(btnElectronica, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L735">                    .addComponent(btnReggae, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L736">                    .addComponent(btnAlternativa, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L737">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)</span>
+<span class="nc" id="L738">                .addGroup(pnlMusicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L739">                    .addComponent(lblGeneroSeleccionado)</span>
+<span class="nc" id="L740">                    .addComponent(lblEstadoReproduccion))</span>
+<span class="nc" id="L741">                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L742">                .addComponent(lblNombreCancion)</span>
+<span class="nc" id="L743">                .addGap(33, 33, 33)</span>
+<span class="nc" id="L744">                .addGroup(pnlMusicaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)</span>
+<span class="nc" id="L745">                    .addComponent(btnReproducirCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L746">                    .addComponent(btnDetenerCancion, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L747">                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L748">                .addGap(132, 132, 132))</span>
+        );
+
+<span class="nc" id="L751">        pnlJuegos.setAlignmentX(0.0F);</span>
+<span class="nc" id="L752">        pnlJuegos.setAlignmentY(0.0F);</span>
+<span class="nc" id="L753">        pnlJuegos.setMaximumSize(new java.awt.Dimension(928, 576));</span>
+<span class="nc" id="L754">        pnlJuegos.setMinimumSize(new java.awt.Dimension(928, 576));</span>
+
+<span class="nc" id="L756">        javax.swing.GroupLayout pnlJuegosLayout = new javax.swing.GroupLayout(pnlJuegos);</span>
+<span class="nc" id="L757">        pnlJuegos.setLayout(pnlJuegosLayout);</span>
+<span class="nc" id="L758">        pnlJuegosLayout.setHorizontalGroup(</span>
+<span class="nc" id="L759">            pnlJuegosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L760">            .addGap(0, 928, Short.MAX_VALUE)</span>
+        );
+<span class="nc" id="L762">        pnlJuegosLayout.setVerticalGroup(</span>
+<span class="nc" id="L763">            pnlJuegosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L764">            .addGap(0, 576, Short.MAX_VALUE)</span>
+        );
+
+<span class="nc" id="L767">        javax.swing.GroupLayout pnlVentanaLayout = new javax.swing.GroupLayout(pnlVentana);</span>
+<span class="nc" id="L768">        pnlVentana.setLayout(pnlVentanaLayout);</span>
+<span class="nc" id="L769">        pnlVentanaLayout.setHorizontalGroup(</span>
+<span class="nc" id="L770">            pnlVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L771">            .addGroup(pnlVentanaLayout.createSequentialGroup()</span>
+<span class="nc" id="L772">                .addComponent(pnlBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L773">                .addGap(0, 0, 0)</span>
+<span class="nc" id="L774">                .addComponent(pnlVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L775">                .addGap(0, 0, 0))</span>
+<span class="nc" id="L776">            .addGroup(pnlVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L777">                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVentanaLayout.createSequentialGroup()</span>
+<span class="nc" id="L778">                    .addGap(96, 96, 96)</span>
+<span class="nc" id="L779">                    .addComponent(pnlMapas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+<span class="nc" id="L780">            .addGroup(pnlVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L781">                .addGroup(pnlVentanaLayout.createSequentialGroup()</span>
+<span class="nc" id="L782">                    .addComponent(pnlIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L783">                    .addGap(0, 0, 0)))</span>
+<span class="nc" id="L784">            .addGroup(pnlVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L785">                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVentanaLayout.createSequentialGroup()</span>
+<span class="nc" id="L786">                    .addGap(96, 96, 96)</span>
+<span class="nc" id="L787">                    .addComponent(pnlJuegos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L788">                .addComponent(pnlApagado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L789">            .addGroup(pnlVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L790">                .addGroup(pnlVentanaLayout.createSequentialGroup()</span>
+<span class="nc" id="L791">                    .addGap(96, 96, 96)</span>
+<span class="nc" id="L792">                    .addComponent(pnlVideo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L793">                    .addGap(0, 0, 0)))</span>
+<span class="nc" id="L794">            .addGroup(pnlVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L795">                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlVentanaLayout.createSequentialGroup()</span>
+<span class="nc" id="L796">                    .addGap(96, 96, 96)</span>
+<span class="nc" id="L797">                    .addComponent(pnlMusica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))</span>
+        );
+<span class="nc" id="L799">        pnlVentanaLayout.setVerticalGroup(</span>
+<span class="nc" id="L800">            pnlVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L801">            .addGroup(pnlVentanaLayout.createSequentialGroup()</span>
+<span class="nc" id="L802">                .addGroup(pnlVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L803">                    .addComponent(pnlBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L804">                    .addComponent(pnlVuelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L805">                .addGap(0, 0, 0))</span>
+<span class="nc" id="L806">            .addGroup(pnlVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L807">                .addComponent(pnlMapas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))</span>
+<span class="nc" id="L808">            .addGroup(pnlVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L809">                .addGroup(pnlVentanaLayout.createSequentialGroup()</span>
+<span class="nc" id="L810">                    .addComponent(pnlIdioma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L811">                    .addGap(0, 0, 0)))</span>
+<span class="nc" id="L812">            .addGroup(pnlVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L813">                .addGroup(pnlVentanaLayout.createSequentialGroup()</span>
+<span class="nc" id="L814">                    .addGap(0, 0, 0)</span>
+<span class="nc" id="L815">                    .addComponent(pnlJuegos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L816">                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)</span>
+<span class="nc" id="L817">                    .addComponent(pnlApagado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L818">                    .addContainerGap()))</span>
+<span class="nc" id="L819">            .addGroup(pnlVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L820">                .addGroup(pnlVentanaLayout.createSequentialGroup()</span>
+<span class="nc" id="L821">                    .addGap(0, 0, 0)</span>
+<span class="nc" id="L822">                    .addComponent(pnlVideo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L823">                    .addGap(0, 0, 0)))</span>
+<span class="nc" id="L824">            .addGroup(pnlVentanaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)</span>
+<span class="nc" id="L825">                .addGroup(pnlVentanaLayout.createSequentialGroup()</span>
+<span class="nc" id="L826">                    .addComponent(pnlMusica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)</span>
+<span class="nc" id="L827">                    .addGap(0, 0, 0)))</span>
+        );
+
+<span class="nc" id="L830">        pnlMapas.getAccessibleContext().setAccessibleName(&quot;&quot;);</span>
+
+<span class="nc" id="L832">        getContentPane().add(pnlVentana);</span>
+<span class="nc" id="L833">        pnlVentana.setBounds(0, 0, 1024, 576);</span>
+
+<span class="nc" id="L835">        pack();</span>
+<span class="nc" id="L836">    }// &lt;/editor-fold&gt;//GEN-END:initComponents</span>
+
+    private int getPanelActual() {
+<span class="nc" id="L839">        return panelActual;</span>
+    }
+
+    private void setPanelActual(int panelActual) {
+<span class="nc" id="L843">        this.panelActual = panelActual;</span>
+<span class="nc" id="L844">    }</span>
+
+    private void btnVueloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVueloActionPerformed
+<span class="nc" id="L847">        this.setPanelActual(0);</span>
+<span class="nc" id="L848">        this.deseleccionarBotones();</span>
+<span class="nc" id="L849">        this.btnVuelo.setBackground(new Color(102, 204, 255));</span>
+<span class="nc" id="L850">        this.ocultarPaneles();</span>
+<span class="nc" id="L851">        this.pnlVuelo.setVisible(true);</span>
+<span class="nc" id="L852">    }//GEN-LAST:event_btnVueloActionPerformed</span>
+
+    private void btnMapasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMapasActionPerformed
+<span class="nc" id="L855">        this.setPanelActual(1);</span>
+<span class="nc" id="L856">        this.deseleccionarBotones();</span>
+<span class="nc" id="L857">        this.btnMapas.setBackground(new Color(102, 204, 255));</span>
+<span class="nc" id="L858">        this.ocultarPaneles();</span>
+<span class="nc" id="L859">        this.pnlMapas.setVisible(true);</span>
+<span class="nc" id="L860">    }//GEN-LAST:event_btnMapasActionPerformed</span>
+
+    private void btnApagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApagarActionPerformed
+<span class="nc" id="L863">        this.pnlBotones.setVisible(false);</span>
+<span class="nc" id="L864">        ocultarPaneles();</span>
+<span class="nc" id="L865">        this.pnlApagado.setVisible(true);</span>
+<span class="nc" id="L866">    }//GEN-LAST:event_btnApagarActionPerformed</span>
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+<span class="nc" id="L869">        this.pnlApagado.setVisible(false);</span>
+<span class="nc bnc" id="L870" title="All 6 branches missed.">        switch (this.getPanelActual()) {</span>
+            case 0:
+<span class="nc" id="L872">                this.pnlVuelo.setVisible(true);</span>
+<span class="nc" id="L873">                break;</span>
+            case 1:
+<span class="nc" id="L875">                this.pnlMapas.setVisible(true);</span>
+<span class="nc" id="L876">                break;</span>
+            case 2:
+<span class="nc" id="L878">                this.pnlVideo.setVisible(true);</span>
+<span class="nc" id="L879">                break;</span>
+            case 3:
+<span class="nc" id="L881">                this.pnlMusica.setVisible(true);</span>
+<span class="nc" id="L882">                break;</span>
+            case 4:
+<span class="nc" id="L884">                this.pnlJuegos.setVisible(true);</span>
+<span class="nc" id="L885">                break;</span>
+            default:
+                break;
+        }
+<span class="nc" id="L889">        this.pnlBotones.setVisible(true);</span>
+<span class="nc" id="L890">    }//GEN-LAST:event_jButton1ActionPerformed</span>
+
+    private void btnContinuarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnContinuarActionPerformed
+        try {
+<span class="nc" id="L894">            ObtenerIdiomaSeleccionadoYActualizarPalabras();</span>
+<span class="nc" id="L895">        } catch (IllegalStateException e) {</span>
+
+<span class="nc" id="L897">        }</span>
+<span class="nc" id="L898">        this.pnlIdioma.setVisible(false);</span>
+<span class="nc" id="L899">        this.pnlApagado.setVisible(false);</span>
+<span class="nc" id="L900">        this.pnlBotones.setVisible(true);</span>
+<span class="nc" id="L901">        this.pnlJuegos.setVisible(false);</span>
+<span class="nc" id="L902">        this.pnlMapas.setVisible(false);</span>
+<span class="nc" id="L903">        this.pnlVuelo.setVisible(true);</span>
+<span class="nc" id="L904">        this.pnlVideo.setVisible(false);</span>
+<span class="nc" id="L905">        this.pnlMusica.setVisible(false);</span>
+<span class="nc" id="L906">    }//GEN-LAST:event_btnContinuarActionPerformed</span>
+
+    private void btnMusicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMusicaActionPerformed
+<span class="nc" id="L909">        this.setPanelActual(3);</span>
+<span class="nc" id="L910">        this.ocultarPaneles();</span>
+<span class="nc" id="L911">        this.deseleccionarBotones();</span>
+<span class="nc" id="L912">        this.btnMusica.setBackground(new Color(102, 204, 255));</span>
+<span class="nc" id="L913">        this.pnlMusica.setVisible(true);</span>
+<span class="nc" id="L914">    }//GEN-LAST:event_btnMusicaActionPerformed</span>
+
+    private void btnReproducirCancionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReproducirCancionActionPerformed
+<span class="nc bnc" id="L917" title="All 2 branches missed.">        if (this.reproductorMusica.isDetenido() == true) {</span>
+<span class="nc" id="L918">            this.lblEstadoReproduccion.setText(volandoAlto.getIdiomaActual().getPalabras()[22]);</span>
+<span class="nc" id="L919">            reproductorMusica.play();</span>
+        }
+<span class="nc" id="L921">        actualizarNombreCancion();</span>
+<span class="nc" id="L922">    }//GEN-LAST:event_btnReproducirCancionActionPerformed</span>
+
+    private void btnDetenerCancionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetenerCancionActionPerformed
+<span class="nc" id="L925">        this.lblEstadoReproduccion.setText(&quot;Detenido&quot;);</span>
+<span class="nc" id="L926">        reproductorMusica.parar();</span>
+<span class="nc" id="L927">    }//GEN-LAST:event_btnDetenerCancionActionPerformed</span>
+
+    private void btnClasicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClasicaActionPerformed
+<span class="nc" id="L930">        this.setTextoGenero(volandoAlto.getIdiomaActual().getPalabras()[15]);</span>
+<span class="nc" id="L931">        reproductorMusica.parar();</span>
+<span class="nc" id="L932">        this.lblEstadoReproduccion.setText(volandoAlto.getIdiomaActual().getPalabras()[21]);</span>
+<span class="nc" id="L933">        this.reproductorMusica.setListaReproduccion(&quot;clasica&quot;);</span>
+<span class="nc" id="L934">        this.actualizarNombreCancion();</span>
+<span class="nc" id="L935">    }//GEN-LAST:event_btnClasicaActionPerformed</span>
+
+    private void btnRockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRockActionPerformed
+<span class="nc" id="L938">        this.setTextoGenero(volandoAlto.getIdiomaActual().getPalabras()[17]);</span>
+<span class="nc" id="L939">        reproductorMusica.parar();</span>
+<span class="nc" id="L940">        this.lblEstadoReproduccion.setText(volandoAlto.getIdiomaActual().getPalabras()[21]);</span>
+<span class="nc" id="L941">        this.reproductorMusica.setListaReproduccion(&quot;rock&quot;);</span>
+<span class="nc" id="L942">        this.actualizarNombreCancion();</span>
+<span class="nc" id="L943">    }//GEN-LAST:event_btnRockActionPerformed</span>
+
+    private void btnPopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPopActionPerformed
+<span class="nc" id="L946">        this.setTextoGenero(volandoAlto.getIdiomaActual().getPalabras()[16]);</span>
+<span class="nc" id="L947">        this.lblEstadoReproduccion.setText(&quot;Detenido&quot;);</span>
+<span class="nc" id="L948">        reproductorMusica.parar();</span>
+<span class="nc" id="L949">        this.lblEstadoReproduccion.setText(volandoAlto.getIdiomaActual().getPalabras()[21]);</span>
+<span class="nc" id="L950">        this.reproductorMusica.setListaReproduccion(&quot;pop&quot;);</span>
+<span class="nc" id="L951">        this.actualizarNombreCancion();</span>
+<span class="nc" id="L952">    }//GEN-LAST:event_btnPopActionPerformed</span>
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+<span class="nc" id="L955">        this.reproductorMusica.siguienteCancion();</span>
+<span class="nc bnc" id="L956" title="All 2 branches missed.">        if (this.reproductorMusica.isDetenido()) {</span>
+<span class="nc" id="L957">            this.lblEstadoReproduccion.setText(volandoAlto.getIdiomaActual().getPalabras()[21]);</span>
+        }
+<span class="nc" id="L959">    }//GEN-LAST:event_jButton5ActionPerformed</span>
+
+    private void btnVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVideoActionPerformed
+<span class="nc" id="L962">        this.setPanelActual(2);</span>
+<span class="nc" id="L963">        this.deseleccionarBotones();</span>
+<span class="nc" id="L964">        this.btnVideo.setBackground(new Color(102, 204, 255));</span>
+<span class="nc" id="L965">        this.ocultarPaneles();</span>
+<span class="nc" id="L966">        this.pnlVideo.setVisible(true);</span>
+<span class="nc" id="L967">    }//GEN-LAST:event_btnVideoActionPerformed</span>
+
+    private void btnJuegosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJuegosActionPerformed
+<span class="nc" id="L970">        this.setPanelActual(4);</span>
+<span class="nc" id="L971">        this.deseleccionarBotones();</span>
+<span class="nc" id="L972">        this.btnJuegos.setBackground(new Color(102, 204, 255));</span>
+<span class="nc" id="L973">        this.ocultarPaneles();</span>
+<span class="nc" id="L974">        this.pnlJuegos.setVisible(true);</span>
+<span class="nc" id="L975">    }//GEN-LAST:event_btnJuegosActionPerformed</span>
+
+    private void btnElectronicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnElectronicaActionPerformed
+<span class="nc" id="L978">        this.setTextoGenero(volandoAlto.getIdiomaActual().getPalabras()[18]);</span>
+<span class="nc" id="L979">        reproductorMusica.parar();</span>
+<span class="nc" id="L980">        this.lblEstadoReproduccion.setText(volandoAlto.getIdiomaActual().getPalabras()[21]);</span>
+<span class="nc" id="L981">        this.reproductorMusica.setListaReproduccion(&quot;electronica&quot;);</span>
+<span class="nc" id="L982">        this.actualizarNombreCancion();</span>
+<span class="nc" id="L983">    }//GEN-LAST:event_btnElectronicaActionPerformed</span>
+
+    private void btnReggaeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReggaeActionPerformed
+<span class="nc" id="L986">        this.setTextoGenero(volandoAlto.getIdiomaActual().getPalabras()[19]);</span>
+<span class="nc" id="L987">        reproductorMusica.parar();</span>
+<span class="nc" id="L988">        this.lblEstadoReproduccion.setText(volandoAlto.getIdiomaActual().getPalabras()[21]);</span>
+<span class="nc" id="L989">        this.reproductorMusica.setListaReproduccion(&quot;reggae&quot;);</span>
+<span class="nc" id="L990">        this.actualizarNombreCancion();</span>
+<span class="nc" id="L991">    }//GEN-LAST:event_btnReggaeActionPerformed</span>
+
+    private void btnAlternativaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlternativaActionPerformed
+<span class="nc" id="L994">        this.setTextoGenero(volandoAlto.getIdiomaActual().getPalabras()[20]);</span>
+<span class="nc" id="L995">        reproductorMusica.parar();</span>
+<span class="nc" id="L996">        this.lblEstadoReproduccion.setText(volandoAlto.getIdiomaActual().getPalabras()[21]);</span>
+<span class="nc" id="L997">        this.reproductorMusica.setListaReproduccion(&quot;alternativa&quot;);</span>
+<span class="nc" id="L998">        this.actualizarNombreCancion();</span>
+<span class="nc" id="L999">    }//GEN-LAST:event_btnAlternativaActionPerformed</span>
+
+    private void CambiarIdiomaSeleccionado(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CambiarIdiomaSeleccionado
+<span class="nc" id="L1002">        ObtenerIdiomaSeleccionadoYActualizarPalabras();</span>
+
+<span class="nc" id="L1004">    }//GEN-LAST:event_CambiarIdiomaSeleccionado</span>
+
+    private void btnAzafataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAzafataActionPerformed
+<span class="nc" id="L1007">        String motivo = this.jComboBoxMotivosAzafata.getSelectedItem().toString();</span>
+<span class="nc bnc" id="L1008" title="All 2 branches missed.">        if (motivo != null) {</span>
+<span class="nc" id="L1009">            JOptionPane.showMessageDialog(null, &quot;Se realizó un llamado a la azafata: &quot;</span>
+                    + motivo, &quot;Llamado&quot;, JOptionPane.INFORMATION_MESSAGE);
+        }
+<span class="nc" id="L1012">    }//GEN-LAST:event_btnAzafataActionPerformed</span>
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+<span class="nc bnc" id="L1015" title="All 2 branches missed.">        if (volandoAlto.ExistenIdiomasRegistrados()) {</span>
+<span class="nc" id="L1016">            this.pnlIdioma.setVisible(true);</span>
+<span class="nc" id="L1017">            this.pnlVuelo.setVisible(false);</span>
+<span class="nc" id="L1018">            this.pnlBotones.setVisible(false);</span>
+        }
+<span class="nc" id="L1020">    }//GEN-LAST:event_jButton3ActionPerformed</span>
+
+    private void ObtenerIdiomaSeleccionadoYActualizarPalabras() {
+<span class="nc" id="L1023">        int indexSelecionado = this.jComboBoxIdiomas.getSelectedIndex();</span>
+<span class="nc bnc" id="L1024" title="All 2 branches missed.">        if (indexSelecionado &gt; -1) {</span>
+<span class="nc" id="L1025">            Idioma idiomaSeleccionado = volandoAlto.getIdiomasRegistrados().get(indexSelecionado);</span>
+<span class="nc" id="L1026">            volandoAlto.setIdiomaActual(idiomaSeleccionado);</span>
+<span class="nc" id="L1027">            cargarPalabras();</span>
+<span class="nc" id="L1028">        } else {</span>
+<span class="nc" id="L1029">            throw new IllegalStateException();</span>
+        }
+<span class="nc" id="L1031">    }</span>
+
+    public void setTextoGenero(String genero) {
+<span class="nc" id="L1034">        this.lblGeneroSeleccionado.setText(genero + &quot;:&quot;);</span>
+<span class="nc" id="L1035">    }</span>
+
+    public void ocultarPaneles() {
+<span class="nc" id="L1038">        this.pnlVuelo.setVisible(false);</span>
+<span class="nc" id="L1039">        this.pnlApagado.setVisible(false);</span>
+<span class="nc" id="L1040">        this.pnlJuegos.setVisible(false);</span>
+<span class="nc" id="L1041">        this.pnlMapas.setVisible(false);</span>
+<span class="nc" id="L1042">        this.pnlVideo.setVisible(false);</span>
+<span class="nc" id="L1043">        this.pnlMusica.setVisible(false);</span>
+<span class="nc" id="L1044">    }</span>
+
+    public void cargarPalabras() {
+<span class="nc" id="L1047">        Idioma idiomaActual = volandoAlto.getIdiomaActual();</span>
+<span class="nc" id="L1048">        String[] palabras = idiomaActual.getPalabras();</span>
+<span class="nc" id="L1049">        Font fuente = idiomaActual.getFuente();</span>
+
+<span class="nc" id="L1051">        this.lblBienvenido.setText(palabras[0]);</span>
+<span class="nc" id="L1052">        this.lblBienvenido.setFont(fuente.deriveFont(Font.PLAIN, 75));</span>
+
+<span class="nc" id="L1054">        this.lblContinuar.setText(palabras[1]);</span>
+<span class="nc" id="L1055">        this.lblContinuar.setFont(fuente.deriveFont(Font.PLAIN, 20));</span>
+
+<span class="nc" id="L1057">        this.lblInfoVuelo.setText(palabras[2]);</span>
+<span class="nc" id="L1058">        this.lblInfoVuelo.setFont(fuente.deriveFont(Font.BOLD, 24));</span>
+
+<span class="nc" id="L1060">        this.lblEtiquetaCapitan.setText(palabras[3] + &quot;:&quot;);</span>
+<span class="nc" id="L1061">        this.lblEtiquetaCapitan.setFont(fuente.deriveFont(Font.PLAIN, 18));</span>
+
+<span class="nc" id="L1063">        this.lblEtiquetaVuelo.setText(palabras[4] + &quot;:&quot;);</span>
+<span class="nc" id="L1064">        this.lblEtiquetaVuelo.setFont(fuente.deriveFont(Font.PLAIN, 18));</span>
+
+<span class="nc" id="L1066">        this.lblEtiquetaOrigen.setText(palabras[5] + &quot;:&quot;);</span>
+<span class="nc" id="L1067">        this.lblEtiquetaOrigen.setFont(fuente.deriveFont(Font.PLAIN, 18));</span>
+
+<span class="nc" id="L1069">        this.lblEtiquetaHoraSalida.setText(palabras[6] + &quot;:&quot;);</span>
+<span class="nc" id="L1070">        this.lblEtiquetaHoraSalida.setFont(fuente.deriveFont(Font.PLAIN, 18));</span>
+
+<span class="nc" id="L1072">        this.lblEstadoLlegada.setText(palabras[7] + &quot;:&quot;);</span>
+<span class="nc" id="L1073">        this.lblEstadoLlegada.setFont(fuente.deriveFont(Font.PLAIN, 18));</span>
+
+<span class="nc" id="L1075">        this.lblEtiquetaDestino.setText(palabras[8] + &quot;:&quot;);</span>
+<span class="nc" id="L1076">        this.lblEtiquetaDestino.setFont(fuente.deriveFont(Font.PLAIN, 18));</span>
+
+<span class="nc" id="L1078">        this.lblHoraEnDestino.setText(palabras[9]);</span>
+<span class="nc" id="L1079">        this.lblHoraEnDestino.setFont(fuente.deriveFont(Font.PLAIN, 24));</span>
+
+<span class="nc" id="L1081">        this.lblClimaEnDestino.setText(palabras[10]);</span>
+<span class="nc" id="L1082">        this.lblClimaEnDestino.setFont(fuente.deriveFont(Font.PLAIN, 24));</span>
+
+<span class="nc" id="L1084">        this.lblDestino.setFont(fuente.deriveFont(Font.BOLD, 36));</span>
+
+<span class="nc" id="L1086">        this.lblEtiquetaDestino.setFont(fuente.deriveFont(Font.PLAIN, 36));</span>
+
+<span class="nc" id="L1088">        this.lblHoraActualEnDestino.setFont(fuente.deriveFont(Font.PLAIN, 24));</span>
+
+<span class="nc" id="L1090">        this.lblClimaEnDestino.setFont(fuente.deriveFont(Font.PLAIN, 24));</span>
+
+<span class="nc" id="L1092">        this.lblBienvenidoBordo.setText(palabras[11]);</span>
+<span class="nc" id="L1093">        this.lblBienvenidoBordo.setFont(fuente.deriveFont(Font.PLAIN, 90));</span>
+
+<span class="nc" id="L1095">        this.lblSeleccioneGenero.setText(palabras[14]);</span>
+<span class="nc" id="L1096">        this.lblSeleccioneGenero.setFont(fuente.deriveFont(Font.BOLD, 36));</span>
+
+<span class="nc" id="L1098">        this.btnClasica.setText(palabras[15]);</span>
+<span class="nc" id="L1099">        this.btnClasica.setFont(fuente.deriveFont(Font.PLAIN, 14));</span>
+
+<span class="nc" id="L1101">        this.btnPop.setText(palabras[16]);</span>
+<span class="nc" id="L1102">        this.btnPop.setFont(fuente.deriveFont(Font.PLAIN, 14));</span>
+
+<span class="nc" id="L1104">        this.btnRock.setText(palabras[17]);</span>
+<span class="nc" id="L1105">        this.btnRock.setFont(fuente.deriveFont(Font.PLAIN, 14));</span>
+
+<span class="nc" id="L1107">        this.btnElectronica.setText(palabras[18]);</span>
+<span class="nc" id="L1108">        this.btnElectronica.setFont(fuente.deriveFont(Font.PLAIN, 14));</span>
+
+<span class="nc" id="L1110">        this.btnReggae.setText(palabras[19]);</span>
+<span class="nc" id="L1111">        this.btnReggae.setFont(fuente.deriveFont(Font.PLAIN, 14));</span>
+
+<span class="nc" id="L1113">        this.btnAlternativa.setText(palabras[20]);</span>
+<span class="nc" id="L1114">        this.btnAlternativa.setFont(fuente.deriveFont(Font.PLAIN, 14));</span>
+
+<span class="nc" id="L1116">        this.lblGeneroSeleccionado.setFont(fuente.deriveFont(Font.BOLD, 24));</span>
+
+<span class="nc" id="L1118">        this.lblNombreCancion.setFont(fuente.deriveFont(Font.BOLD, 36));</span>
+
+<span class="nc" id="L1120">        this.lblEstadoReproduccion.setText(palabras[21]);</span>
+<span class="nc" id="L1121">        this.lblEstadoReproduccion.setFont(fuente.deriveFont(Font.BOLD, 24));</span>
+<span class="nc" id="L1122">    }</span>
+
+    public void actualizarNombreCancion() {
+<span class="nc" id="L1125">        this.lblNombreCancion.setText(this.reproductorMusica.getNombreCancionActual());</span>
+<span class="nc" id="L1126">    }</span>
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlternativa;
+    private javax.swing.JButton btnApagar;
+    private javax.swing.JButton btnAzafata;
+    private javax.swing.JButton btnClasica;
+    private javax.swing.JButton btnContinuar;
+    private javax.swing.JButton btnDetenerCancion;
+    private javax.swing.JButton btnElectronica;
+    private javax.swing.JButton btnJuegos;
+    private javax.swing.JButton btnMapas;
+    private javax.swing.JButton btnMusica;
+    private javax.swing.JButton btnPop;
+    private javax.swing.JButton btnReggae;
+    private javax.swing.JButton btnReproducirCancion;
+    private javax.swing.JButton btnRock;
+    private javax.swing.JButton btnVideo;
+    private javax.swing.JButton btnVuelo;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JComboBox&lt;Object&gt; jComboBoxIdiomas;
+    private javax.swing.JComboBox jComboBoxMotivosAzafata;
+    private javax.swing.JLabel lblBienvenido;
+    private javax.swing.JLabel lblBienvenidoBordo;
+    private javax.swing.JLabel lblClimaEnDestino;
+    private javax.swing.JLabel lblCodigoVuelo;
+    private javax.swing.JLabel lblContinuar;
+    private javax.swing.JLabel lblDestino;
+    private javax.swing.JLabel lblEstadoLlegada;
+    private javax.swing.JLabel lblEstadoReproduccion;
+    private javax.swing.JLabel lblEtiquetaCapitan;
+    private javax.swing.JLabel lblEtiquetaDestino;
+    private javax.swing.JLabel lblEtiquetaHoraSalida;
+    private javax.swing.JLabel lblEtiquetaOrigen;
+    private javax.swing.JLabel lblEtiquetaVuelo;
+    private javax.swing.JLabel lblGeneroSeleccionado;
+    private javax.swing.JLabel lblHoraActualEnDestino;
+    private javax.swing.JLabel lblHoraEnDestino;
+    private javax.swing.JLabel lblHoraLlegada;
+    private javax.swing.JLabel lblHoraSalida;
+    private javax.swing.JLabel lblInfoVuelo;
+    private javax.swing.JLabel lblNombreCancion;
+    private javax.swing.JLabel lblNombreCapitan;
+    private javax.swing.JLabel lblOrigen;
+    private javax.swing.JLabel lblSeleccioneGenero;
+    private javax.swing.JPanel pnlApagado;
+    private javax.swing.JPanel pnlBotones;
+    private javax.swing.JPanel pnlIdioma;
+    private javax.swing.JPanel pnlJuegos;
+    private javax.swing.JPanel pnlMapas;
+    private javax.swing.JPanel pnlMusica;
+    private javax.swing.JPanel pnlVentana;
+    private javax.swing.JPanel pnlVideo;
+    private javax.swing.JPanel pnlVuelo;
+    // End of variables declaration//GEN-END:variables
+
+    public void actualizarCambiosDeVuelo() {
+
+<span class="nc" id="L1186">        Vuelo vueloActual = volandoAlto.getVueloActual();</span>
+
+<span class="nc" id="L1188">        this.lblNombreCapitan.setText(vueloActual.getCapitan());</span>
+<span class="nc" id="L1189">        this.lblCodigoVuelo.setText(vueloActual.getCodigoDeVuelo());</span>
+<span class="nc" id="L1190">        this.lblOrigen.setText(vueloActual.getCiudadOrigen().toString());</span>
+<span class="nc" id="L1191">        this.lblDestino.setText(vueloActual.getCiudadDestino().toString());</span>
+
+        //this.lblHoraSalida.setText(horaSalida + &quot;:&quot; + minutoSalida);
+<span class="nc" id="L1194">        Calendar horaSalida = vueloActual.getHoraSalida();</span>
+<span class="nc" id="L1195">        this.lblHoraSalida.setText(zero(horaSalida.get(Calendar.HOUR_OF_DAY))</span>
+<span class="nc" id="L1196">                + &quot;:&quot; + zero(horaSalida.get(Calendar.MINUTE)));</span>
+<span class="nc bnc" id="L1197" title="All 2 branches missed.">        if (vueloActual.isDemorado()) {</span>
+<span class="nc" id="L1198">            String texto = volandoAlto.getIdiomaActual().getPalabras()[13];</span>
+<span class="nc" id="L1199">            this.lblEstadoLlegada.setText(texto);</span>
+<span class="nc" id="L1200">            this.lblHoraLlegada.setText(&quot;&quot;);</span>
+<span class="nc" id="L1201">        } else {</span>
+<span class="nc" id="L1202">            String texto = volandoAlto.getIdiomaActual().getPalabras()[7] + &quot;:&quot;;</span>
+<span class="nc" id="L1203">            this.lblEstadoLlegada.setText(texto);</span>
+<span class="nc" id="L1204">            Calendar horaLlegada = vueloActual.getHoraLlegada();</span>
+<span class="nc" id="L1205">            this.lblHoraLlegada.setText(zero(horaLlegada.get(Calendar.HOUR_OF_DAY))</span>
+<span class="nc" id="L1206">                    + &quot;:&quot; + zero(horaLlegada.get(Calendar.MINUTE)));</span>
+        }
+<span class="nc" id="L1208">    }</span>
+
+    public static String zero(int num) {
+<span class="nc bnc" id="L1211" title="All 2 branches missed.">        return (num &lt; 10) ? (&quot;0&quot; + num) : (&quot;&quot; + num);</span>
+    }
+
+    public void actualizarHora(String hora) {
+<span class="nc" id="L1215">        this.lblHoraActualEnDestino.setText(hora);</span>
+<span class="nc" id="L1216">    }</span>
+
+    private Object[] ObtenerImageIconsDeIdiomas() {
+<span class="nc" id="L1219">        ArrayList&lt;Object&gt; retorno = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L1220" title="All 2 branches missed.">        for (Idioma idiomaAux : volandoAlto.getIdiomasRegistrados()) {</span>
+            try {
+<span class="nc" id="L1222">                ImageIcon imageIcon = new ImageIcon(getClass().getResource(&quot;/volandoAlto/interfaz/&quot;</span>
+<span class="nc" id="L1223">                        + idiomaAux.getNombre() + &quot;.png&quot;));</span>
+<span class="nc" id="L1224">                Image unaImagen = imageIcon.getImage();</span>
+<span class="nc" id="L1225">                Image imagenEscalada = unaImagen.getScaledInstance(225, 185, java.awt.Image.SCALE_SMOOTH);</span>
+<span class="nc" id="L1226">                imageIcon = new ImageIcon(imagenEscalada);</span>
+<span class="nc" id="L1227">                retorno.add(imageIcon);</span>
+<span class="nc" id="L1228">            } catch (NullPointerException e) {</span>
+<span class="nc" id="L1229">                Logger.getLogger(VentanaUsuario.class.getName()).log(Level.SEVERE, null, e);</span>
+<span class="nc" id="L1230">            }</span>
+<span class="nc" id="L1231">        }</span>
+<span class="nc" id="L1232">        return retorno.toArray();</span>
+    }
+
+    public void cargarComboBoxMotivosAzafata() {
+<span class="nc" id="L1236">        Object[] arrayMotivos = volandoAlto.getMotivosAzafata().toArray();</span>
+<span class="nc" id="L1237">        this.jComboBoxMotivosAzafata.setModel(new DefaultComboBoxModel&lt;&gt;(arrayMotivos));</span>
+<span class="nc" id="L1238">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

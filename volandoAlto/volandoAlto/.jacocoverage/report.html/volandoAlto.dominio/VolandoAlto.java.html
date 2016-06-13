@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>VolandoAlto.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;volandoAlto&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">volandoAlto.dominio</a> &gt; <span class="el_source">VolandoAlto.java</span></div><h1>VolandoAlto.java</h1><pre class="source lang-java linenums">package volandoAlto.dominio;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import volandoAlto.persistencia.ArchivoLectura;
+
+public class VolandoAlto implements Serializable {
+
+    private transient Idioma idiomaActual;
+    private final ArrayList&lt;Ciudad&gt; ciudades;
+    private Vuelo vueloActual;
+    private transient ArrayList&lt;Idioma&gt; idiomasRegistrados;
+    private final ArrayList&lt;String&gt; motivosAzafata;
+
+    public ArrayList&lt;Ciudad&gt; getCiudades() {
+<span class="nc" id="L20">        return ciudades;</span>
+    }
+
+    public Vuelo getVueloActual() {
+<span class="nc" id="L24">        return vueloActual;</span>
+    }
+
+    public void setVueloActual(Vuelo vueloActual) {
+<span class="nc" id="L28">        this.vueloActual = vueloActual;</span>
+<span class="nc" id="L29">    }</span>
+
+<span class="nc" id="L31">    public VolandoAlto() {</span>
+<span class="nc" id="L32">        this.ciudades = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L33">        this.idiomasRegistrados = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L34">        this.motivosAzafata = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L35">    }</span>
+
+    public void EliminarCiudad(Ciudad ciudadSeleccionada) {
+<span class="nc bnc" id="L38" title="All 4 branches missed.">        if (vueloActual != null &amp;&amp; (ciudadSeleccionada.equals(vueloActual.getCiudadOrigen())</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">                || ciudadSeleccionada.equals(vueloActual.getCiudadDestino()))) {</span>
+<span class="nc" id="L40">            throw new IllegalStateException(&quot;La ciudad seleccionada es uno de los &quot;</span>
+                    + &quot;extremos del vuelo actual&quot;);
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        } else if (ciudades.size() &lt;= 2) {</span>
+<span class="nc" id="L43">            throw new IllegalStateException(&quot;No es posible eliminar a la ciudad:&quot;</span>
+                    + &quot; es necesario al menos mantener dos registradas.&quot;);
+        } else {
+<span class="nc" id="L46">            this.ciudades.remove(ciudadSeleccionada);</span>
+        }
+<span class="nc" id="L48">    }</span>
+
+    public void RegistrarCiudad(String nombre, String gmtZonaHoraria) throws IllegalStateException {
+<span class="nc" id="L51">        ZoneOffset zonaHoraria = ZoneOffset.of(gmtZonaHoraria.replace(&quot;GMT&quot;, &quot;&quot;));</span>
+<span class="nc" id="L52">        Ciudad ciudadARegistrar = new Ciudad(nombre, zonaHoraria);</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if (ciudadRegistrada(ciudadARegistrar)) {</span>
+<span class="nc" id="L54">            throw new IllegalStateException(&quot;Ciudad ya registrada&quot;);</span>
+        }
+<span class="nc" id="L56">        this.ciudades.add(ciudadARegistrar);</span>
+<span class="nc" id="L57">    }</span>
+
+    private boolean ciudadRegistrada(Ciudad ciudad) {
+<span class="nc" id="L60">        return this.ciudades.contains(ciudad);</span>
+    }
+
+    public Idioma getIdiomaActual() {
+<span class="nc" id="L64">        return idiomaActual;</span>
+    }
+
+    public void setIdiomaActual(Idioma idiomaActual) {
+<span class="nc" id="L68">        this.idiomaActual = idiomaActual;</span>
+<span class="nc" id="L69">    }</span>
+
+    public void cargarIdiomas() {
+        ArchivoLectura archivo;
+        try {
+<span class="nc" id="L74">            archivo = new ArchivoLectura(&quot;./Idiomas.txt&quot;);</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">            while (archivo.hayMasLineas()) {</span>
+<span class="nc" id="L76">                String linea = archivo.linea();</span>
+<span class="nc" id="L77">                String[] datos = linea.split(&quot;#&quot;);</span>
+<span class="nc" id="L78">                String[] palabras = quitarPrimerYUltimoElemento(datos);</span>
+<span class="nc" id="L79">                String nombreIdioma = datos[0].replaceAll(&quot;[ñÑ \\W]&quot;, &quot;&quot;);</span>
+<span class="nc" id="L80">                String fontIdioma = datos[datos.length - 1];</span>
+<span class="nc" id="L81">                Idioma idiomaAAgregar = new Idioma(nombreIdioma, palabras, fontIdioma);</span>
+<span class="nc" id="L82">                this.getIdiomasRegistrados().add(idiomaAAgregar);</span>
+<span class="nc" id="L83">            }</span>
+<span class="nc" id="L84">        } catch (IOException ex) {</span>
+<span class="nc" id="L85">            Logger.getLogger(VolandoAlto.class.getName()).log(Level.SEVERE, null, ex);</span>
+<span class="nc" id="L86">        }</span>
+<span class="nc" id="L87">    }</span>
+
+    private String[] quitarPrimerYUltimoElemento(String[] datos) {
+<span class="nc" id="L90">        int largo = datos.length;</span>
+<span class="nc" id="L91">        String[] retorno = new String[largo - 2];</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        for (int i = 1; i &lt; largo - 2; i++) {</span>
+<span class="nc" id="L93">            retorno[i - 1] = datos[i];</span>
+        }
+<span class="nc" id="L95">        return retorno;</span>
+    }
+
+    public ArrayList&lt;String&gt; getMotivosAzafata() {
+<span class="nc" id="L99">        return motivosAzafata;</span>
+    }
+
+    public void RegistrarMotivo(String motivo) {
+<span class="nc bnc" id="L103" title="All 2 branches missed.">        if (motivoRegistrado(motivo)) {</span>
+<span class="nc" id="L104">            throw new IllegalStateException(&quot;Motivo ya registrado&quot;);</span>
+        }
+<span class="nc" id="L106">        this.motivosAzafata.add(motivo);</span>
+<span class="nc" id="L107">    }</span>
+
+    private boolean motivoRegistrado(String motivo) {
+<span class="nc" id="L110">        return this.motivosAzafata.contains(motivo);</span>
+    }
+
+    public void ElminarMotivo(String motivo) throws IllegalStateException {
+<span class="nc bnc" id="L114" title="All 2 branches missed.">        if (this.motivosAzafata.size() == 1) {</span>
+<span class="nc" id="L115">            throw new IllegalStateException(&quot;No es posible dejar la lista &quot;</span>
+                    + &quot;de motivos vacía.&quot;);
+        } else {
+<span class="nc" id="L118">            this.motivosAzafata.remove(motivo);</span>
+        }
+<span class="nc" id="L120">    }</span>
+
+    public void setIdiomasRegistrados(ArrayList&lt;Idioma&gt; unosIdiomas) {
+<span class="nc" id="L123">        this.idiomasRegistrados = unosIdiomas;</span>
+<span class="nc" id="L124">    }</span>
+
+    public ArrayList&lt;Idioma&gt; getIdiomasRegistrados() {
+<span class="nc" id="L127">        return idiomasRegistrados;</span>
+    }
+
+    public boolean ExistenIdiomasRegistrados() {
+<span class="nc bnc" id="L131" title="All 2 branches missed.">        return !this.idiomasRegistrados.isEmpty();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>
