@@ -2,8 +2,8 @@ package volandoAlto.dominio;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
-import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import volandoAlto.persistencia.ArchivoLectura;
@@ -15,7 +15,7 @@ public class VolandoAlto implements Serializable {
     private Vuelo vueloActual;
     private transient ArrayList<Idioma> idiomasRegistrados;
     private final ArrayList<String> motivosAzafata;
-    
+
     public ArrayList<Ciudad> getCiudades() {
         return ciudades;
     }
@@ -35,12 +35,20 @@ public class VolandoAlto implements Serializable {
     }
 
     public void EliminarCiudad(Ciudad ciudadSeleccionada) {
-        this.ciudades.remove(ciudadSeleccionada);
+        if (vueloActual != null && (ciudadSeleccionada.equals(vueloActual.getCiudadOrigen())
+                || ciudadSeleccionada.equals(vueloActual.getCiudadDestino()))) {
+            throw new IllegalStateException("La ciudad seleccionada es uno de los "
+                    + "extremos del vuelo actual");
+        } else if (ciudades.size() <= 2) {
+            throw new IllegalStateException("No es posible eliminar a la ciudad:"
+                    + " es necesario al menos mantener dos registradas.");
+        } else {
+            this.ciudades.remove(ciudadSeleccionada);
+        }
     }
 
     public void RegistrarCiudad(String nombre, String gmtZonaHoraria) throws IllegalStateException {
-        String timeZoneId = "Etc/" + gmtZonaHoraria;
-        TimeZone zonaHoraria = TimeZone.getTimeZone(timeZoneId);
+        ZoneOffset zonaHoraria = ZoneOffset.of(gmtZonaHoraria.replace("GMT", ""));
         Ciudad ciudadARegistrar = new Ciudad(nombre, zonaHoraria);
         if (ciudadRegistrada(ciudadARegistrar)) {
             throw new IllegalStateException("Ciudad ya registrada");
@@ -102,8 +110,13 @@ public class VolandoAlto implements Serializable {
         return this.motivosAzafata.contains(motivo);
     }
 
-    public void ElminarMotivo(String motivo) {
-        this.motivosAzafata.remove(motivo);
+    public void ElminarMotivo(String motivo) throws IllegalStateException {
+        if (this.motivosAzafata.size() == 1) {
+            throw new IllegalStateException("No es posible dejar la lista "
+                    + "de motivos vacía.");
+        } else {
+            this.motivosAzafata.remove(motivo);
+        }
     }
 
     public void setIdiomasRegistrados(ArrayList<Idioma> unosIdiomas) {

@@ -20,89 +20,86 @@ public class Vuelo implements Serializable {
     private Ciudad ciudadDestino;
     private Calendar horaSalida;
     private Calendar horaLlegada;
+    private boolean demorado;
 
-    /**
-     * @return the codigoDeVuelo
-     */
+    
+    public Vuelo(String codigo, String capitan, Ciudad origen, 
+            Ciudad destino, Calendar horaSalida, Calendar horaLlegada, boolean demorado){
+    
+        this.codigoDeVuelo = codigo;
+        this.capitan = capitan;
+        this.ciudadOrigen = origen;
+        this.ciudadDestino = destino;
+        this.horaSalida = horaSalida;
+        this.horaLlegada = horaLlegada;
+        this.demorado = demorado;
+    }
+    
     public String getCodigoDeVuelo() {
         return codigoDeVuelo;
     }
 
-    /**
-     * @param codigoDeVuelo the codigoDeVuelo to set
-     */
+    
     public void setCodigoDeVuelo(String codigoDeVuelo) {
         this.codigoDeVuelo = codigoDeVuelo;
     }
 
-    /**
-     * @return the capitan
-     */
+    
     public String getCapitan() {
         return capitan;
     }
 
-    /**
-     * @param capitan the capitan to set
-     */
+    
     public void setCapitan(String capitan) {
         this.capitan = capitan;
     }
 
-    /**
-     * @return the ciudadOrigen
-     */
+    
     public Ciudad getCiudadOrigen() {
         return ciudadOrigen;
     }
 
-    /**
-     * @param ciudadOrigen the ciudadOrigen to set
-     */
+    
     public void setCiudadOrigen(Ciudad ciudadOrigen) {
         this.ciudadOrigen = ciudadOrigen;
     }
 
-    /**
-     * @return the ciudadDestino
-     */
+    
     public Ciudad getCiudadDestino() {
         return ciudadDestino;
     }
 
-    /**
-     * @param ciudadDestino the ciudadDestino to set
-     */
+   
     public void setCiudadDestino(Ciudad ciudadDestino) {
         this.ciudadDestino = ciudadDestino;
     }
 
-    /**
-     * @return the horaSalida
-     */
+    
     public Calendar getHoraSalida() {
         return horaSalida;
     }
 
-    /**
-     * @param horaSalida the horaSalida to set
-     */
+    
     public void setHoraSalida(Calendar horaSalida) {
         this.horaSalida = horaSalida;
     }
 
-    /**
-     * @return the horaLlegada
-     */
+    
     public Calendar getHoraLlegada() {
         return horaLlegada;
     }
 
-    /**
-     * @param horaLlegada the horaLlegada to set
-     */
+    
     public void setHoraLlegada(Calendar horaLlegada) {
         this.horaLlegada = horaLlegada;
+    }
+
+        public Boolean isDemorado() {
+        return demorado;
+    }
+
+    public void setDemorado(Boolean demorado) {
+        this.demorado = demorado;
     }
 
 }

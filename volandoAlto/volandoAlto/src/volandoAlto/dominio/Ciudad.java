@@ -1,48 +1,32 @@
 package volandoAlto.dominio;
 
 import java.io.Serializable;
+import java.time.ZoneOffset;
 import java.util.Objects;
-import java.util.TimeZone;
 
-/**
- *
- * @author pabloMorales
- */
 public class Ciudad implements Serializable {
 
     private String nombre;
-    private TimeZone zonaHoraria;
+    private ZoneOffset zonaHoraria;
 
-    public Ciudad(String unNombre, TimeZone unaZonaHoraria) {
+    public Ciudad(String unNombre, ZoneOffset unaZonaHoraria) {
         nombre = unNombre;
         zonaHoraria = unaZonaHoraria;
     }
 
-    /**
-     * @return the nombre
-     */
     public String getNombre() {
         return nombre;
     }
 
-    /**
-     * @param nombre the nombre to set
-     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /**
-     * @return the zonaHoraria
-     */
-    public TimeZone getZonaHoraria() {
+    public ZoneOffset getZonaHoraria() {
         return zonaHoraria;
     }
 
-    /**
-     * @param zonaHoraria the zonaHoraria to set
-     */
-    public void setZonaHoraria(TimeZone zonaHoraria) {
+    public void setZonaHoraria(ZoneOffset zonaHoraria) {
         this.zonaHoraria = zonaHoraria;
     }
 
