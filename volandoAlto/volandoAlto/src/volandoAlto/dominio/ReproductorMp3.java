@@ -20,7 +20,7 @@ public class ReproductorMp3 extends PlaybackListener implements Runnable {
     private boolean detenido;
     private String[] nombreCanciones;
 
-    public ReproductorMp3(VentanaUsuario vMusica) {
+    public ReproductorMp3() {
         this.setListaReproduccion("clasica");
         this.filePath = "//media//music//clasica//Handel Royal Fireworks.mp3";
         this.cancionActual = 0;
