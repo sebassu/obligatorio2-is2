@@ -85,7 +85,7 @@ public class VolandoAltoTest {
 
         volandoAlto.RegistrarCiudad(ciudadOrigen.getNombre(), ciudadOrigen.getZonaHoraria().getId());
         volandoAlto.RegistrarCiudad(ciudadDestino.getNombre(), ciudadDestino.getZonaHoraria().getId());
-        
+
         Calendar horarioSalida = Calendar.getInstance();
         Calendar horarioActualMasUnaHora = Calendar.getInstance();
         horarioActualMasUnaHora.add(Calendar.HOUR, 1);
@@ -102,7 +102,7 @@ public class VolandoAltoTest {
 
         volandoAlto.EliminarCiudad(ciudadRegistradaAEliminar);
     }
-    
+
     @Test
     public void testEliminarCiudadCuandoHayVueloQueUsaLaCiudadComoDestinoTiraExcepcion() {
         VolandoAlto volandoAlto = new VolandoAlto();
@@ -112,7 +112,7 @@ public class VolandoAltoTest {
 
         volandoAlto.RegistrarCiudad(ciudadOrigen.getNombre(), ciudadOrigen.getZonaHoraria().getId());
         volandoAlto.RegistrarCiudad(ciudadDestino.getNombre(), ciudadDestino.getZonaHoraria().getId());
-        
+
         Calendar horarioSalida = Calendar.getInstance();
         Calendar horarioActualMasUnaHora = Calendar.getInstance();
         horarioActualMasUnaHora.add(Calendar.HOUR, 1);
@@ -129,13 +129,71 @@ public class VolandoAltoTest {
 
         volandoAlto.EliminarCiudad(ciudadRegistradaAEliminar);
     }
-    
-     @Test
-    public void testCargarIdiomasConArchivoVacioNoCargaNada() {
+
+    @Test
+    public void testRegistrarMotivo() {
         VolandoAlto volandoAlto = new VolandoAlto();
+        String motivo = "motivo";
+
+        volandoAlto.RegistrarMotivo(motivo);
+
+        assertTrue(volandoAlto.getMotivosAzafata().contains(motivo));
+    }
+
+    @Test
+    public void testRegistrarMotivoVacio() {
+        VolandoAlto volandoAlto = new VolandoAlto();
+        String motivo = "";
+
+        volandoAlto.RegistrarMotivo(motivo);
+
+        assertTrue(volandoAlto.getMotivosAzafata().contains(motivo));
+    }
+
+    @Test
+    public void testRegistrarMotivoVacioRepetidoTiraExcepcion() {
+        VolandoAlto volandoAlto = new VolandoAlto();
+        String motivo = "motivo";
+
+        volandoAlto.RegistrarMotivo(motivo);
+
+        thrown.expect(IllegalStateException.class);
+
+        volandoAlto.RegistrarMotivo(motivo);
+    }
+
+    @Test
+    public void testEliminarMotivo() {
+        VolandoAlto volandoAlto = new VolandoAlto();
+        String motivo1 = "motivo1";
+        String motivo2 = "motivo2";
+        volandoAlto.RegistrarMotivo(motivo1);
+        volandoAlto.RegistrarMotivo(motivo2);
+
+        volandoAlto.ElminarMotivo(motivo1);
+
+        assertFalse(volandoAlto.getMotivosAzafata().contains(motivo1));
+    }
+
+    @Test
+    public void testEliminarMotivoCuandoSoloHayUnMotivoRegistradoTiraExcepcion() {
+        VolandoAlto volandoAlto = new VolandoAlto();
+        String motivo = "motivo";
+
+        volandoAlto.RegistrarMotivo(motivo);
+
+        thrown.expect(IllegalStateException.class);
+
+        volandoAlto.ElminarMotivo(motivo);
+    }
+
+    @Test
+    public void testExistenIdiomasRegistrados() {
+        VolandoAlto volandoAlto = new VolandoAlto();
+
+        Idioma idioma = new Idioma("nombre", new String[21], "nombreFuente");
+        volandoAlto.getIdiomasRegistrados().add(idioma);
         
-        volandoAlto.cargarIdiomas("./Idiomas");
-        
-        assertTrue(volandoAlto.getIdiomasRegistrados().isEmpty());
+        assertTrue(volandoAlto.ExistenIdiomasRegistrados());
     }
 }
