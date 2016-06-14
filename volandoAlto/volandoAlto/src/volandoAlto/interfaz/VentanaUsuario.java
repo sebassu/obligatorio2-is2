@@ -1124,6 +1124,9 @@ public class VentanaUsuario extends javax.swing.JFrame {
 
         this.lblEstadoReproduccion.setText(palabras[21]);
         this.lblEstadoReproduccion.setFont(fuente.deriveFont(Font.BOLD, 24));
+        if (volandoAlto.getVueloActual() != null) {
+            actualizarCambiosDeVuelo();
+        }
     }
 
     public void actualizarNombreCancion() {
@@ -1195,7 +1198,6 @@ public class VentanaUsuario extends javax.swing.JFrame {
         this.lblOrigen.setText(vueloActual.getCiudadOrigen().toString());
         this.lblDestino.setText(vueloActual.getCiudadDestino().toString());
 
-        //this.lblHoraSalida.setText(horaSalida + ":" + minutoSalida);
         Calendar horaSalida = vueloActual.getHoraSalida();
         this.lblHoraSalida.setText(zero(horaSalida.get(Calendar.HOUR_OF_DAY))
                 + ":" + zero(horaSalida.get(Calendar.MINUTE)));

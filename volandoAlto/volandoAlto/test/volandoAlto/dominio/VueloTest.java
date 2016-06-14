@@ -1,12 +1,9 @@
 package volandoAlto.dominio;
 
-import java.awt.Font;
 import java.time.ZoneOffset;
 import java.util.Calendar;
 import static org.junit.Assert.*;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class VueloTest {
 
@@ -40,15 +37,13 @@ public class VueloTest {
         String codigo = "";
         String capitan = "";
 
-        ZoneOffset unaZonaHoraria = ZoneOffset.of("-3");
-
         Ciudad ciudadOrigen = new Ciudad("Montevideo", null);
         Ciudad ciudadDestino = new Ciudad("Pekin", null);
 
         Calendar horaSalida = Calendar.getInstance();
         Calendar horaLlegada = Calendar.getInstance();
         Calendar.getInstance().add(Calendar.HOUR, 8);
-        
+
         boolean demorado = false;
 
         Vuelo vuelo = new Vuelo(codigo, capitan, ciudadOrigen, ciudadDestino,
@@ -62,6 +57,4 @@ public class VueloTest {
         assertEquals(horaLlegada, vuelo.getHoraLlegada());
         assertEquals(demorado, vuelo.isDemorado());
     }
-
-    
 }

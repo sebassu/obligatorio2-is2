@@ -764,7 +764,9 @@ public class VentanaTripulacion extends javax.swing.JFrame {
 
             volandoAlto.setVueloActual(vuelo);
 
-            ventanaCliente.actualizarCambiosDeVuelo();
+            if (volandoAlto.getIdiomaActual() != null) {
+                ventanaCliente.actualizarCambiosDeVuelo();
+            }
             this.lblCambiosAplicados.setText("Cambios aplicados");
         } else {
             this.lblCambiosAplicados.setText("Datos incorrectos");
@@ -924,7 +926,7 @@ public class VentanaTripulacion extends javax.swing.JFrame {
             String capitan = this.txtCapitan.getText();
             String codigoDeVuelo = this.txtCodigoVuelo.getText();
 
-            if (capitan.isEmpty() || capitan.length() > 25
+            if (capitan.trim().isEmpty() || capitan.length() > 25
                     || !StringUtils.isAlphaSpace(capitan)) {
                 valido = false;
             } else if (codigoDeVuelo.isEmpty()
