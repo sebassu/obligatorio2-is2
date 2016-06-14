@@ -130,4 +130,12 @@ public class VolandoAltoTest {
         volandoAlto.EliminarCiudad(ciudadRegistradaAEliminar);
     }
     
+     @Test
+    public void testCargarIdiomasConArchivoVacioNoCargaNada() {
+        VolandoAlto volandoAlto = new VolandoAlto();
+        
+        volandoAlto.cargarIdiomas("./Idiomas");
+        
+        assertTrue(volandoAlto.getIdiomasRegistrados().isEmpty());
+    }
 }
