@@ -120,4 +120,39 @@ public class ReproductorMp3Test {
         reproductor.siguienteCancion();
         assertTrue(reproductor.isDetenido());
     }
+
+    @Test
+    public void testRunThreadReproductorMp3() {
+        ReproductorMp3 reproductor = new ReproductorMp3();
+        reproductor.setListaReproduccion("alternativa");
+        reproductor.run();
+        try {
+            sleep(100);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ReproductorMp3.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        reproductor.siguienteCancion();
+        reproductor.siguienteCancion();
+        reproductor.siguienteCancion();
+        assertTrue(reproductor.isDetenido());
+    }
+
+    @Test
+    public void testReproductorMp3CorrectlySetted() {
+        ReproductorMp3 reproductor = new ReproductorMp3();
+        reproductor.setListaReproduccion("pop");
+        
+        int cancion = reproductor.getCancionActual();
+        assertEquals("Dancing in the Street", reproductor.getListaReproduccion().get(cancion));
+    }
+    
+    @Test
+    public void testSetPlayerThread() {
+        ReproductorMp3 reproductor = new ReproductorMp3();
+        reproductor.setListaReproduccion("pop");
+        
+        Thread playerThread = new Thread();
+        reproductor.setPlayerThread(playerThread);
+        assertEquals(playerThread, reproductor.getPlayerThread());
+    }
 }
