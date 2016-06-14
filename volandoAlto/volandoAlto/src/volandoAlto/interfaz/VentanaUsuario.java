@@ -454,7 +454,7 @@ public class VentanaUsuario extends javax.swing.JFrame {
         lblHoraActualEnDestino.setText("00:00:00");
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton3.setText("A - Z");
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/volandoAlto/interfaz/translatorLogo.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -505,15 +505,17 @@ public class VentanaUsuario extends javax.swing.JFrame {
                 .addComponent(lblBienvenidoBordo, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(pnlVueloLayout.createSequentialGroup()
-                .addGap(368, 368, 368)
-                .addComponent(btnAzafata)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlVueloLayout.createSequentialGroup()
+                        .addGap(368, 368, 368)
+                        .addComponent(btnAzafata)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlVueloLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBoxMotivosAzafata, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(167, 167, 167)))
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(pnlVueloLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBoxMotivosAzafata, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(314, 314, 314))
         );
         pnlVueloLayout.setVerticalGroup(
             pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -555,12 +557,15 @@ public class VentanaUsuario extends javax.swing.JFrame {
                 .addGap(34, 34, 34)
                 .addComponent(lblBienvenidoBordo)
                 .addGap(13, 13, 13)
-                .addComponent(jComboBoxMotivosAzafata, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnAzafata, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addGroup(pnlVueloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlVueloLayout.createSequentialGroup()
+                        .addComponent(jComboBoxMotivosAzafata, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnAzafata, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(pnlVueloLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(7, 7, 7))
         );
 
         pnlMapas.setAlignmentX(0.0F);
@@ -1004,8 +1009,9 @@ public class VentanaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_CambiarIdiomaSeleccionado
 
     private void btnAzafataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAzafataActionPerformed
-        String motivo = this.jComboBoxMotivosAzafata.getSelectedItem().toString();
-        if (motivo != null) {
+        Object selecionado = this.jComboBoxMotivosAzafata.getSelectedItem();
+        if (selecionado != null) {
+            String motivo = selecionado.toString();
             JOptionPane.showMessageDialog(null, "Se realizó un llamado a la azafata: "
                     + motivo, "Llamado", JOptionPane.INFORMATION_MESSAGE);
         }

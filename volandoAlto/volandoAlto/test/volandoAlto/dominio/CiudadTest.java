@@ -116,9 +116,9 @@ public class CiudadTest {
         ZoneOffset unaZonaHoraria = ZoneOffset.of("-3");
         Ciudad ciudad = new Ciudad("Montevideo", unaZonaHoraria);
 
-        ciudad.setNombre("Chile");
+        ciudad.setNombre("Santiago de Chile");
         
-        assertEquals("Chile", ciudad.getNombre());
+        assertEquals("Santiago de Chile", ciudad.getNombre());
     }
     
      @Test
