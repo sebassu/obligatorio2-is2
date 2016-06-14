@@ -3,6 +3,7 @@ package volandoAlto.dominio;
 import java.awt.Font;
 import java.time.DateTimeException;
 import java.time.ZoneOffset;
+import java.util.Calendar;
 import static org.junit.Assert.*;
 import org.junit.Rule;
 import org.junit.Test;
@@ -34,11 +35,99 @@ public class VolandoAltoTest {
     }
 
     @Test
-    public void testRegistrarCiudadTiraExcepcion() {
+    public void testRegistrarCiudadTiraIllegalArgumentExcepcion() {
         VolandoAlto volandoAlto = new VolandoAlto();
-      
-        thrown.expect(DateTimeException.class);
-        volandoAlto.RegistrarCiudad("Montevideo", "a/sdas-3");        
+
+        thrown.expect(IllegalArgumentException.class);
+        volandoAlto.RegistrarCiudad("Montevideo", "a/sdas-3");
     }
 
+    @Test
+    public void testRegistrarCiudadRepetidaTiraIllegalStateArgument() {
+        VolandoAlto volandoAlto = new VolandoAlto();
+
+        volandoAlto.RegistrarCiudad("Montevideo", "-5");
+        thrown.expect(IllegalStateException.class);
+        volandoAlto.RegistrarCiudad("Montevideo", "-3");
+    }
+
+    @Test
+    public void testEliminarCiudadCuandoHaySoloUnaRegistradaTiraExcepcion() {
+        VolandoAlto volandoAlto = new VolandoAlto();
+
+        volandoAlto.RegistrarCiudad("Montevideo", "-3");
+        Ciudad ciudadRegistradaAEliminar = volandoAlto.getCiudades().get(0);
+
+        thrown.expect(IllegalStateException.class);
+
+        volandoAlto.EliminarCiudad(ciudadRegistradaAEliminar);
+    }
+
+    @Test
+    public void testEliminarCiudadCuandoHaySoloDosRegistradasTiraExcepcion() {
+        VolandoAlto volandoAlto = new VolandoAlto();
+
+        volandoAlto.RegistrarCiudad("Montevideo", "-3");
+        volandoAlto.RegistrarCiudad("Buenos Aires", "-3");
+        Ciudad ciudadRegistradaAEliminar = volandoAlto.getCiudades().get(0);
+
+        thrown.expect(IllegalStateException.class);
+
+        volandoAlto.EliminarCiudad(ciudadRegistradaAEliminar);
+    }
+
+    @Test
+    public void testEliminarCiudadCuandoHayVueloQueUsaLaCiudadComoOrigenTiraExcepcion() {
+        VolandoAlto volandoAlto = new VolandoAlto();
+
+        Ciudad ciudadOrigen = new Ciudad("Montevideo", ZoneOffset.UTC);
+        Ciudad ciudadDestino = new Ciudad("Buenos Aires", ZoneOffset.UTC);
+
+        volandoAlto.RegistrarCiudad(ciudadOrigen.getNombre(), ciudadOrigen.getZonaHoraria().getId());
+        volandoAlto.RegistrarCiudad(ciudadDestino.getNombre(), ciudadDestino.getZonaHoraria().getId());
+        
+        Calendar horarioSalida = Calendar.getInstance();
+        Calendar horarioActualMasUnaHora = Calendar.getInstance();
+        horarioActualMasUnaHora.add(Calendar.HOUR, 1);
+        Calendar horarioLlegada = horarioActualMasUnaHora;
+
+        Vuelo vuelo = new Vuelo("codigo", "capitan", ciudadOrigen,
+                ciudadDestino, horarioSalida, horarioLlegada, false);
+
+        volandoAlto.setVueloActual(vuelo);
+
+        Ciudad ciudadRegistradaAEliminar = volandoAlto.getCiudades().get(0);
+
+        thrown.expect(IllegalStateException.class);
+
+        volandoAlto.EliminarCiudad(ciudadRegistradaAEliminar);
+    }
+    
+    @Test
+    public void testEliminarCiudadCuandoHayVueloQueUsaLaCiudadComoDestinoTiraExcepcion() {
+        VolandoAlto volandoAlto = new VolandoAlto();
+
+        Ciudad ciudadOrigen = new Ciudad("Montevideo", ZoneOffset.UTC);
+        Ciudad ciudadDestino = new Ciudad("Buenos Aires", ZoneOffset.UTC);
+
+        volandoAlto.RegistrarCiudad(ciudadOrigen.getNombre(), ciudadOrigen.getZonaHoraria().getId());
+        volandoAlto.RegistrarCiudad(ciudadDestino.getNombre(), ciudadDestino.getZonaHoraria().getId());
+        
+        Calendar horarioSalida = Calendar.getInstance();
+        Calendar horarioActualMasUnaHora = Calendar.getInstance();
+        horarioActualMasUnaHora.add(Calendar.HOUR, 1);
+        Calendar horarioLlegada = horarioActualMasUnaHora;
+
+        Vuelo vuelo = new Vuelo("codigo", "capitan", ciudadOrigen,
+                ciudadDestino, horarioSalida, horarioLlegada, false);
+
+        volandoAlto.setVueloActual(vuelo);
+
+        Ciudad ciudadRegistradaAEliminar = volandoAlto.getCiudades().get(1);
+
+        thrown.expect(IllegalStateException.class);
+
+        volandoAlto.EliminarCiudad(ciudadRegistradaAEliminar);
+    }
+    
 }

@@ -22,10 +22,9 @@ public class Vuelo implements Serializable {
     private Calendar horaLlegada;
     private boolean demorado;
 
-    
-    public Vuelo(String codigo, String capitan, Ciudad origen, 
-            Ciudad destino, Calendar horaSalida, Calendar horaLlegada, boolean demorado){
-    
+    public Vuelo(String codigo, String capitan, Ciudad origen,
+            Ciudad destino, Calendar horaSalida, Calendar horaLlegada, boolean demorado) {
+
         this.codigoDeVuelo = codigo;
         this.capitan = capitan;
         this.ciudadOrigen = origen;
@@ -34,67 +33,56 @@ public class Vuelo implements Serializable {
         this.horaLlegada = horaLlegada;
         this.demorado = demorado;
     }
-    
+
     public String getCodigoDeVuelo() {
         return codigoDeVuelo;
     }
 
-    
     public void setCodigoDeVuelo(String codigoDeVuelo) {
         this.codigoDeVuelo = codigoDeVuelo;
     }
 
-    
     public String getCapitan() {
         return capitan;
     }
 
-    
     public void setCapitan(String capitan) {
         this.capitan = capitan;
     }
 
-    
     public Ciudad getCiudadOrigen() {
         return ciudadOrigen;
     }
 
-    
     public void setCiudadOrigen(Ciudad ciudadOrigen) {
         this.ciudadOrigen = ciudadOrigen;
     }
 
-    
     public Ciudad getCiudadDestino() {
         return ciudadDestino;
     }
 
-   
     public void setCiudadDestino(Ciudad ciudadDestino) {
         this.ciudadDestino = ciudadDestino;
     }
 
-    
     public Calendar getHoraSalida() {
         return horaSalida;
     }
 
-    
     public void setHoraSalida(Calendar horaSalida) {
         this.horaSalida = horaSalida;
     }
 
-    
     public Calendar getHoraLlegada() {
         return horaLlegada;
     }
 
-    
     public void setHoraLlegada(Calendar horaLlegada) {
         this.horaLlegada = horaLlegada;
     }
 
-        public Boolean isDemorado() {
+    public Boolean isDemorado() {
         return demorado;
     }
 
