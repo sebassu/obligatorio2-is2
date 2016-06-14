@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>Vuelo.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;volandoAlto&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">volandoAlto.dominio</a> &gt; <span class="el_source">Vuelo.java</span></div><h1>Vuelo.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package volandoAlto.dominio;
+
+import java.io.Serializable;
+import java.util.Calendar;
+
+/**
+ *
+ * @author alumnoFI
+ */
+public class Vuelo implements Serializable {
+
+    private String codigoDeVuelo;
+    private String capitan;
+    private Ciudad ciudadOrigen;
+    private Ciudad ciudadDestino;
+    private Calendar horaSalida;
+    private Calendar horaLlegada;
+    private boolean demorado;
+
+    
+    public Vuelo(String codigo, String capitan, Ciudad origen, 
+<span class="nc" id="L27">            Ciudad destino, Calendar horaSalida, Calendar horaLlegada, boolean demorado){</span>
+    
+<span class="nc" id="L29">        this.codigoDeVuelo = codigo;</span>
+<span class="nc" id="L30">        this.capitan = capitan;</span>
+<span class="nc" id="L31">        this.ciudadOrigen = origen;</span>
+<span class="nc" id="L32">        this.ciudadDestino = destino;</span>
+<span class="nc" id="L33">        this.horaSalida = horaSalida;</span>
+<span class="nc" id="L34">        this.horaLlegada = horaLlegada;</span>
+<span class="nc" id="L35">        this.demorado = demorado;</span>
+<span class="nc" id="L36">    }</span>
+    
+    public String getCodigoDeVuelo() {
+<span class="nc" id="L39">        return codigoDeVuelo;</span>
+    }
+
+    
+    public void setCodigoDeVuelo(String codigoDeVuelo) {
+<span class="nc" id="L44">        this.codigoDeVuelo = codigoDeVuelo;</span>
+<span class="nc" id="L45">    }</span>
+
+    
+    public String getCapitan() {
+<span class="nc" id="L49">        return capitan;</span>
+    }
+
+    
+    public void setCapitan(String capitan) {
+<span class="nc" id="L54">        this.capitan = capitan;</span>
+<span class="nc" id="L55">    }</span>
+
+    
+    public Ciudad getCiudadOrigen() {
+<span class="nc" id="L59">        return ciudadOrigen;</span>
+    }
+
+    
+    public void setCiudadOrigen(Ciudad ciudadOrigen) {
+<span class="nc" id="L64">        this.ciudadOrigen = ciudadOrigen;</span>
+<span class="nc" id="L65">    }</span>
+
+    
+    public Ciudad getCiudadDestino() {
+<span class="nc" id="L69">        return ciudadDestino;</span>
+    }
+
+   
+    public void setCiudadDestino(Ciudad ciudadDestino) {
+<span class="nc" id="L74">        this.ciudadDestino = ciudadDestino;</span>
+<span class="nc" id="L75">    }</span>
+
+    
+    public Calendar getHoraSalida() {
+<span class="nc" id="L79">        return horaSalida;</span>
+    }
+
+    
+    public void setHoraSalida(Calendar horaSalida) {
+<span class="nc" id="L84">        this.horaSalida = horaSalida;</span>
+<span class="nc" id="L85">    }</span>
+
+    
+    public Calendar getHoraLlegada() {
+<span class="nc" id="L89">        return horaLlegada;</span>
+    }
+
+    
+    public void setHoraLlegada(Calendar horaLlegada) {
+<span class="nc" id="L94">        this.horaLlegada = horaLlegada;</span>
+<span class="nc" id="L95">    }</span>
+
+        public Boolean isDemorado() {
+<span class="nc" id="L98">        return demorado;</span>
+    }
+
+    public void setDemorado(Boolean demorado) {
+<span class="nc" id="L102">        this.demorado = demorado;</span>
+<span class="nc" id="L103">    }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

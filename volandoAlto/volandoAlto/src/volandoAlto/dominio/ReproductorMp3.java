@@ -19,96 +19,50 @@ public class ReproductorMp3 extends PlaybackListener implements Runnable {
     private int cancionActual = 0;
     private boolean detenido;
     private String[] nombreCanciones;
-    private final VentanaUsuario ventanaMusica;
 
-    /**
-     *
-     * @param vMusica
-     */
-    public ReproductorMp3(VentanaUsuario vMusica) {
+    public ReproductorMp3() {
         this.setListaReproduccion("clasica");
         this.filePath = "//media//music//clasica//Handel Royal Fireworks.mp3";
         this.cancionActual = 0;
         this.detenido = true;
-        this.ventanaMusica = vMusica;
     }
 
-    /**
-     *
-     * @return
-     */
     public AdvancedPlayer getPlayer() {
         return player;
     }
 
-    /**
-     *
-     * @param player
-     */
     public void setPlayer(AdvancedPlayer player) {
         this.player = player;
     }
 
-    /**
-     *
-     * @return
-     */
     public Thread getPlayerThread() {
         return playerThread;
     }
 
-    /**
-     *
-     * @param playerThread
-     */
     public void setPlayerThread(Thread playerThread) {
         this.playerThread = playerThread;
     }
 
-    /**
-     *
-     * @return
-     */
     public String[] getNombreCanciones() {
         return nombreCanciones;
     }
 
-    /**
-     *
-     * @param nombreCanciones
-     */
     public void setNombreCanciones(String[] nombreCanciones) {
         this.nombreCanciones = nombreCanciones;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getFilePath() {
         return filePath;
     }
 
-    /**
-     *
-     * @param filePath
-     */
     public void setFilePath(String filePath) {
         this.filePath = filePath;
     }
 
-    /**
-     *
-     * @return
-     */
     public ArrayList<String> getListaReproduccion() {
         return listaReproduccion;
     }
 
-    /**
-     *
-     * @param genero
-     */
     public final void setListaReproduccion(String genero) {
         this.listaReproduccion = new ArrayList<>();
         switch (genero) {
@@ -151,33 +105,18 @@ public class ReproductorMp3 extends PlaybackListener implements Runnable {
         this.setFilePath(this.listaReproduccion.get(0));
     }
 
-    /**
-     *
-     * @return
-     */
     public String getNombreCancionActual() {
         return this.nombreCanciones[this.cancionActual];
     }
 
-    /**
-     *
-     * @return
-     */
     public int getCancionActual() {
         return cancionActual;
     }
 
-    /**
-     *
-     * @param cancionActual
-     */
     public void setCancionActual(int cancionActual) {
         this.cancionActual = cancionActual;
     }
 
-    /**
-     *
-     */
     public void play() {
         try {
             this.detenido = false;
@@ -200,25 +139,14 @@ public class ReproductorMp3 extends PlaybackListener implements Runnable {
         }
     }
 
-    /**
-     *
-     * @return
-     */
     public boolean isDetenido() {
         return detenido;
     }
 
-    /**
-     *
-     * @param detenido
-     */
     public void setDetenido(boolean detenido) {
         this.detenido = detenido;
     }
 
-    /**
-     *
-     */
     public void parar() {
         if (this.detenido == false) {
             this.detenido = true;
@@ -226,28 +154,17 @@ public class ReproductorMp3 extends PlaybackListener implements Runnable {
         }
     }
 
-    /**
-     *
-     */
     public void siguienteCancion() {
         if (this.detenido == false) {
             this.player.stop();
         }
     }
 
-    /**
-     *
-     * @param playbackEvent
-     */
     @Override
     public void playbackStarted(PlaybackEvent playbackEvent) {
 
     }
 
-    /**
-     *
-     * @param playbackEvent
-     */
     @Override
     public void playbackFinished(PlaybackEvent playbackEvent) {
         if (this.cancionActual < this.listaReproduccion.size() - 1 && this.detenido == false) {
@@ -263,7 +180,6 @@ public class ReproductorMp3 extends PlaybackListener implements Runnable {
 
     @Override
     public void run() {
-        this.ventanaMusica.actualizarNombreCancion();
         try {
             this.player.play();
         } catch (JavaLayerException ex) {
