@@ -2,6 +2,7 @@ package volandoAlto.dominio;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.time.DateTimeException;
 import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -48,12 +49,17 @@ public class VolandoAlto implements Serializable {
     }
 
     public void RegistrarCiudad(String nombre, String gmtZonaHoraria) throws IllegalStateException {
-        ZoneOffset zonaHoraria = ZoneOffset.of(gmtZonaHoraria.replace("GMT", ""));
-        Ciudad ciudadARegistrar = new Ciudad(nombre, zonaHoraria);
-        if (ciudadRegistrada(ciudadARegistrar)) {
-            throw new IllegalStateException("Ciudad ya registrada");
+        try {
+            String idZonaHoraria = gmtZonaHoraria.replace("GMT", "");
+            ZoneOffset zonaHoraria = ZoneOffset.of(idZonaHoraria);
+            Ciudad ciudadARegistrar = new Ciudad(nombre, zonaHoraria);
+            if (ciudadRegistrada(ciudadARegistrar)) {
+                throw new IllegalStateException("Ciudad ya registrada");
+            }
+            this.ciudades.add(ciudadARegistrar);
+        } catch (DateTimeException e) {
+            throw new IllegalArgumentException();
         }
-        this.ciudades.add(ciudadARegistrar);
     }
 
     private boolean ciudadRegistrada(Ciudad ciudad) {
@@ -68,10 +74,10 @@ public class VolandoAlto implements Serializable {
         this.idiomaActual = idiomaActual;
     }
 
-    public void cargarIdiomas() {
+    public void cargarIdiomas(String ruta) {
         ArchivoLectura archivo;
         try {
-            archivo = new ArchivoLectura("./Idiomas.txt");
+            archivo = new ArchivoLectura(ruta);
             while (archivo.hayMasLineas()) {
                 String linea = archivo.linea();
                 String[] datos = linea.split("#");

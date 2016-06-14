@@ -23,7 +23,7 @@ public class Principal {
     public static void main(String[] args) {
         try {
             final VolandoAlto volandoAlto = abrirSistema();
-            volandoAlto.cargarIdiomas();
+            volandoAlto.cargarIdiomas("./Idiomas.txt");
             UIManager.setLookAndFeel(
                     UIManager.getSystemLookAndFeelClassName());
             VentanaTripulacion vT = new VentanaTripulacion(volandoAlto);
